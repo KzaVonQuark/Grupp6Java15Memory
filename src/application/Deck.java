@@ -1,5 +1,8 @@
 package application;
 
+import java.util.Collections;
+import java.util.LinkedList;
+
 import javafx.scene.image.Image;
 
 /**
@@ -9,24 +12,49 @@ import javafx.scene.image.Image;
  */
 public class Deck {
 
-	private Card[] deck;
+	// --------- Instance Variables ---------- //
+
+	private LinkedList<Card> deck = new LinkedList<>();
+	private int deckSize;
 	private String frontImage;
 
+	// --------- Constructor ----------- //
+
 	public Deck(int deckSize, String frontImage) {
-		this.deck = new Card[deckSize];
 		this.frontImage = frontImage;
 		populateDeck();
+		shuffleDeck();
+	}
+
+	// ---------- Getters ------------ //
+
+	public LinkedList<Card> getDeck() {
+		return deck;
+	}
+
+	public int getDeckSize() {
+		return deckSize;
+	}
+
+	public String getFrontImage() {
+		return frontImage;
+	}
+
+	// --------- Methods ---------- //
+
+	private void shuffleDeck() {
+		Collections.shuffle(deck);
 	}
 
 	public void populateDeck() {
-
-		int cardsToCreate = deck.length / 2;
-		
-		for(int i = 0; i < cardsToCreate; i++) {
-			deck[i] = new Card(i + 1, this.frontImage, new Image("/images/" + i + ".png"));
-			deck[i + 1] = new Card(i + 1, this.frontImage, new Image("/images/" + i + ".png"));
+		for (int i = 0; i < (deckSize / 2); i++) {
+			deck.add(new Card(i + 1, this.frontImage, new Image("/images/" + i + ".png")));
+			deck.add(new Card(i + 1, this.frontImage, new Image("/images/" + i + ".png")));
 		}
+	}
 
+	public Card dealCard() {
+		return deck.pop();
 	}
 
 }
