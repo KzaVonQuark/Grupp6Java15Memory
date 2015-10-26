@@ -13,48 +13,49 @@ import javafx.scene.image.Image;
 public class Deck {
 
 	// --------- Instance Variables ---------- //
-
 	private LinkedList<Card> deck = new LinkedList<>();
-	private int deckSize;
-	private String frontImage;
 
-	// --------- Constructor ----------- //
+	// --------- Constructors ----------- //
 
+	// Create a deck with fixed size and front image
 	public Deck(int deckSize, String frontImage) {
-		this.frontImage = frontImage;
-		populateDeck();
+		populateDeck(deckSize, frontImage);
 		shuffleDeck();
 	}
 
-	// ---------- Getters ------------ //
+	// Create an empty deck
+	public Deck() {
+	}
 
+	// ---------- Getters ------------ //
 	public LinkedList<Card> getDeck() {
 		return deck;
 	}
 
 	public int getDeckSize() {
-		return deckSize;
-	}
-
-	public String getFrontImage() {
-		return frontImage;
+		return deck.size();
 	}
 
 	// --------- Methods ---------- //
-
 	private void shuffleDeck() {
 		Collections.shuffle(deck);
 	}
 
-	public void populateDeck() {
+	public void populateDeck(int deckSize, String frontImage) {
 		for (int i = 0; i < (deckSize / 2); i++) {
-			deck.add(new Card(i + 1, this.frontImage, new Image("/images/" + i + ".png")));
-			deck.add(new Card(i + 1, this.frontImage, new Image("/images/" + i + ".png")));
+			deck.add(new Card(i + 1, frontImage, new Image("/images/" + i + ".png")));
+			deck.add(new Card(i + 1, frontImage, new Image("/images/" + i + ".png")));
 		}
 	}
 
+	// Deal card to gameboard
 	public Card dealCard() {
 		return deck.pop();
+	}
+
+	// Add card to players win hand
+	public void addCardToDeck(Card card) {
+		deck.push(card);
 	}
 
 }

@@ -9,16 +9,19 @@ import javafx.scene.image.Image;
  */
 public class Card {
 
+	// --------- Instance Variables ---------- //
 	private int value;
 	private Image frontImage;
 	private Image backImage;
 
+	// --------- Constructor ----------- //
 	public Card(int value, String frontImage, Image backImage) {
 		this.value = value;
 		this.frontImage = new Image("/images/" + frontImage);
 		this.backImage = backImage;
 	}
 
+	// ---------- Getters and Setters ------------ //
 	public int getValue() {
 		return value;
 	}
