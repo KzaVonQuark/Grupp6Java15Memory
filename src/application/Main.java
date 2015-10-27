@@ -22,9 +22,11 @@ public class Main extends Application {
 			FileManager fm = new FileManager();
 			String[] oldPlayers = new File("/PlayerScore/").list();
 			
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
+			FreePane root = new FreePane();
+			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			StartMenu start = new StartMenu();
+			root.setPane(start);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
