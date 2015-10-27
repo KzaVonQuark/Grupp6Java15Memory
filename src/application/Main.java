@@ -1,6 +1,7 @@
 package application;
 	
 import java.io.File;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -20,7 +21,7 @@ public class Main extends Application {
 			
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager(); 
-			
+			String[] oldPlayers = {""}; 
 			FreePane root = new FreePane();
 			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
