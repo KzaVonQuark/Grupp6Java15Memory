@@ -2,7 +2,34 @@ package application;
 
 import java.util.TreeMap;
 
-public class GameBoard {
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class GameBoard extends Application{
+	@Override
+	public void start(Stage primaryStage) {
+		
+		GridPane grid = new GridPane();
+		Scene scene = new Scene(grid,400,400);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
 	
 	FileManager fileManager = new FileManager();
 	TreeMap<Integer, Player> players = new TreeMap<Integer, Player>();
@@ -34,4 +61,6 @@ public class GameBoard {
 	public void savePlayers() {
 		
 	}
+
+	
 }
