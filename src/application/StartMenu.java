@@ -26,7 +26,7 @@ public class StartMenu extends Application{
 		
 		Label headLine = new Label("Memory");
 		headLine.setAlignment(Pos.CENTER);
-		rootNode.setTop(headLine);
+		
 		Label playersLabel = new Label("Add number of players");
 		Label fieldLabel = new Label("Play field selection");
 		
@@ -38,6 +38,10 @@ public class StartMenu extends Application{
 		ComboBox<String> choosePlayers = new ComboBox<>();
 		ComboBox<String> playFields = new ComboBox<>();
 		
+		HBox labelBox = new HBox();
+		labelBox.setAlignment(Pos.CENTER);
+		labelBox.getChildren().add(headLine);
+		rootNode.setTop(labelBox);
 		HBox playersBox = new HBox(5);
 		playersBox.setAlignment(Pos.CENTER);
 		playersBox.getChildren().addAll(playersLabel, choosePlayers, addButton, createButton);
