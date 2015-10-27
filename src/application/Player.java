@@ -4,7 +4,6 @@ public class Player {
 	
 	private String name;
 	private int points, moves;
-	private Player[] players;
 	
 	public Player(String name) {
 		super();
@@ -55,19 +54,6 @@ public class Player {
 		this.moves = moves;
 	}
 
-	/**
-	 * @return the players
-	 */
-	public Player[] getPlayers() {
-		return players;
-	}
-
-	/**
-	 * @param players the players to set
-	 */
-	public void setPlayers(Player[] players) {
-		this.players = players;
-	}
 	
 	
 	
