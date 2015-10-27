@@ -11,10 +11,11 @@ import javafx.util.Duration;
 
 /**
  * FreePane is a pane that can smoothly transition from 1 pane to another with
- * color or black/white fade transition or without.
- * This pane will be used as root Pane in the main project.
- * Initialization to the projects first pane is done with setPane().
- * Transitions are made with setPane() or fadeChange() with Color.color as fade color.
+ * color or black/white fade transition or without. This pane will be used as
+ * root Pane in the main project. Initialization to the projects first pane is
+ * done with setPane(). Transitions are made with setPane() or fadeChange() with
+ * Color.color as fade color.
+ * 
  * @author Masih
  *
  */
@@ -52,7 +53,8 @@ public class FreePane extends GridPane {
 		loadAnimation.play();
 
 	}
-	//Instant transition to new Pane.
+
+	// Instant transition to new Pane.
 	public void setPane(Pane newPane) {
 		getChildren().remove(innerContent);
 		innerContent = newPane;
@@ -60,7 +62,8 @@ public class FreePane extends GridPane {
 		innerContent.setMinHeight(getHeight());
 		add(innerContent, 0, 0);
 	}
-	//Inner method that handles pane change.
+
+	// Inner method that handles pane change.
 	private void changePane(Pane newPane, Color fadeColor) {
 		getChildren().remove(innerContent);
 		innerContent = newPane;
