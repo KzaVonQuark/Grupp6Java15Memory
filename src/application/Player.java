@@ -4,12 +4,14 @@ public class Player {
 	
 	private String name;
 	private int points, moves;
+	private Deck playerWinningHand;
 	
 	public Player(String name) {
 		super();
 		this.name = name;
 		this.points = 0;
 		this.moves = 0;
+		this.playerWinningHand = new Deck();
 	}
 
 	/**
@@ -54,8 +56,11 @@ public class Player {
 		this.moves = moves;
 	}
 
-	
-	
-	
-	
+	public Deck getPlayerWinningHand() {
+		return playerWinningHand;
+	}
+
+	public void setPlayerWinningHand(Deck playerWinningHand) {
+		this.playerWinningHand = playerWinningHand;
+	}
 }
