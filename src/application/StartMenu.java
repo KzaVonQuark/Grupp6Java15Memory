@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class StartMenu extends BorderPane{
 
@@ -21,8 +23,15 @@ public class StartMenu extends BorderPane{
 	
 		headLine = new Label("Memory");
 		headLine.setAlignment(Pos.CENTER);
+		headLine.setTextFill(Color.WHITESMOKE);
+		headLine.setStyle("-fx-font: 100px Tahoma;");
+		
 		playersLabel = new Label("Add number of players");
+		playersLabel.setTextFill(Color.GHOSTWHITE);
+		playersLabel.setFont(Font.font(15));
 		fieldLabel = new Label("Play field selection");
+		fieldLabel.setTextFill(Color.GHOSTWHITE);
+		fieldLabel.setFont(Font.font(15));
 		
 		playButton = new Button("Let's play");
 		resetButton = new Button("Reset");
