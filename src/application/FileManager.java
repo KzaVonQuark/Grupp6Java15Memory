@@ -7,25 +7,27 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class FileManager {
 
 	String pathName = "/Files/";
 	Player player;
 
-	public void load(TreeMap<Integer, Player> players, String name) {
+	public Player load(String name) {
 
-		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "players.txt"))) {
-			int key = players.lastKey() + 1;
-			String temp = br.readLine();
-			if (temp.contains(name)) {
-				String tempArray[] = temp.split("[ ]");
-				player.setName(tempArray[0]);
-				player.setPoints(Integer.parseInt(tempArray[1]));
-				player.setMoves(Integer.parseInt(tempArray[2]));
+		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "Players.txt"))) {
+
+			String temp;
+			while ((temp = br.readLine()) != null) {
+
+				if (temp.contains(name)) {
+					String tempArray[] = temp.split("[ ]");
+					player.setName(tempArray[0]);
+					player.setHighestPoint(Integer.parseInt(tempArray[1]));
+					player.setFastestGame(Integer.parseInt(tempArray[2]));
+					return player;
+				}
 			}
-
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,12 +35,14 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		return null;
+
 	}
 
 	public void save(Player player) {
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "players.txt"))) {
-
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt"))) {
+			bw.append(player.getName() + " " + player.getHighestPoint() + " " + player.getFastestGame());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,15 +60,15 @@ public class FileManager {
 				player.setPoints(Integer.parseInt(temp[1]));
 				player.setMoves(Integer.parseInt(temp[2]));
 				highScore.add(player);
-				
+
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}			
+			}
 		}
-		
+
 	}
 }

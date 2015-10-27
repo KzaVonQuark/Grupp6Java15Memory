@@ -12,49 +12,49 @@ public class Player {
 		this.name = name;
 		this.points = 0;
 		this.moves = 0;
+		this.highestPoint = 0;
+		this.fastestGame = 0;
 		this.playerWinningHand = new Deck();
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the points
-	 */
 	public int getPoints() {
 		return points;
 	}
 
-	/**
-	 * @param points the points to set
-	 */
 	public void setPoints(int points) {
 		this.points = points;
 	}
 
-	/**
-	 * @return the moves
-	 */
 	public int getMoves() {
 		return moves;
 	}
 
-	/**
-	 * @param moves the moves to set
-	 */
 	public void setMoves(int moves) {
 		this.moves = moves;
+	}
+
+	public int getHighestPoint() {
+		return highestPoint;
+	}
+
+	public void setHighestPoint(int highestPoint) {
+		this.highestPoint = highestPoint;
+	}
+
+	public int getFastestGame() {
+		return fastestGame;
+	}
+
+	public void setFastestGame(int fastestGame) {
+		this.fastestGame = fastestGame;
 	}
 
 	public Deck getPlayerWinningHand() {

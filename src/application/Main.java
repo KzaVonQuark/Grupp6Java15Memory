@@ -20,7 +20,7 @@ public class Main extends Application {
 			
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
-			String[] oldPlayers = new File("/PlayerScore/").list();
+			String[] oldPlayers = 
 			
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
@@ -47,10 +47,8 @@ public class Main extends Application {
 			});
 			
 			loadPlayer.setOnAction(event -> {
-				/* clear buttons */
-				/* add buttons + getPlayers */
-				getPlayer.setOnAction(getEvent -> {
-					gameBoard.loadPlayers(getPlayer.getValue());
+				getPlayer.setOnAction(getEvent -> {					
+					gameBoard.addPlayers(fm.load(getPlayer.getValue()));
 				});
 			});
 			
