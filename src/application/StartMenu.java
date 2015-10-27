@@ -21,7 +21,6 @@ public class StartMenu extends BorderPane{
 	
 		headLine = new Label("Memory");
 		headLine.setAlignment(Pos.CENTER);
-//		setStyle("-fx-background-color: #2040EE;");
 		playersLabel = new Label("Add number of players");
 		fieldLabel = new Label("Play field selection");
 		
@@ -36,13 +35,15 @@ public class StartMenu extends BorderPane{
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
-		setTop(labelBox);
+		
 		playersBox = new HBox(5);
 		playersBox.setAlignment(Pos.CENTER);
 		playersBox.getChildren().addAll(playersLabel, choosePlayers, addButton, createButton);
+		
 		fieldOption = new HBox(5);
 		fieldOption.setAlignment(Pos.CENTER);
 		fieldOption.getChildren().addAll(fieldLabel, playFields);
+		
 		bottomButtons = new HBox(5);
 		bottomButtons.setAlignment(Pos.BASELINE_RIGHT);
 		bottomButtons.getChildren().addAll(resetButton, playButton);
@@ -51,9 +52,11 @@ public class StartMenu extends BorderPane{
 		alignmentBox.setAlignment(Pos.CENTER);
 		alignmentBox.getChildren().addAll(playersBox, fieldOption);
 		
+		setTop(labelBox);
 		setCenter(alignmentBox);
 		setBottom(bottomButtons);
-		}
 		
+		setStyle("-fx-background-image: url(\"images/background.jpg\"); -fx-backgroundsize: 800,600;");
 		}
+}
 	
