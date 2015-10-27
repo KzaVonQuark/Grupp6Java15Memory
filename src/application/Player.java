@@ -3,12 +3,10 @@ package application;
 public class Player {
 	
 	private String name;
-<<<<<<< HEAD
-	private int points, moves, highestPoint, fastestGame;
-=======
-	private Deck playerWinningHand;
->>>>>>> branch 'master' of https://github.com/KzaVonQuark/Grupp6Java15Memory
 	
+	private int points, moves, highestPoint, fastestGame;
+	private Deck playerWinningHand;
+
 	public Player(String name) {
 		super();
 		this.name = name;
