@@ -41,7 +41,6 @@ public class FreePane extends GridPane {
 			if (gradient < 1) {
 				gc.setFill(Color.color(r, g, b, gradient));
 				gc.fillRect(0, 0, getWidth(), getHeight());
-				System.out.println("ANIMATION PLAYING " + gradient);
 			} else {
 				changePane(newPane, fadeColor);
 				loadAnimation.stop();
@@ -87,14 +86,11 @@ public class FreePane extends GridPane {
 		backAnimation.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame fadeAnimation = new KeyFrame(Duration.seconds(0.03), e -> {
-			// TODO Auto-generated method stub
-
 			gradient = gradient - 0.04f;
 			gc.clearRect(0, 0, getWidth(), getHeight());
 			if (gradient > 0) {
 				gc.setFill(Color.color(r, g, b, gradient));
 				gc.fillRect(0, 0, getWidth(), getHeight());
-				System.out.println("ANIMATION PLAYING " + gradient);
 			} else {
 				backAnimation.stop();
 				getChildren().remove(transit);
