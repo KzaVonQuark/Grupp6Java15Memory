@@ -21,7 +21,7 @@ public class StartMenu extends BorderPane{
 	
 		headLine = new Label("Memory");
 		headLine.setAlignment(Pos.CENTER);
-		
+//		setStyle("-fx-background-color: #2040EE;");
 		playersLabel = new Label("Add number of players");
 		fieldLabel = new Label("Play field selection");
 		
