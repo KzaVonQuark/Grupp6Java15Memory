@@ -3,7 +3,7 @@ package application;
 public class Player {
 	
 	private String name;
-	private int points, moves;
+	private int points, moves, highestPoint, fastestGame;
 	
 	public Player(String name) {
 		super();

@@ -7,6 +7,7 @@ public class GameBoard {
 	FileManager fileManager = new FileManager();
 	TreeMap<Integer, Player> players = new TreeMap<Integer, Player>();
 	Player player;
+
 	
 	private int index;;
 	

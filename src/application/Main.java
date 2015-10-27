@@ -39,8 +39,7 @@ public class Main extends Application {
 			
 
 			
-			// Events
-			
+			// Events			
 			addPlayer.setOnAction(event -> {
 				if (!playerName.equals("")) {
 					gameBoard.addPlayers(playerName.getText());

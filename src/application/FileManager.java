@@ -7,14 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
-
-import javax.annotation.processing.Filer;
-import javax.lang.model.element.Element;
-import javax.tools.FileObject;
-import javax.tools.JavaFileObject;
-import javax.tools.JavaFileManager.Location;
 
 public class FileManager {
 
@@ -23,7 +16,7 @@ public class FileManager {
 
 	public void load(TreeMap<Integer, Player> players, String name) {
 
-		try (BufferedReader br = new BufferedReader(new FileReader(pathName + name))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "players.txt"))) {
 			int key = players.lastKey() + 1;
 			String temp = br.readLine();
 			if (temp.contains(name)) {
@@ -44,7 +37,7 @@ public class FileManager {
 
 	public void save(Player player) {
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + player.getName() + ".txt"))) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "players.txt"))) {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -57,7 +50,7 @@ public class FileManager {
 		ArrayList<Player> highScore = new ArrayList<Player>();
 		for (String name : names) {
 
-			try (BufferedReader br = new BufferedReader(new FileReader(pathName + name))) {
+			try (BufferedReader br = new BufferedReader(new FileReader(pathName + "HighScore.txt"))) {
 				String temp[] = name.split("[ ]");
 				player.setName(temp[0]);
 				player.setPoints(Integer.parseInt(temp[1]));
