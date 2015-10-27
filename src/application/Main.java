@@ -19,8 +19,7 @@ public class Main extends Application {
 		try {
 			
 			GameBoard gameBoard = new GameBoard();
-			FileManager fm = new FileManager();
-			String[] oldPlayers;
+			FileManager fm = new FileManager(); 
 			
 			FreePane root = new FreePane();
 			Scene scene = new Scene(root,800,600);
