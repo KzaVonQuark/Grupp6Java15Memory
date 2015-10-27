@@ -20,7 +20,7 @@ public class Main extends Application {
 			
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
-			String[] oldPlayers = 
+			String[] oldPlayers;
 			
 			FreePane root = new FreePane();
 			Scene scene = new Scene(root,800,600);
