@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -13,10 +14,19 @@ public class GameBoard extends Application {
 	public void start(Stage primaryStage) {
 
 		GridPane grid = new GridPane();
-		Scene scene = new Scene(grid, 400, 400);
+		Scene scene = new Scene(grid);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		Deck decks = new Deck(10, "frontimage2");
+		
+		for(int i=0; i<decks.getDeckSize(); i++){
+			ImageView imageView = new ImageView(decks.dealCard().getFrontImage());
+			/*imageView.setFitHeight(100);
+			imageView.setFitWidth(100);*/
+			grid.add(imageView,i,0);
+		}
 
 	}
 
