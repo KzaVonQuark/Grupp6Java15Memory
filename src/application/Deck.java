@@ -3,8 +3,6 @@ package application;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import javafx.scene.image.Image;
-
 /**
  * 
  * @author Tomas Majling
@@ -43,8 +41,8 @@ public class Deck {
 
 	public void populateDeck(int deckSize, String frontImage) {
 		for (int i = 0; i < (deckSize / 2); i++) {
-			deck.add(new Card(i + 1, frontImage, new Image("/images/" + i + ".png")));
-			deck.add(new Card(i + 1, frontImage, new Image("/images/" + i + ".png")));
+			deck.add(new Card(i + 1, frontImage, i + 1));
+			deck.add(new Card(i + 1, frontImage, i + 1));
 		}
 	}
 

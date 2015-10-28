@@ -1,7 +1,5 @@
 package application;
 
-import javafx.scene.image.Image;
-
 /**
  * 
  * @author Tomas Majling
@@ -11,14 +9,14 @@ public class Card {
 
 	// --------- Instance Variables ---------- //
 	private int value;
-	private Image frontImage;
-	private Image backImage;
+	private String frontImage;
+	private String backImage;
 
 	// --------- Constructor ----------- //
-	public Card(int value, String frontImage, Image backImage) {
+	public Card(int value, String frontImage, int backImage) {
 		this.value = value;
-		this.frontImage = new Image("/images/" + frontImage);
-		this.backImage = backImage;
+		this.frontImage = "images/" + frontImage + ".png";
+		this.backImage = "images/" + backImage + ".png";
 	}
 
 	// ---------- Getters and Setters ------------ //
@@ -26,19 +24,19 @@ public class Card {
 		return value;
 	}
 
-	public Image getFrontImage() {
+	public String getFrontImage() {
 		return frontImage;
 	}
 
-	public void setFrontImage(Image frontImage) {
+	public void setFrontImage(String frontImage) {
 		this.frontImage = frontImage;
 	}
 
-	public Image getBackImage() {
+	public String getBackImage() {
 		return backImage;
 	}
 
-	public void setBackImage(Image backImage) {
+	public void setBackImage(String backImage) {
 		this.backImage = backImage;
 	}
 
