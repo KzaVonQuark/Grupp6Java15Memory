@@ -15,8 +15,8 @@ public class StartMenu extends BorderPane{
 	Label headLine, playersLabel, fieldLabel;
 	Button  playButton, resetButton, addButton, createButton;
 	ComboBox<String> choosePlayers, playFields;
-	VBox alignmentBox;
-	HBox bottomButtons, fieldOption, playersBox, labelBox; 
+	VBox alignmentBox, bottomButtons;
+	HBox fieldOption, playersBox, labelBox; 
 	
 	StartMenu()
 		{
@@ -53,30 +53,33 @@ public class StartMenu extends BorderPane{
 		createButton.setFont(Font.font(20));
 		
 		choosePlayers = new ComboBox<>();
+		choosePlayers.setPrefHeight(40);
 		playFields = new ComboBox<>();
+		playFields.setPrefHeight(40);
 		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
 		
 		playersBox = new HBox(5);
-		playersBox.setAlignment(Pos.CENTER);
-		playersBox.getChildren().addAll(playersLabel, choosePlayers);
+		playersBox.setAlignment(Pos.TOP_CENTER);
+		playersBox.getChildren().add(playersLabel);
 		
 		fieldOption = new HBox(5);
-		fieldOption.setAlignment(Pos.CENTER);
-		fieldOption.getChildren().addAll(fieldLabel, playFields);
+		fieldOption.setAlignment(Pos.TOP_CENTER);
+		fieldOption.getChildren().add(fieldLabel);
 		
-		bottomButtons = new HBox(5);
-		bottomButtons.setAlignment(Pos.CENTER);
-		bottomButtons.getChildren().addAll(resetButton, playButton);
+		bottomButtons = new VBox(5);
+		bottomButtons.setAlignment(Pos.TOP_LEFT);
+		bottomButtons.getChildren().addAll(choosePlayers, playFields);
 		
 		alignmentBox = new VBox(5);
-		alignmentBox.setAlignment(Pos.CENTER);
-		alignmentBox.getChildren().addAll(addButton, createButton, playersBox, fieldOption, bottomButtons);
+		alignmentBox.setAlignment(Pos.TOP_CENTER);
+		alignmentBox.getChildren().addAll(addButton, createButton, playersBox, fieldOption, resetButton, playButton);
 		
 		setTop(labelBox);
-		setCenter(alignmentBox);
+		setLeft(alignmentBox);
+		setCenter(bottomButtons);
 		
 		setStyle("-fx-background-image: url(\"images/background.jpg\"); -fx-backgroundsize: 800,600;");
 		}
