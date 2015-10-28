@@ -14,6 +14,7 @@ public class FileManager {
 	String pathName = "/Files/";
 	Player player;
 
+	// Load methods
 	public Player load(String name) {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "Players.txt"))) {
@@ -40,26 +41,39 @@ public class FileManager {
 
 	}
 
-	public void save(Player player) {
+	public ArrayList<String> loadNames() {
+		
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Guest");
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "Players.txt"))) {
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt"))) {
-			bw.append(player.getName() + " " + player.getHighestPoint() + " " + player.getFastestGame());
-		} catch (IOException e) {
+			String temp;
+			while ((temp = br.readLine()) != null) {
+				String tempArray[] = temp.split("[ ]");
+				names.add(tempArray[0]);
+			}
+
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
+		return names;
 	}
 
-	public void highScore(String[] names) {
+	public void loadHighScore(String[] names) {
 		ArrayList<Player> highScore = new ArrayList<Player>();
 		for (String name : names) {
 
 			try (BufferedReader br = new BufferedReader(new FileReader(pathName + "HighScore.txt"))) {
 				String temp[] = name.split("[ ]");
 				player.setName(temp[0]);
-				player.setPoints(Integer.parseInt(temp[1]));
-				player.setMoves(Integer.parseInt(temp[2]));
+				player.setHighestPoint(Integer.parseInt(temp[4]));
+				player.setLeastMoves(Integer.parseInt(temp[5]));
 				highScore.add(player);
 
 			} catch (FileNotFoundException e) {
@@ -71,9 +85,21 @@ public class FileManager {
 			}
 		}
 	}
-	
-	private void loadImages() {
-	File imgdir = new File(pathName);
-	File[] images = imgdir.listFiles();
-	}		
+
+	// Save methods.
+
+	public void save(Player player) {
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt"))) {
+			bw.append(player.getName() + " " + player.getHighestPoint() + " " + player.getFastestGame());
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void saveHighScore(Player player) {
+
+	}
 }
