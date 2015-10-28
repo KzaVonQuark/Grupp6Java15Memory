@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	CardImageView firstCard = null;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -64,6 +65,16 @@ public class Main extends Application {
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					System.out.println(cardIv.getCardValue());
+					if (firstCard != null) {
+						if (firstCard.getCardValue() == cardIv.getCardValue()) {
+							System.out.println("Du hittade ett par!");
+						} else {
+							System.out.println("Du hittade ingen par!");
+						}
+						firstCard = null;
+					} else {
+						firstCard = cardIv;
+					}
 				} catch (ClassCastException e) {
 				}
 			});
