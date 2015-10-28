@@ -11,23 +11,23 @@ public class Compare implements Comparator<Player> {
 
 		if (sortType.equals("Highest point")) {
 			if (p1.getHighestPoint() >= p2.getHighestPoint())
-				return 1;
-			else
 				return -1;
+			else
+				return 1;
 		}
 
 		if (sortType.equals("Least Moves")) {
 			if (p1.getLeastMoves() <= p2.getLeastMoves())
-				return 1;
-			else
 				return -1;
+			else
+				return 1;
 		}
 
 		if (sortType.equals("Fastest Time")) {
 			if (p1.getFastestGame() <= p2.getFastestGame())
-				return 1;
-			else
 				return -1;
+			else
+				return 1;
 		}
 		return 0;
 

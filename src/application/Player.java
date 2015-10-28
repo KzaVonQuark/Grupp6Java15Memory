@@ -2,6 +2,11 @@ package application;
 
 public class Player {
 	
+	@Override
+	public String toString() {
+		return this.getName() + " Points " + this.getHighestPoint() + " Moves " + this.getLeastMoves();
+	}
+
 	private String name;
 	
 	private int points, moves, time, highestPoint, leastMoves, fastestGame;

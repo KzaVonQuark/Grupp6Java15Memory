@@ -12,7 +12,7 @@ import java.util.Collections;
 
 public class FileManager {
 
-	String pathName = "/Files/";
+	String pathName = "src/Files/";
 	Player player;
 
 	// Load methods
@@ -66,14 +66,14 @@ public class FileManager {
 		return names;
 	}
 
-	public void loadHighScore(String sortType) {
+	public ArrayList<Player> loadHighScore(String sortType) {
 		ArrayList<Player> highScore = new ArrayList<Player>();
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "HighScore.txt"))) {
 			String temp;
 			while ((temp= br.readLine()) != null) {
 				String tempSplit[] = temp.split("[ ]");
-				player.setName(tempSplit[0]);
+				Player player = new Player(tempSplit[0]);
 				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				highScore.add(player);
@@ -90,6 +90,8 @@ public class FileManager {
 			Compare comp = new Compare();
 			comp.setSortType(sortType);
 			Collections.sort(highScore, comp);
+			
+			return highScore;
 		}
 
 	// Save methods.
