@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FileManager {
 
@@ -65,16 +66,18 @@ public class FileManager {
 		return names;
 	}
 
-	public void loadHighScore(String[] names) {
+	public void loadHighScore(String sortType) {
 		ArrayList<Player> highScore = new ArrayList<Player>();
-		for (String name : names) {
-
-			try (BufferedReader br = new BufferedReader(new FileReader(pathName + "HighScore.txt"))) {
-				String temp[] = name.split("[ ]");
-				player.setName(temp[0]);
-				player.setHighestPoint(Integer.parseInt(temp[4]));
-				player.setLeastMoves(Integer.parseInt(temp[5]));
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "HighScore.txt"))) {
+			String temp;
+			while ((temp= br.readLine()) != null) {
+				String tempSplit[] = temp.split("[ ]");
+				player.setName(tempSplit[0]);
+				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
+				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				highScore.add(player);
+			}
 
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -83,8 +86,11 @@ public class FileManager {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		
+			Compare comp = new Compare();
+			comp.setSortType(sortType);
+			Collections.sort(highScore, comp);
 		}
-	}
 
 	// Save methods.
 

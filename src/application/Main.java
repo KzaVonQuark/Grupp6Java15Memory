@@ -1,8 +1,5 @@
 package application;
 	
-import java.io.File;
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +7,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 
@@ -38,6 +35,11 @@ public class Main extends Application {
 			
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
+			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves", "Fastest Time");
+			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
+			ListView<String> HighScoreList = new ListView<String>(); 
+			
+			
 			
 			start.playButton.setOnAction(e->{
 				root.fadeChange(gameBoard, Color.BLACK);
@@ -47,18 +49,20 @@ public class Main extends Application {
 			// Events			
 			addPlayer.setOnAction(event -> {
 				if (!playerName.equals("")) {
-//					gameBoard.addPlayers(playerName.getText());
 				}
 			});
 			
 			loadPlayer.setOnAction(event -> {
 				getPlayer.setOnAction(getEvent -> {					
-//					gameBoard.addPlayers(fm.load(getPlayer.getValue()));
 				});
 			});
 			
 			highScore.setOnAction(event -> {
-//				fm.loadHighScore();
+				scoreType.setValue("Choose highscore");
+				start.bottomButtons.getChildren().addAll(scoreType, HighScoreList);
+				scoreType.setOnAction(event2 -> {
+					
+				});
 			});
 			
 		} catch(Exception e) {
