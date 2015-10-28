@@ -4,7 +4,7 @@ public class Player {
 	
 	private String name;
 	
-	private int points, moves, highestPoint, fastestGame;
+	private int points, moves, time, highestPoint, leastMoves, fastestGame;
 	private Deck playerWinningHand;
 
 	public Player(String name) {
@@ -12,9 +12,27 @@ public class Player {
 		this.name = name;
 		this.points = 0;
 		this.moves = 0;
+		this.time = 0;
 		this.highestPoint = 0;
+		this.leastMoves = 0;
 		this.fastestGame = 0;
 		this.playerWinningHand = new Deck();
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public int getLeastMoves() {
+		return leastMoves;
+	}
+
+	public void setLeastMoves(int leastMoves) {
+		this.leastMoves = leastMoves;
 	}
 
 	public String getName() {
