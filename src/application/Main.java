@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 
 
 public class Main extends Application {
@@ -38,24 +39,26 @@ public class Main extends Application {
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
 			
-			
+			start.playButton.setOnAction(e->{
+				root.fadeChange(gameBoard, Color.BLACK);
+			});
 
 			
 			// Events			
 			addPlayer.setOnAction(event -> {
 				if (!playerName.equals("")) {
-					gameBoard.addPlayers(playerName.getText());
+//					gameBoard.addPlayers(playerName.getText());
 				}
 			});
 			
 			loadPlayer.setOnAction(event -> {
 				getPlayer.setOnAction(getEvent -> {					
-					gameBoard.addPlayers(fm.load(getPlayer.getValue()));
+//					gameBoard.addPlayers(fm.load(getPlayer.getValue()));
 				});
 			});
 			
 			highScore.setOnAction(event -> {
-				fm.loadHighScore();
+//				fm.loadHighScore();
 			});
 			
 		} catch(Exception e) {
