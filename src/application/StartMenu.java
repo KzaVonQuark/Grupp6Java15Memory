@@ -27,16 +27,30 @@ public class StartMenu extends BorderPane{
 		headLine.setStyle("-fx-font: 100px Tahoma;");
 		
 		playersLabel = new Label("Add number of players");
+		playersLabel.setPrefSize(175, 10);
 		playersLabel.setTextFill(Color.GHOSTWHITE);
 		playersLabel.setFont(Font.font(15));
 		fieldLabel = new Label("Play field selection");
 		fieldLabel.setTextFill(Color.GHOSTWHITE);
 		fieldLabel.setFont(Font.font(15));
+		fieldLabel.setPrefSize(175, 10);
 		
 		playButton = new Button("Let's play");
+		playButton.setTextFill(Color.WHITESMOKE);
+        playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+        playButton.setFont(Font.font(20));
 		resetButton = new Button("Reset");
+		resetButton.setTextFill(Color.WHITESMOKE);
+		resetButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+		resetButton.setFont(Font.font(20));
 		addButton = new Button("Add");
+		addButton.setTextFill(Color.WHITESMOKE);
+		addButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+		addButton.setFont(Font.font(20));
 		createButton = new Button("Create");
+		createButton.setTextFill(Color.WHITESMOKE);
+		createButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+		createButton.setFont(Font.font(20));
 		
 		choosePlayers = new ComboBox<>();
 		playFields = new ComboBox<>();
@@ -47,23 +61,22 @@ public class StartMenu extends BorderPane{
 		
 		playersBox = new HBox(5);
 		playersBox.setAlignment(Pos.CENTER);
-		playersBox.getChildren().addAll(playersLabel, choosePlayers, addButton, createButton);
+		playersBox.getChildren().addAll(playersLabel, choosePlayers);
 		
 		fieldOption = new HBox(5);
 		fieldOption.setAlignment(Pos.CENTER);
 		fieldOption.getChildren().addAll(fieldLabel, playFields);
 		
 		bottomButtons = new HBox(5);
-		bottomButtons.setAlignment(Pos.BASELINE_RIGHT);
+		bottomButtons.setAlignment(Pos.CENTER);
 		bottomButtons.getChildren().addAll(resetButton, playButton);
 		
 		alignmentBox = new VBox(5);
 		alignmentBox.setAlignment(Pos.CENTER);
-		alignmentBox.getChildren().addAll(playersBox, fieldOption);
+		alignmentBox.getChildren().addAll(addButton, createButton, playersBox, fieldOption, bottomButtons);
 		
 		setTop(labelBox);
 		setCenter(alignmentBox);
-		setBottom(bottomButtons);
 		
 		setStyle("-fx-background-image: url(\"images/background.jpg\"); -fx-backgroundsize: 800,600;");
 		}
