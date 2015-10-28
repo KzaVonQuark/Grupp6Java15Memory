@@ -18,7 +18,7 @@ public class GameBoard extends BorderPane {
 
 		for (int i = 0; i < decks.getDeckSize(); i++) {
 			CardImageView imageView = new CardImageView(decks.dealCard(i).getFrontImage(),
-					decks.dealCard(i).getValue());
+ decks.dealCard(i));
 			imageView.setFitHeight(100);
 			imageView.setFitWidth(100);
 			grid.add(imageView, i, 0);
