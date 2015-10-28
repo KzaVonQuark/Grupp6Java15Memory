@@ -48,16 +48,18 @@ public class Main extends Application {
 			 * loadPlayer.setOnAction(event -> { getPlayer.setOnAction(getEvent
 			 * -> { }); });
 			 */
-			start.addButton.setOnAction(event -> {
+			start.newGameButton.setOnAction(event -> {
+				start.bottomButtons.getChildren().addAll(start.choosePlayers, start.playFields);
 				scoreType.setValue("Choose highscore");
 				start.bottomButtons.getChildren().addAll(scoreType, HighScoreList);
 				scoreType.setOnAction(event2 -> {
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
+					start.fieldOption.getChildren().addAll(HighScoreList);
 				});
 			});
 
-			start.resetButton.setOnAction(event -> {
+			start.ExitButton.setOnAction(event -> {
 				Platform.exit();
 			});
 
