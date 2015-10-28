@@ -1,6 +1,5 @@
 package application;
 
-import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -13,7 +12,9 @@ public class GameBoard extends BorderPane {
 		grid = new GridPane();
 		setCenter(grid);
 		decks = new Deck(10, "frontimage2");
-		grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setHgap(10);
+		grid.setVgap(10);
+		
 		
 
 		for (int i = 0; i < decks.getDeckSize(); i++) {
