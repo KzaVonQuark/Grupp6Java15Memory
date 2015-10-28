@@ -35,4 +35,18 @@ public class Rules {
 
 		return (dealerDeck.getDeck().size() == 0) ? true : false;
 	}
+	
+public void checkHighScore(Player[] inGame) {
+		
+		for (Player player : inGame) {
+			if (player.getPoints() > player.getHighestPoint())
+				player.setHighestPoint(player.getPoints());
+
+			if (player.getMoves() < player.getLeastMoves())
+				player.setLeastMoves(player.getMoves());
+
+			if (player.getTime() < player.getFastestGame())
+				player.setFastestGame(player.getTime());
+		}
+	}
 }
