@@ -1,17 +1,15 @@
 package application;
 	
-import java.io.File;
-import java.util.ArrayList;
-
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 
@@ -31,13 +29,13 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			Button addPlayer = new Button();
-			TextField playerName = new TextField(); 
-			Button loadPlayer = new Button();
-			Button highScore = new Button();
-			
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
+			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves", "Fastest Time");
+			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
+			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
+			ListView<Player> HighScoreList = new ListView<Player>(); 
+			HighScoreList.setId("HighScoreList");
 			
 			start.playButton.setOnAction(e->{
 				root.fadeChange(gameBoard, Color.BLACK);
@@ -45,20 +43,27 @@ public class Main extends Application {
 
 			
 			// Events			
-			addPlayer.setOnAction(event -> {
+/*			addPlayer.setOnAction(event -> {
 				if (!playerName.equals("")) {
-//					gameBoard.addPlayers(playerName.getText());
 				}
 			});
 			
 			loadPlayer.setOnAction(event -> {
 				getPlayer.setOnAction(getEvent -> {					
-//					gameBoard.addPlayers(fm.load(getPlayer.getValue()));
+				});
+			});
+*/			
+			start.addButton.setOnAction(event -> {
+				scoreType.setValue("Choose highscore");
+				start.bottomButtons.getChildren().addAll(scoreType, HighScoreList);
+				scoreType.setOnAction(event2 -> {
+					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
+					HighScoreList.setItems(highScoreEntries);
 				});
 			});
 			
-			highScore.setOnAction(event -> {
-//				fm.loadHighScore();
+			start.resetButton.setOnAction(event -> {
+				Platform.exit();
 			});
 			
 		} catch(Exception e) {
