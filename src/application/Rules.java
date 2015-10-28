@@ -3,9 +3,9 @@ package application;
 public class Rules {
 
 	// Compare match of cards
-	public boolean compareCards(Card card1, Card card2) {
+	public boolean compareCards(CardImageView card1, CardImageView card2) {
 		
-		return (card1.getValue() == card2.getValue()) ? true : false;
+		return (card1.getCardValue() == card2.getCardValue()) ? true : false;
 	}
 
 	// Winning player
