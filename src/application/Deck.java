@@ -47,13 +47,17 @@ public class Deck {
 	}
 
 	// Deal card to gameboard
-	public Card dealCard() {
-		return deck.pop();
+	public Card dealCard(int cardInDeck) {
+		return deck.get(cardInDeck);
 	}
 
 	// Add card to players win hand
-	public void addCardToDeck(Card card) {
-		deck.push(card);
+	public void addCardToDeck(CardImageView card) {
+		for (Card playerCard : deck) {
+			if (playerCard.getValue() == card.getCardValue()) {
+				deck.push(playerCard);
+			}
+		}
 	}
 
 }
