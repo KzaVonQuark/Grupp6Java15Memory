@@ -1,6 +1,7 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -34,7 +35,7 @@ public class Main extends Application {
 			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> HighScoreList = new ListView<Player>(); 
-			HighScoreList.setId("HighScoreList");			
+			HighScoreList.setId("HighScoreList");
 			
 			start.playButton.setOnAction(e->{
 				root.fadeChange(gameBoard, Color.BLACK);
@@ -59,6 +60,10 @@ public class Main extends Application {
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
 				});
+			});
+			
+			start.resetButton.setOnAction(event -> {
+				Platform.exit();
 			});
 			
 		} catch(Exception e) {
