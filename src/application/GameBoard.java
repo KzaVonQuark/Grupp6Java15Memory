@@ -1,14 +1,8 @@
 package application;
 
-import java.util.ArrayList;
-
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class GameBoard extends BorderPane {
 	GridPane grid;
