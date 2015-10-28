@@ -24,7 +24,7 @@ public class FreePane extends GridPane {
 	protected Canvas transit;
 	private float gradient = 0.0f;
 
-	// inner Transition Method.
+	// Transition - Fading method.
 	public void fadeChange(Pane newPane, Color fadeColor) {
 		transit = new Canvas(getWidth(), getHeight());
 		add(transit, 0, 0);
@@ -36,7 +36,6 @@ public class FreePane extends GridPane {
 		final double g = fadeColor.getGreen();
 		final double b = fadeColor.getBlue();
 		KeyFrame fadeAnimation = new KeyFrame(Duration.seconds(0.03), e -> {
-
 			gradient = gradient + 0.04f;
 			gc.clearRect(0, 0, getWidth(), getHeight());
 			if (gradient < 1) {
@@ -48,13 +47,12 @@ public class FreePane extends GridPane {
 
 			}
 		});
-
 		loadAnimation.getKeyFrames().add(fadeAnimation);
 		loadAnimation.play();
 
 	}
 
-	// Instant transition to new Pane.
+	// Transition - Instant method
 	public void setPane(Pane newPane) {
 		getChildren().remove(innerContent);
 		innerContent = newPane;
@@ -75,7 +73,6 @@ public class FreePane extends GridPane {
 	}
 
 	private void fadeBack(Pane newPane, Color fadeColor) {
-		// TODO Auto-generated method stub
 		transit = new Canvas(getWidth(), getHeight());
 		add(transit, 0, 0);
 		final double r = fadeColor.getRed();
@@ -87,7 +84,6 @@ public class FreePane extends GridPane {
 		newPane.setVisible(true);
 		Timeline backAnimation = new Timeline();
 		backAnimation.setCycleCount(Timeline.INDEFINITE);
-
 		KeyFrame fadeAnimation = new KeyFrame(Duration.seconds(0.03), e -> {
 			gradient = gradient - 0.04f;
 			gc.clearRect(0, 0, getWidth(), getHeight());
@@ -99,9 +95,7 @@ public class FreePane extends GridPane {
 				getChildren().remove(transit);
 			}
 		});
-
 		backAnimation.getKeyFrames().add(fadeAnimation);
 		backAnimation.play();
 	}
-
 }
