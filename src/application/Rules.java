@@ -5,7 +5,7 @@ public class Rules {
 	// Compare match of cards
 	public boolean compareCards(CardImageView card1, CardImageView card2) {
 		
-		return (card1.getCardValue() == card2.getCardValue()) ? true : false;
+		return (card1.getCard() == card2.getCard()) ? true : false;
 	}
 
 	// Winning player

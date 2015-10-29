@@ -7,10 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	CardImageView firstCard = null;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -65,8 +68,26 @@ public class Main extends Application {
 
 			gameBoard.grid.setOnMouseClicked(me -> {
 				try {
+
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
-					System.out.println(cardIv.getCardValue());
+					cardIv.setImage(new Image(cardIv.getCard().getBackImage()));
+					System.out.println(cardIv.getCard().getValue());
+					if (!cardIv.equals(firstCard)) { // Check if player choose
+														// same card
+						if (firstCard != null) {
+							if (firstCard.getCard().getValue() == cardIv.getCard().getValue()) {
+								System.out.println("Du hittade ett par!");
+							} else {
+								System.out.println("Du hittade inget par!");
+								// cardIv.setImage(new
+								// Image(cardIv.getCard().getFrontImage()));
+								firstCard.setImage(new Image(firstCard.getCard().getFrontImage()));
+							}
+							firstCard = null;
+						} else {
+							firstCard = cardIv;
+						}
+					}
 				} catch (ClassCastException e) {
 				}
 			});
