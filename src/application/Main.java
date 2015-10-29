@@ -57,9 +57,10 @@ public class Main extends Application {
 			 * -> { }); });
 			 */
 			start.newGameButton.setOnAction(event -> {
-				start.bottomButtons.getChildren().addAll(start.choosePlayers, start.playFields);
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields);
 				scoreType.setValue("Choose highscore");
-				start.bottomButtons.getChildren().addAll(scoreType, HighScoreList);
+				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 				scoreType.setOnAction(event2 -> {
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
@@ -67,6 +68,18 @@ public class Main extends Application {
 				});
 			});
 
+			start.createButton.setOnAction(event -> {
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().add(start.creatorTexfield);
+			});
+			
+			start.creatorTexfield.setOnAction(event -> {
+				
+				start.playersLabel.setText(start.playersLabel.getText() + start.creatorTexfield.getText() + "\n");
+				start.creatorTexfield.clear();
+				start.centerBox.getChildren().clear();
+			});
+			
 			start.ExitButton.setOnAction(event -> {
 				Platform.exit();
 			});
