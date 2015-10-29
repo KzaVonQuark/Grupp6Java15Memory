@@ -17,7 +17,12 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	static int timePassed = 0;
-	static int timeToSee = 0;
+	static int timeToSee = 2; // Man har 2 sekunder på sig att se korten innan
+								// de försvinner eller flippas tillbaka.
+	static CardImageView cardOne = null;
+	static CardImageView cardTwo = null;
+	// Dessa variabler kan flyttas till Rules senare, men stannar för tillfället
+	// eftersom de behövs för metoden
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -72,21 +77,19 @@ public class Main extends Application {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().add(start.creatorTexfield);
 			});
-			
+
 			start.creatorTexfield.setOnAction(event -> {
-				
+
 				start.playersLabel.setText(start.playersLabel.getText() + start.creatorTexfield.getText() + "\n");
 				start.creatorTexfield.clear();
 				start.centerBox.getChildren().clear();
 			});
-			
+
 			start.ExitButton.setOnAction(event -> {
 				Platform.exit();
 			});
 
 			gameBoard.grid.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				CardImageView cardOne = null;
-				CardImageView cardTwo = null;
 
 				@Override
 				public void handle(MouseEvent me) {
@@ -122,22 +125,28 @@ public class Main extends Application {
 		}
 	}
 
+	// Ska flyttas till Rules (compareCards metoden som finns inklusive boolean
+	// returnen som redan är kodad)
 	public static void ConfirmPair(CardImageView a, CardImageView b) {
 		if (a.getCard().getValue() == b.getCard().getValue())
 			System.out.println("Du hittade ett par!");
 		else
 			System.out.println("Du hittade inget par!");
-		Timeline delay = new Timeline();
+		Timeline delay = new Timeline(); // Delay timern innan korten vänds
+											// tillbaka eller tas bort
 		delay.setCycleCount(Timeline.INDEFINITE);
-
-		KeyFrame cardFlip = new KeyFrame(Duration.seconds(1), e -> {
-			if (timePassed > timeToSee) {
+		// ska separeras från metod och flyttas till eventet
+		KeyFrame cardFlip = new KeyFrame(Duration.seconds(1.0), e -> {
+			if (timePassed + 1 >= timeToSee) {
+				// +1 för nån anledning börjar Timern på -1 verkar det som.
 				if (a.getCard().getValue() == b.getCard().getValue()) {
 					a.Remove();
 					b.Remove();
 				} else {
 					a.Flip();
 					b.Flip();
+					cardOne = null;
+					cardTwo = null;
 				}
 				timePassed = 0;
 				delay.stop();
