@@ -1,18 +1,23 @@
 package application;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
-	CardImageView firstCard = null;
+	static int timePassed = 0;
+	static int timeToSee = 0;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -66,35 +71,69 @@ public class Main extends Application {
 				Platform.exit();
 			});
 
-			gameBoard.grid.setOnMouseClicked(me -> {
-				try {
+			gameBoard.grid.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				CardImageView cardOne = null;
+				CardImageView cardTwo = null;
 
-					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
-					cardIv.setImage(new Image(cardIv.getCard().getBackImage()));
-					System.out.println(cardIv.getCard().getValue());
-					if (!cardIv.equals(firstCard)) { // Check if player choose
-														// same card
-						if (firstCard != null) {
-							if (firstCard.getCard().getValue() == cardIv.getCard().getValue()) {
-								System.out.println("Du hittade ett par!");
-							} else {
-								System.out.println("Du hittade inget par!");
-								// cardIv.setImage(new
-								// Image(cardIv.getCard().getFrontImage()));
-								firstCard.setImage(new Image(firstCard.getCard().getFrontImage()));
+				@Override
+				public void handle(MouseEvent me) {
+					// TODO Auto-generated method stub
+					try {
+						CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
+						if (!cardIv.equals(cardOne)) {// Check if player
+							// choose
+							// same card
+							if (cardOne == null) {
+								cardOne = cardIv;
+							} else if (cardTwo == null) {
+								cardTwo = cardIv;
 							}
-							firstCard = null;
-						} else {
-							firstCard = cardIv;
+							if (!cardOne.isFlipped()) {
+								cardOne = cardIv;
+								System.out.println("Card 1 Selected! (" + cardOne.getCard().getValue() + ")");
+								cardOne.Flip();
+							} else if (!cardTwo.isFlipped()) {
+								cardTwo = cardIv;
+								cardTwo.Flip();
+								System.out.println("Card 2 Selected! (" + cardTwo.getCard().getValue() + ")");
+								ConfirmPair(cardOne, cardTwo);
+							}
 						}
+					} catch (ClassCastException e) {
 					}
-				} catch (ClassCastException e) {
 				}
 			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void ConfirmPair(CardImageView a, CardImageView b) {
+		if (a.getCard().getValue() == b.getCard().getValue())
+			System.out.println("Du hittade ett par!");
+		else
+			System.out.println("Du hittade inget par!");
+		Timeline delay = new Timeline();
+		delay.setCycleCount(Timeline.INDEFINITE);
+
+		KeyFrame cardFlip = new KeyFrame(Duration.seconds(1), e -> {
+			if (timePassed > timeToSee) {
+				if (a.getCard().getValue() == b.getCard().getValue()) {
+					a.Remove();
+					b.Remove();
+				} else {
+					a.Flip();
+					b.Flip();
+				}
+				timePassed = 0;
+				delay.stop();
+			} else {
+				timePassed++;
+			}
+		});
+		delay.getKeyFrames().add(cardFlip);
+		delay.play();
 	}
 
 	public static void main(String[] args) {
