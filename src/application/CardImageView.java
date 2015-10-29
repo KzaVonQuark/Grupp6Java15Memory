@@ -26,20 +26,20 @@ public class CardImageView extends ImageView {
 
 	public void Flip() {
 		if(!isFlipped()){
-			//Animering insert här
-			flipped=true;
-			setImage(new Image(card.getBackImage()));
+			//Animering insert hï¿½r
+			this.flipped = true;
+			this.setImage(new Image(card.getBackImage()));
 		}
 		else{
-			//Animering to Front insert här
-			flipped=false;
-			setImage(new Image(card.getFrontImage()));
+			//Animering to Front insert hï¿½r
+			this.flipped = false;
+			this.setImage(new Image(card.getFrontImage()));
 		}
 	}
 	
 	public void Remove(){
-		card=null;
-		flipped=false;
-		setImage(null);
+		this.card = null;
+		this.flipped = false;
+		this.setImage(null);
 	}
 }
