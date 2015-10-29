@@ -25,6 +25,7 @@ public class Main extends Application {
 			root.setPane(start);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setTitle("Java15:Grupp6:Memory");
 
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
