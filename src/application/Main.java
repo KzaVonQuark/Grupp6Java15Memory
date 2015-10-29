@@ -1,28 +1,16 @@
 package application;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Main extends Application {
-	static int timePassed = 0;
-	static int timeToSee = 2; // Man har 2 sekunder på sig att se korten innan
-								// de försvinner eller flippas tillbaka.
-	static CardImageView cardOne = null;
-	static CardImageView cardTwo = null;
-	// Dessa variabler kan flyttas till Rules senare, men stannar för tillfället
-	// eftersom de behövs för metoden
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -30,6 +18,7 @@ public class Main extends Application {
 
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
+			Rules rules = new Rules();
 
 			FreePane root = new FreePane();
 			Scene scene = new Scene(root, 800, 600);
@@ -89,34 +78,30 @@ public class Main extends Application {
 				Platform.exit();
 			});
 
-			gameBoard.grid.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			gameBoard.grid.setOnMouseClicked(me -> {
 
-				@Override
-				public void handle(MouseEvent me) {
-					// TODO Auto-generated method stub
 					try {
 						CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
-						if (!cardIv.equals(cardOne)) {// Check if player
+					if (!cardIv.equals(rules.getCardOne())) {// Check if player
 							// choose
 							// same card
-							if (cardOne == null) {
-								cardOne = cardIv;
-							} else if (cardTwo == null) {
-								cardTwo = cardIv;
+						if (rules.getCardOne() == null) {
+							rules.setCardOne(cardIv);
+						} else if (rules.getCardTwo() == null) {
+							rules.setCardTwo(cardIv);
 							}
-							if (!cardOne.isFlipped()) {
-								cardOne = cardIv;
-								System.out.println("Card 1 Selected! (" + cardOne.getCard().getValue() + ")");
-								cardOne.Flip();
-							} else if (!cardTwo.isFlipped()) {
-								cardTwo = cardIv;
-								cardTwo.Flip();
-								System.out.println("Card 2 Selected! (" + cardTwo.getCard().getValue() + ")");
-								ConfirmPair(cardOne, cardTwo);
+						if (!rules.getCardOne().isFlipped()) {
+							rules.setCardOne(cardIv);
+							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
+							rules.getCardOne().Flip();
+						} else if (!rules.getCardTwo().isFlipped()) {
+							rules.setCardTwo(cardIv);
+							rules.getCardTwo().Flip();
+							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
+							rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 							}
 						}
 					} catch (ClassCastException e) {
-					}
 				}
 			});
 
@@ -125,38 +110,7 @@ public class Main extends Application {
 		}
 	}
 
-	// Ska flyttas till Rules (compareCards metoden som finns inklusive boolean
-	// returnen som redan är kodad)
-	public static void ConfirmPair(CardImageView a, CardImageView b) {
-		if (a.getCard().getValue() == b.getCard().getValue())
-			System.out.println("Du hittade ett par!");
-		else
-			System.out.println("Du hittade inget par!");
-		Timeline delay = new Timeline(); // Delay timern innan korten vänds
-											// tillbaka eller tas bort
-		delay.setCycleCount(Timeline.INDEFINITE);
-		// ska separeras från metod och flyttas till eventet
-		KeyFrame cardFlip = new KeyFrame(Duration.seconds(1.0), e -> {
-			if (timePassed + 1 >= timeToSee) {
-				// +1 för nån anledning börjar Timern på -1 verkar det som.
-				if (a.getCard().getValue() == b.getCard().getValue()) {
-					a.Remove();
-					b.Remove();
-				} else {
-					a.Flip();
-					b.Flip();
-					cardOne = null;
-					cardTwo = null;
-				}
-				timePassed = 0;
-				delay.stop();
-			} else {
-				timePassed++;
-			}
-		});
-		delay.getKeyFrames().add(cardFlip);
-		delay.play();
-	}
+
 
 	public static void main(String[] args) {
 		launch(args);
