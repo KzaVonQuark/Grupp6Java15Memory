@@ -4,36 +4,42 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class StartMenu extends BorderPane{
 
-	Label headLine, playersLabel, fieldLabel;
+	TextField creatorTexfield;
+	Text playersLabel;
+	Label headLine, playersHeadLine;
 	Button  playButton, ExitButton, newGameButton, createButton;
 	ComboBox<String> choosePlayers, playFields;
-	VBox alignmentBox, bottomButtons, fieldOption;
+	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox; 
 	
 	StartMenu()
 		{
 		
+		creatorTexfield = new TextField();
+		creatorTexfield.setMaxWidth(175);
+		creatorTexfield.setPromptText("Enter your ID");
+		
 		headLine = new Label("Memory");
 		headLine.setAlignment(Pos.CENTER);
 		headLine.setTextFill(Color.WHITESMOKE);
 		headLine.setStyle("-fx-font: 100px Tahoma;");
-		
-		playersLabel = new Label("Add number of players");
-		playersLabel.setPrefSize(175, 10);
-		playersLabel.setTextFill(Color.GHOSTWHITE);
+		playersLabel = new Text("");
+		playersLabel.setFill(Color.GHOSTWHITE);
 		playersLabel.setFont(Font.font(15));
-		fieldLabel = new Label("Play field selection");
-		fieldLabel.setTextFill(Color.GHOSTWHITE);
-		fieldLabel.setFont(Font.font(15));
-		fieldLabel.setPrefSize(175, 10);
+		playersHeadLine = new Label("Paticipant");
+		playersHeadLine.setTextFill(Color.GHOSTWHITE);
+		playersHeadLine.setFont(Font.font(15));
+		playersHeadLine.setPrefSize(175, 10);
 		
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.WHITESMOKE);
@@ -57,6 +63,8 @@ public class StartMenu extends BorderPane{
 		playFields = new ComboBox<>();
 		playFields.setPromptText("theme");
 		
+		
+		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
@@ -67,10 +75,10 @@ public class StartMenu extends BorderPane{
 		
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_CENTER);
-		fieldOption.getChildren().addAll(fieldLabel, playersLabel);
+		fieldOption.getChildren().addAll(playersHeadLine, playersLabel);
 		
-		bottomButtons = new VBox(5);
-		bottomButtons.setAlignment(Pos.TOP_LEFT);
+		centerBox = new VBox(5);
+		centerBox.setAlignment(Pos.TOP_LEFT);
 		
 		alignmentBox = new VBox(5);
 		alignmentBox.setAlignment(Pos.TOP_CENTER);
@@ -78,10 +86,10 @@ public class StartMenu extends BorderPane{
 		
 		setTop(labelBox);
 		setLeft(alignmentBox);
-		setCenter(bottomButtons);
+		setCenter(centerBox);
 		setRight(fieldOption);
 		
-		setStyle("-fx-background-image: url(\"images/background.jpg\"); -fx-backgroundsize: 800,600;");
+		setStyle("-fx-background-image: url(\"images/background.jpg\")");
 		}
 }
 	
