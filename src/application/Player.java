@@ -9,8 +9,9 @@ public class Player {
 
 	private String name;
 	
-	private int points, moves, time, highestPoint, leastMoves, fastestGame;
+	private int points, moves, time, highestPoint, leastMoves, fastestGame, streak;
 	private Deck playerWinningHand;
+	private String[] achivements;
 
 	public Player(String name) {
 		super();
@@ -22,6 +23,14 @@ public class Player {
 		this.leastMoves = 0;
 		this.fastestGame = 0;
 		this.playerWinningHand = new Deck();
+	}
+
+	public int getStreak() {
+		return streak;
+	}
+
+	public void setStreak(int streak) {
+		this.streak = streak;
 	}
 
 	public int getTime() {

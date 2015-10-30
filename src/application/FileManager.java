@@ -73,7 +73,7 @@ public class FileManager {
 			String temp;
 			while ((temp= br.readLine()) != null) {
 				String tempSplit[] = temp.split("[ ]");
-				Player player = new Player(tempSplit[0]);
+				Player player = new Player(tempSplit[0] + "\n");
 				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				highScore.add(player);
