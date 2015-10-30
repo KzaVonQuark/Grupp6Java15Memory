@@ -76,7 +76,7 @@ public class Main extends Application {
 			start.ExitButton.setOnAction(event -> {
 				Platform.exit();
 			});
-
+/*
 			gameBoard.grid.setOnMouseClicked(me -> {
 				try {
 			gameBoard.grid.setOnMouseClicked(me -> {
@@ -127,7 +127,7 @@ public class Main extends Application {
 		}
 	}
 
-
+*/
 
 	public static void main(String[] args) {
 		launch(args);
