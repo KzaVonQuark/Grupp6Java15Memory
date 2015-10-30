@@ -55,9 +55,10 @@ public class Main extends Application {
 				scoreType.setValue("Choose highscore");
 				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 				scoreType.setOnAction(event2 -> {
+					highScoreEntries.clear();
+					HighScoreList.setItems(highScoreEntries);
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
-					start.fieldOption.getChildren().addAll(HighScoreList);
 				});
 			});
 
@@ -76,6 +77,7 @@ public class Main extends Application {
 			start.ExitButton.setOnAction(event -> {
 				Platform.exit();
 			});
+
 /*
 			gameBoard.grid.setOnMouseClicked(me -> {
 				try {
@@ -121,13 +123,12 @@ public class Main extends Application {
 				} catch (ClassCastException e) {
 				}
 			});
-
+*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-*/
+}
+	
 
 	public static void main(String[] args) {
 		launch(args);
