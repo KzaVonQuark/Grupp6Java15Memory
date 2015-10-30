@@ -56,6 +56,8 @@ public class Main extends Application {
 				scoreType.setValue("Choose highscore");
 				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 				scoreType.setOnAction(event2 -> {
+					highScoreEntries.clear();
+					HighScoreList.setItems(highScoreEntries);
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
 					start.fieldOption.getChildren().addAll(HighScoreList);
