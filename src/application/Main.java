@@ -31,8 +31,7 @@ public class Main extends Application {
 
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
-			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves",
-					"Fastest Time");
+			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
 			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> HighScoreList = new ListView<Player>();
@@ -60,7 +59,6 @@ public class Main extends Application {
 					HighScoreList.setItems(highScoreEntries);
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
-					start.fieldOption.getChildren().addAll(HighScoreList);
 				});
 			});
 
