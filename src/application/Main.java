@@ -7,12 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	CardImageView firstCard = null;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -20,6 +18,7 @@ public class Main extends Application {
 
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
+			Rules rules = new Rules();
 
 			FreePane root = new FreePane();
 			Scene scene = new Scene(root, 800, 600);
@@ -28,6 +27,7 @@ public class Main extends Application {
 			root.setPane(start);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setTitle("Java15:Grupp6:Memory");
 
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
@@ -49,18 +49,29 @@ public class Main extends Application {
 			 * loadPlayer.setOnAction(event -> { getPlayer.setOnAction(getEvent
 			 * -> { }); });
 			 */
-			/*
 			start.newGameButton.setOnAction(event -> {
-				start.bottomButtons.getChildren().addAll(start.choosePlayers, start.playFields);
-				scoreType.setValue("Choose ranking");
-				start.bottomButtons.getChildren().addAll(scoreType, HighScoreList);
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields);
+				scoreType.setValue("Choose highscore");
+				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 				scoreType.setOnAction(event2 -> {
 					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
 					HighScoreList.setItems(highScoreEntries);
 					start.fieldOption.getChildren().addAll(HighScoreList);
 				});
 			});
-			*/
+
+			start.createButton.setOnAction(event -> {
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().add(start.creatorTexfield);
+			});
+
+			start.creatorTexfield.setOnAction(event -> {
+
+				start.playersLabel.setText(start.playersLabel.getText() + start.creatorTexfield.getText() + "\n");
+				start.creatorTexfield.clear();
+				start.centerBox.getChildren().clear();
+			});
 
 			start.ExitButton.setOnAction(event -> {
 				Platform.exit();
@@ -68,6 +79,7 @@ public class Main extends Application {
 
 			gameBoard.grid.setOnMouseClicked(me -> {
 				try {
+			gameBoard.grid.setOnMouseClicked(me -> {
 
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					cardIv.setImage(new Image(cardIv.getCard().getBackImage()));
@@ -82,12 +94,30 @@ public class Main extends Application {
 								// cardIv.setImage(new
 								// Image(cardIv.getCard().getFrontImage()));
 								firstCard.setImage(new Image(firstCard.getCard().getFrontImage()));
+					try {
+						CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
+					if (!cardIv.equals(rules.getCardOne())) {// Check if player
+							// choose
+							// same card
+						if (rules.getCardOne() == null) {
+							rules.setCardOne(cardIv);
+						} else if (rules.getCardTwo() == null) {
+							rules.setCardTwo(cardIv);
 							}
 							firstCard = null;
 						} else {
 							firstCard = cardIv;
+						if (!rules.getCardOne().isFlipped()) {
+							rules.setCardOne(cardIv);
+							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
+							rules.getCardOne().Flip();
+						} else if (!rules.getCardTwo().isFlipped()) {
+							rules.setCardTwo(cardIv);
+							rules.getCardTwo().Flip();
+							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
+							rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
+							}
 						}
-					}
 				} catch (ClassCastException e) {
 				}
 			});
@@ -96,6 +126,8 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+
+
 
 	public static void main(String[] args) {
 		launch(args);
