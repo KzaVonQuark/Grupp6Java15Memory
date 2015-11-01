@@ -1,5 +1,7 @@
 package application;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -7,8 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
 
@@ -91,16 +95,11 @@ public class Main extends Application {
 						// same card
 						if (rules.getCardOne() == null) {
 							rules.setCardOne(cardIv);
+							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
+							flipAnimation(rules.getCardOne());
 						} else if (rules.getCardTwo() == null) {
 							rules.setCardTwo(cardIv);
-						}
-						if (!rules.getCardOne().isFlipped()) {
-							rules.setCardOne(cardIv);
-							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
-							rules.getCardOne().Flip();
-						} else if (!rules.getCardTwo().isFlipped()) {
-							rules.setCardTwo(cardIv);
-							rules.getCardTwo().Flip();
+							flipAnimation(rules.getCardTwo());
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 							rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						}
@@ -113,7 +112,27 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	public static void flipAnimation(CardImageView cardX){
+		Timeline flipAnimation = new Timeline();
+		flipAnimation.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
+			if (cardX.getScaleX() < 0) {
+				cardX.Flip();
+			}
+			if (!cardX.isFlipped()) {
+				cardX.setScaleX(cardX.getScaleX() - 0.15);
+			}
+			else{
+				cardX.setScaleX(cardX.getScaleX() + 0.25);
+				if(cardX.getScaleX()>=1.0){
+					cardX.setScaleX(1.0);
+					flipAnimation.stop();
+				}
+			}
+		});
+		flipAnimation.getKeyFrames().add(flipFrames);
+		flipAnimation.play();
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
