@@ -11,9 +11,10 @@ public class GameBoard extends BorderPane {
 
 		grid = new GridPane();
 		setCenter(grid);
-		decks = new Deck(10, "frontimage2");
+		decks = new Deck(12, "frontimage2");
 		grid.setHgap(10);
 		grid.setVgap(10);
+		
 		
 		
 
@@ -22,6 +23,10 @@ public class GameBoard extends BorderPane {
 			imageView.setFitHeight(100);
 			imageView.setFitWidth(100);
 			grid.add(imageView, i, 0);
+			
+			if(i >= 4){
+				return;
+			}
 		}
 
 	}
