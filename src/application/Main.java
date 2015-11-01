@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -53,6 +52,7 @@ public class Main extends Application {
 			 * loadPlayer.setOnAction(event -> { getPlayer.setOnAction(getEvent
 			 * -> { }); });
 			 */
+			
 			start.newGameButton.setOnAction(event -> {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields, scoreType, HighScoreList);
@@ -87,7 +87,7 @@ public class Main extends Application {
 			});
 
 			gameBoard.grid.setOnMouseClicked(me -> {
-
+tunrtest tt = new tunrtest(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -101,7 +101,9 @@ public class Main extends Application {
 							rules.setCardTwo(cardIv);
 							flipAnimation(rules.getCardTwo());
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
-							rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
+							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
+							
+							tt.playerTurn(turn); //Checks and changes player for next turn.
 						}
 					}
 				} catch (ClassCastException e) {

@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Queue;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -7,9 +9,15 @@ import javafx.scene.layout.GridPane;
 public class GameBoard extends BorderPane {
 	GridPane grid;
 	Deck decks;
-	Player[] players;
+	
+	// % = Added by Linus.
+	Queue<Player> q; // %
 
-	GameBoard() {
+	
+	GameBoard(Player[] players) { // Get players from "participants". // %
+		for (Player player : players) {
+			q.add(player);
+		} 									//%
 
 		grid = new GridPane();
 		setCenter(grid);
@@ -24,13 +32,5 @@ public class GameBoard extends BorderPane {
 			grid.add(imageView, i, 0);
 		}
 	}
-	
-	void start() {
-		
-		
-	}
-	
-	void play() {
-		
-	}
+
 }

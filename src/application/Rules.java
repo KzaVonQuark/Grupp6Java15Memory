@@ -1,7 +1,5 @@
 package application;
 
-import java.util.LinkedList;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -14,7 +12,6 @@ public class Rules {
 									// de f�rsvinner eller flippas tillbaka.
 	private CardImageView cardOne = null;
 	private CardImageView cardTwo = null;
-	LinkedList<Player> playersInGame;
 
 	public int getTimePassed() {
 		return timePassed;
@@ -87,11 +84,11 @@ public class Rules {
 		
 		if (this.compareCards(card1, card2)) {
 			System.out.println("Du hittade ett par!");
-			return true;// Skickas till playerTurn()
+			return true;
 			}
 		else {
 			System.out.println("Du hittade inget par!");
-			return false; //Skickas till playerTurn() (med index + 1)
+			return false;
 		}
 	}
 	
