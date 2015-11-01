@@ -4,11 +4,16 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -40,6 +45,15 @@ public class Main extends Application {
 			ListView<Player> HighScoreList = new ListView<Player>();
 			HighScoreList.setId("HighScoreList");
 
+			// Choose size
+			RadioButton boardSmall = new RadioButton("Small");
+			RadioButton boardMedium = new RadioButton("Medium");
+			RadioButton boardLarge = new RadioButton("Large");
+			ToggleGroup tg = new ToggleGroup();
+			boardSmall.setToggleGroup(tg);
+			boardMedium.setToggleGroup(tg);
+			boardLarge.setToggleGroup(tg);
+
 			start.playButton.setOnAction(e -> {
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
@@ -52,7 +66,7 @@ public class Main extends Application {
 			 * loadPlayer.setOnAction(event -> { getPlayer.setOnAction(getEvent
 			 * -> { }); });
 			 */
-			
+
 			start.newGameButton.setOnAction(event -> {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields, scoreType, HighScoreList);
@@ -65,7 +79,15 @@ public class Main extends Application {
 				scoreType.setOnAction(event2 -> {
 					highScoreEntries.clear();
 					HighScoreList.setItems(highScoreEntries);
-					highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue()));
+					tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+						@Override
+						public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
+								Toggle newValue) {
+							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(),
+									tg.getSelectedToggle().getUserData().toString()));
+						}
+
+					});
 					HighScoreList.setItems(highScoreEntries);
 				});
 			});
@@ -87,7 +109,7 @@ public class Main extends Application {
 			});
 
 			gameBoard.grid.setOnMouseClicked(me -> {
-tunrtest tt = new tunrtest(); // Trying player turn methods...
+				tunrtest tt = new tunrtest(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -102,8 +124,9 @@ tunrtest tt = new tunrtest(); // Trying player turn methods...
 							flipAnimation(rules.getCardTwo());
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
-							
-							tt.playerTurn(turn); //Checks and changes player for next turn.
+
+							tt.playerTurn(turn); // Checks and changes player
+													// for next turn.
 						}
 					}
 				} catch (ClassCastException e) {
@@ -114,7 +137,8 @@ tunrtest tt = new tunrtest(); // Trying player turn methods...
 			e.printStackTrace();
 		}
 	}
-	public static void flipAnimation(CardImageView cardX){
+
+	public static void flipAnimation(CardImageView cardX) {
 		Timeline flipAnimation = new Timeline();
 		flipAnimation.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
@@ -123,10 +147,9 @@ tunrtest tt = new tunrtest(); // Trying player turn methods...
 			}
 			if (!cardX.isFlipped()) {
 				cardX.setScaleX(cardX.getScaleX() - 0.15);
-			}
-			else{
+			} else {
 				cardX.setScaleX(cardX.getScaleX() + 0.25);
-				if(cardX.getScaleX()>=1.0){
+				if (cardX.getScaleX() >= 1.0) {
 					cardX.setScaleX(1.0);
 					flipAnimation.stop();
 				}
@@ -135,6 +158,7 @@ tunrtest tt = new tunrtest(); // Trying player turn methods...
 		flipAnimation.getKeyFrames().add(flipFrames);
 		flipAnimation.play();
 	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}

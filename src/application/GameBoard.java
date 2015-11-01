@@ -14,11 +14,12 @@ public class GameBoard extends BorderPane {
 	Queue<Player> q; // %
 
 	
-	GameBoard(Player[] players) { // Get players from "participants". // %
+	GameBoard() { // Get players from "participants". // % Player[] players
+		/*
 		for (Player player : players) {
 			q.add(player);
 		} 									//%
-
+*/
 		grid = new GridPane();
 		setCenter(grid);
 		decks = new Deck(10, "frontimage2");

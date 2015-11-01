@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class FileManager {
 
@@ -66,10 +67,19 @@ public class FileManager {
 		return names;
 	}
 
-	public ArrayList<Player> loadHighScore(String sortType) {
+	public List<Player> loadHighScore(String sortType, String boardSize) {
 		ArrayList<Player> highScore = new ArrayList<Player>();
+
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "HighScore.txt"))) {
+		try {
+			BufferedReader br = null;
+		if (boardSize.equals("Small"))
+			br = new BufferedReader(new FileReader(pathName + "HighScoreSmall.txt"));
+		else if (boardSize.equals("Medium"))
+			br = new BufferedReader(new FileReader(pathName + "HighScoreMedium.txt"));
+		else if (boardSize.equals("Large"))
+			br = new BufferedReader(new FileReader(pathName + "HighScoreLarge.txt"));
+
 			String temp;
 			while ((temp= br.readLine()) != null) {
 				String tempSplit[] = temp.split("[ ]");
@@ -91,7 +101,7 @@ public class FileManager {
 			comp.setSortType(sortType);
 			Collections.sort(highScore, comp);
 			
-			return highScore;
+			return highScore.subList(0, 4);
 		}
 
 	// Save methods.
