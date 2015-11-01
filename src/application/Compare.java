@@ -16,14 +16,14 @@ public class Compare implements Comparator<Player> {
 				return 1;
 		}
 
-		if (sortType.equals("Least Moves")) {
+		if (sortType.equals("Least moves")) {
 			if (p1.getLeastMoves() <= p2.getLeastMoves())
 				return -1;
 			else
 				return 1;
 		}
 
-		if (sortType.equals("Fastest Time")) {
+		if (sortType.equals("Fastest time")) {
 			if (p1.getFastestGame() <= p2.getFastestGame())
 				return -1;
 			else

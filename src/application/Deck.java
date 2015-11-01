@@ -40,7 +40,7 @@ public class Deck {
 	}
 
 	public void populateDeck(int deckSize, String frontImage) {
-		for (int i = 1; i < (deckSize / 2); i++) {
+		for (int i = 0; i < (deckSize / 2); i++) {
 			deck.add(new Card(i + 1, frontImage, i + 1));
 			deck.add(new Card(i + 1, frontImage, i + 1));
 		}
@@ -52,9 +52,9 @@ public class Deck {
 	}
 
 	// Add card to players win hand
-	public void addCardToDeck(CardImageView card) {
+	public void addCardToDeck(Card card) {
 		for (Card playerCard : deck) {
-			if (playerCard.getValue() == card.getCardValue()) {
+			if (playerCard.getValue() == card.getValue()) {
 				deck.push(playerCard);
 			}
 		}
