@@ -67,6 +67,8 @@ public class Rules {
 				if (this.compareCards(card1, card2)) {
 					card1.Remove();
 					card2.Remove();
+					this.cardOne = null;
+					this.cardTwo = null;
 				} else {
 					card1.Flip();
 					card2.Flip();

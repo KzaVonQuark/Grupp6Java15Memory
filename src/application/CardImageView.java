@@ -39,7 +39,6 @@ public class CardImageView extends ImageView {
 	
 	public void Remove(){
 		this.card = null;
-		this.flipped = false;
 		this.setImage(null);
 	}
 }
