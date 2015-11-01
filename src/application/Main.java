@@ -18,7 +18,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application {
-
+  
+	private AudioClip playSound = new AudioClip(new File("src/Sounds/Start.wav").toURI().toString());
+	private static AudioClip swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -45,7 +47,7 @@ public class Main extends Application {
 			HighScoreList.setId("HighScoreList");
 
 			start.playButton.setOnAction(e -> {
-				
+				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
 
@@ -136,7 +138,7 @@ public class Main extends Application {
 			}
 		});
 		flipAnimation.getKeyFrames().add(flipFrames);
-		
+		swishSound.play();
 		flipAnimation.play();
 	}
 	public static void main(String[] args) {
