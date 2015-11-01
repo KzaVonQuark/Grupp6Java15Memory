@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 public class GameBoard extends BorderPane {
 	GridPane grid;
 	Deck decks;
+	Player[] players;
 
 	GameBoard() {
 
@@ -22,7 +23,14 @@ public class GameBoard extends BorderPane {
 			imageView.setFitWidth(100);
 			grid.add(imageView, i, 0);
 		}
-
 	}
-
+	
+	void start() {
+		
+		
+	}
+	
+	void play() {
+		
+	}
 }

@@ -1,5 +1,7 @@
 package application;
 
+import java.util.LinkedList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -12,6 +14,7 @@ public class Rules {
 									// de f�rsvinner eller flippas tillbaka.
 	private CardImageView cardOne = null;
 	private CardImageView cardTwo = null;
+	LinkedList<Player> playersInGame;
 
 	public int getTimePassed() {
 		return timePassed;
@@ -51,11 +54,9 @@ public class Rules {
 		return (card1.getCard().getValue() == card2.getCard().getValue()) ? true : false;
 	}
 
-	public void confirmPair(CardImageView card1, CardImageView card2) {
-		if (this.compareCards(card1, card2))
-			System.out.println("Du hittade ett par!");
-		else
-			System.out.println("Du hittade inget par!");
+	// Added return true/false if player got pair or not.
+	public boolean confirmPair(CardImageView card1, CardImageView card2) { 
+		
 		Timeline delay = new Timeline(); // Delay timern innan korten v�nds
 											// tillbaka eller tas bort
 		delay.setCycleCount(Timeline.INDEFINITE);
@@ -78,9 +79,20 @@ public class Rules {
 				this.timePassed++;
 			}
 		});
+		
 		delay.getKeyFrames().add(cardFlip);
 		delay.play();
+		
+		if (this.compareCards(card1, card2)) {
+			System.out.println("Du hittade ett par!");
+			return true;// Skickas till playerTurn()
+			}
+		else {
+			System.out.println("Du hittade inget par!");
+			return false; //Skickas till playerTurn() (med index + 1)
+		}
 	}
+	
 
 	// Winning player
 	public Player winner(Player[] players) {

@@ -11,7 +11,6 @@ public class Player {
 	
 	private int points, moves, time, highestPoint, leastMoves, fastestGame, streak;
 	private Deck playerWinningHand;
-	private String[] achivements;
 
 	public Player(String name) {
 		super();
