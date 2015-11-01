@@ -1,5 +1,7 @@
 package application;
 
+import java.io.File;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -32,7 +35,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
-
+			
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
 			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
@@ -42,6 +45,7 @@ public class Main extends Application {
 			HighScoreList.setId("HighScoreList");
 
 			start.playButton.setOnAction(e -> {
+				
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
 
@@ -113,6 +117,7 @@ public class Main extends Application {
 		}
 	}
 	public static void flipAnimation(CardImageView cardX){
+		
 		Timeline flipAnimation = new Timeline();
 		flipAnimation.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
@@ -131,6 +136,7 @@ public class Main extends Application {
 			}
 		});
 		flipAnimation.getKeyFrames().add(flipFrames);
+		
 		flipAnimation.play();
 	}
 	public static void main(String[] args) {
