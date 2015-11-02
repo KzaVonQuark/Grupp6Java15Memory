@@ -11,12 +11,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -121,7 +119,8 @@ public class StartMenu extends BorderPane {
 		setCenter(centerBox);
 		setRight(fieldOption);
 
-		setStyle("-fx-background-image: url(\"images/background.jpg\")");
+		setStyle(
+				"-fx-background-color: #0f0f0f; -fx-background-image: url(\"images/background.jpg\"); -fx-background-position: center center; -fx-background-repeat: no-repeat;");
 
 		newGameButton.setOnMouseEntered(event -> {
 			newGameButton.setEffect(shadow);
