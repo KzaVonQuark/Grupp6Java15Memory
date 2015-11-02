@@ -68,8 +68,10 @@ public class Main extends Application {
 				}
 				Collections.shuffle(shufflePlayers);
 				players = shufflePlayers.toArray(new Player[players.length]);
-
-				GameBoard gameBoard = new GameBoard(players, 2);
+				int boardSize=0;
+				if(start.tg.getSelectedToggle().equals(start.mediumBoard))boardSize=1;
+				else if(start.tg.getSelectedToggle().equals(start.largeBoard))boardSize=2;
+				GameBoard gameBoard = new GameBoard(players, boardSize);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
