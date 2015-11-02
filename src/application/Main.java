@@ -28,7 +28,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
 			Rules rules = new Rules();
@@ -53,6 +52,23 @@ public class Main extends Application {
 			ListView<Player> HighScoreList = new ListView<Player>();
 			HighScoreList.setId("HighScoreList");
 
+			start.playButton.setOnAction(e -> {
+				int i = 0;
+				String[] temp = start.playersLabel.getText().split("[\n]");
+				Player[] players = new Player[temp.length];
+				for (String name : temp) {
+					if (fm.playerMap.containsKey(name))
+						players[i] = fm.playerMap.get(name);
+					else
+						players[i] = new Player(name);
+					i++;	
+				}
+				gameBoard.setPlayers(players);
+					playSound.play();
+					root.fadeChange(gameBoard, Color.BLACK);
+				});
+
+
 			// Events
 			/*
 			 * addPlayer.setOnAction(event -> { if (!playerName.equals("")) { }
@@ -62,12 +78,9 @@ public class Main extends Application {
 			 * -> { }); });
 			 */
 
-			start.playButton.setOnAction(e -> {
-				playSound.play();
-				root.fadeChange(gameBoard, Color.BLACK);
-			});
-			
+
 			start.newGameButton.setOnAction(event -> {
+				fm.load();
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, 
 							start.mediumBoard, start.largeBoard, start.playButton);
@@ -113,8 +126,8 @@ public class Main extends Application {
 				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 			});
 			
-			gameBoard.grid.setOnMouseClicked(me -> {
-//				Test tt = new Test(); // Trying player turn methods...
+			gameBoard.getGrid().setOnMouseClicked(me -> {
+	 //Test tt = new Test(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -131,7 +144,7 @@ public class Main extends Application {
 							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 
 //							tt.playerTurn(turn); // Checks and changes player
-													// for next turn.
+
 						}
 					}
 				} catch (ClassCastException e) {
