@@ -16,10 +16,6 @@ public class GameBoard extends BorderPane {
 
 	GameBoard() { // Get players from "participants". // % Player[] player
 		
-		for (Player player : players) {
-			this.q.add(player);
-		}
-		
 		grid = new GridPane();
 		this.setCenter(grid);
 		decks = new Deck(36, "frontimage2");
@@ -52,6 +48,13 @@ public class GameBoard extends BorderPane {
 		}
 		leaderBoard.setText(lb);
 		this.setLeft(leaderBoard);
+	}
+	
+	public void addPlayers(Player[] players) {
+		
+		for (Player player : players) {
+			this.q.add(player);
+		}
 	}
 
 	public GridPane getGrid() {
