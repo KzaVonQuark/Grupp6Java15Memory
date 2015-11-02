@@ -77,6 +77,7 @@ public class StartMenu extends BorderPane {
 		smallBoard.setTextFill(Color.ORANGE);
 		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
 		mediumBoard = new RadioButton("Normal");
+		mediumBoard.setSelected(true);
 		mediumBoard.setTextFill(Color.ORANGE);
 		mediumBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
 		largeBoard = new RadioButton("Hard");
