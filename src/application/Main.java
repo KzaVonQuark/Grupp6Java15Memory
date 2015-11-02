@@ -13,9 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -55,7 +53,7 @@ public class Main extends Application {
 
 			start.playButton.setOnAction(e -> {
 				int i = 0;
-				String[] temp = start.playersLabel.getText().split("[\n]");
+				String[] temp = start.participantsList.getText().split("[\n]");
 				Player[] players = new Player[temp.length];
 				for (String name : temp) {
 					if (fm.playerMap.containsKey(name))
@@ -64,7 +62,7 @@ public class Main extends Application {
 						players[i] = new Player(name);
 					i++;
 				}
-				
+				gameBoard.setPlayers(players);
 				gameBoard.addPlayers(players);
 					playSound.play();
 					root.fadeChange(gameBoard, Color.BLACK);
@@ -86,12 +84,33 @@ public class Main extends Application {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, 
 							start.mediumBoard, start.largeBoard, start.playButton);
-				start.choosePlayers.setOnAction(event1 -> {
+				start.choosePlayers.setOnAction(event2 -> {
 					start.fieldOption.getChildren().clear();
-					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersLabel);
-					start.playersLabel.setText(start.playersLabel.getText() + start.choosePlayers.getValue() + "\n");
+					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
+					start.participantsList.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 				});
-				scoreType.setOnAction(event2 -> {
+			});
+
+			start.createButton.setOnAction(event -> {
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().add(start.creatorTexfield);
+			});
+
+			start.creatorTexfield.setOnAction(event -> {
+
+				start.participantsList.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
+				start.creatorTexfield.clear();
+				start.centerBox.getChildren().clear();
+			});
+
+			start.exitButton.setOnAction(event -> {
+				Platform.exit();
+			});
+
+			start.highScoreButton.setOnAction(even ->{
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
+				scoreType.setOnAction(event -> {
 					highScoreEntries.clear();
 					HighScoreList.setItems(highScoreEntries);
 					start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -105,27 +124,6 @@ public class Main extends Application {
 					});
 					HighScoreList.setItems(highScoreEntries);
 				});
-			});
-
-			start.createButton.setOnAction(event -> {
-				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().add(start.creatorTexfield);
-			});
-
-			start.creatorTexfield.setOnAction(event -> {
-
-				start.playersLabel.setText(start.playersLabel.getText() + start.creatorTexfield.getText() + "\n");
-				start.creatorTexfield.clear();
-				start.centerBox.getChildren().clear();
-			});
-
-			start.exitButton.setOnAction(event -> {
-				Platform.exit();
-			});
-
-			start.highScoreButton.setOnAction(even ->{
-				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 			});
 			
 			gameBoard.getGrid().setOnMouseClicked(me -> {

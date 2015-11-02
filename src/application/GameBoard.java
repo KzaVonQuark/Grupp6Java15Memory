@@ -4,7 +4,6 @@ import java.util.Queue;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -41,13 +40,13 @@ public class GameBoard extends BorderPane {
 			// }
 		}
 
-		Label leaderBoard = new Label();
-		String lb = "";
-		for (Player player : this.getPlayers()) {
-			lb += player.getName() + ": " + player.getPoints() + " Points\n";
-		}
-		leaderBoard.setText(lb);
-		this.setLeft(leaderBoard);
+		// Leaderboard on gameboard
+		/*
+		 * Label leaderBoard = new Label(); String lb = ""; for (Player player :
+		 * this.getPlayers()) { lb += player.getName() + ": " +
+		 * player.getPoints() + " Points\n"; } leaderBoard.setText(lb);
+		 * this.setLeft(leaderBoard);
+		 */
 	}
 	
 	public void addPlayers(Player[] players) {

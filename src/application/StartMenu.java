@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 public class StartMenu extends BorderPane {
 
 	TextField creatorTexfield;
-	Text playersLabel;
+	Text participantsList;
 	Label headLine, playersHeadLine;
 	Button playButton, exitButton, newGameButton, createButton, highScoreButton;
 	ComboBox<String> choosePlayers, playFields;
@@ -40,15 +40,15 @@ public class StartMenu extends BorderPane {
 		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
-		creatorTexfield.setPromptText("Enter your ID");
+		creatorTexfield.setPromptText("Enter your Name");
 
 		headLine = new Label("Memory");
 		headLine.setAlignment(Pos.CENTER);
 		headLine.setTextFill(Color.WHITESMOKE);
 		headLine.setStyle("-fx-font: 100px Tahoma;");
-		playersLabel = new Text("");
-		playersLabel.setFill(Color.ORANGE);
-		playersLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		participantsList = new Text("");
+		participantsList.setFill(Color.ORANGE);
+		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
 		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
@@ -102,11 +102,11 @@ public class StartMenu extends BorderPane {
 
 		playersBox = new HBox(5);
 		playersBox.setAlignment(Pos.TOP_CENTER);
-		playersBox.getChildren().add(playersLabel);
+		playersBox.getChildren().add(participantsList);
 
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_CENTER);
-		fieldOption.getChildren().addAll(playersHeadLine, playersLabel);
+		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
 
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
@@ -140,6 +140,12 @@ public class StartMenu extends BorderPane {
 		});
 		playButton.setOnMouseExited(event -> {
 			playButton.setEffect(null);
+		});
+		highScoreButton.setOnMouseEntered(event -> {
+			highScoreButton.setEffect(shadow);
+		});
+		highScoreButton.setOnMouseExited(event -> {
+			highScoreButton.setEffect(null);
 		});
 		exitButton.setOnMouseEntered(event -> {
 			exitButton.setEffect(shadow);
