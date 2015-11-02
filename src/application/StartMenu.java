@@ -25,7 +25,7 @@ public class StartMenu extends BorderPane {
 	Text participantsList;
 	Label headLine, playersHeadLine;
 	Button playButton, exitButton, newGameButton, createButton, highScoreButton;
-	ComboBox<String> choosePlayers, playFields;
+	ComboBox<String> choosePlayers;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox;
 	RadioButton smallBoard, mediumBoard, largeBoard;
@@ -91,10 +91,9 @@ public class StartMenu extends BorderPane {
 		
 		ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 		choosePlayers = new ComboBox<>(playerEntries);
+		choosePlayers.setPrefSize(150, 15);
 		choosePlayers.setPromptText("Choose Player");
-		playFields = new ComboBox<>();
-		playFields.setPromptText("Choose Theme");
-
+		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
