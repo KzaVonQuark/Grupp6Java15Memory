@@ -64,8 +64,6 @@ public class Main extends Application {
 				}
 
 				GameBoard gameBoard = new GameBoard(players, 2);
-
-				//gameBoard.addPlayers(players);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});

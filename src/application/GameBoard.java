@@ -1,6 +1,9 @@
 package application;
 
+import java.awt.List;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import javafx.animation.KeyFrame;
@@ -13,16 +16,20 @@ import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 
 public class GameBoard extends BorderPane {
+	
 	private GridPane grid;
 	private Deck decks;
 	private Queue<Player> q;
 	private Player[] players;
-	Rules rules = new Rules();
 	private AudioClip swishSound;
+	
+	Rules rules = new Rules();
 
 	GameBoard(Player[] players, int deckSize) { // Get players from "participants". // % Player[] player
 
-		
+		this.q = new LinkedList<Player>();
+		addPlayers(players);
+
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 		
 		grid = new GridPane();
