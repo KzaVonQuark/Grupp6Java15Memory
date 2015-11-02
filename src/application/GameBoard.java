@@ -23,7 +23,7 @@ public class GameBoard extends BorderPane {
 
 	Rules rules = new Rules();
 
-	GameBoard(Player[] players, int deckSize) { // Get players from
+	GameBoard(Player[] players, int mode) { // Get players from
 												// "participants". // % Player[]
 												// player
 
@@ -37,7 +37,17 @@ public class GameBoard extends BorderPane {
 
 		grid = new GridPane();
 		this.setCenter(grid);
-		decks = new Deck(36, "frontimage2");
+		int cardsInDeck=0;
+		if(mode==0){
+			cardsInDeck=6*4;
+		}
+		else if(mode==1){
+			cardsInDeck=6*6;
+		}
+		else{
+			cardsInDeck=6*8;
+		}
+		decks = new Deck(cardsInDeck, "frontimage2");
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
