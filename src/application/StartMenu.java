@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -25,7 +26,7 @@ public class StartMenu extends BorderPane {
 	TextField creatorTexfield;
 	Text playersLabel;
 	Label headLine, playersHeadLine;
-	Button playButton, exitButton, newGameButton, createButton;
+	Button playButton, exitButton, newGameButton, createButton, highScoreButton;
 	ComboBox<String> choosePlayers, playFields;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox;
@@ -36,15 +37,6 @@ public class StartMenu extends BorderPane {
 		
 		FileManager fm = new FileManager();
 		DropShadow shadow = new DropShadow(5, Color.WHITE);
-		
-		smallBoard = new RadioButton("12 Pictures");
-		mediumBoard = new RadioButton("18 Pictures");
-		largeBoard = new RadioButton("24 Pictures");
-		
-		tg = new ToggleGroup();
-		smallBoard.setToggleGroup(tg);
-		mediumBoard.setToggleGroup(tg);
-		largeBoard.setToggleGroup(tg);
 		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
@@ -78,7 +70,26 @@ public class StartMenu extends BorderPane {
 		createButton.setTextFill(playButton.getTextFill());
 		createButton.setStyle(playButton.getStyle());
 		createButton.setFont(playButton.getFont());
+		highScoreButton = new Button("Highscores");
+		highScoreButton.setTextFill(playButton.getTextFill());
+		highScoreButton.setStyle(playButton.getStyle());
+		highScoreButton.setFont(playButton.getFont());
 
+		smallBoard = new RadioButton("Easy");
+		smallBoard.setTextFill(Color.ORANGE);
+		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		mediumBoard = new RadioButton("Normal");
+		mediumBoard.setTextFill(Color.ORANGE);
+		mediumBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		largeBoard = new RadioButton("Hard");
+		largeBoard.setTextFill(Color.ORANGE);
+		largeBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		
+		tg = new ToggleGroup();
+		smallBoard.setToggleGroup(tg);
+		mediumBoard.setToggleGroup(tg);
+		largeBoard.setToggleGroup(tg);
+		
 		ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 		choosePlayers = new ComboBox<>(playerEntries);
 		choosePlayers.setPromptText("Choose Player");
@@ -97,13 +108,13 @@ public class StartMenu extends BorderPane {
 		fieldOption.setAlignment(Pos.TOP_CENTER);
 		fieldOption.getChildren().addAll(playersHeadLine, playersLabel);
 
-		centerBox = new VBox(5);
+		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
 
 		alignmentBox = new VBox(5);
 		alignmentBox.setPadding(new Insets(0, 10, 0, 10));
 		alignmentBox.setAlignment(Pos.TOP_CENTER);
-		alignmentBox.getChildren().addAll(newGameButton, createButton, exitButton);
+		alignmentBox.getChildren().addAll(newGameButton, createButton, highScoreButton,  exitButton);
 
 		setTop(labelBox);
 		setLeft(alignmentBox);
@@ -118,29 +129,41 @@ public class StartMenu extends BorderPane {
 		newGameButton.setOnMouseExited(event -> {
 			newGameButton.setEffect(null);
 		});
-
 		createButton.setOnMouseEntered(event -> {
 			createButton.setEffect(shadow);
 		});
 		createButton.setOnMouseExited(event -> {
 			createButton.setEffect(null);
 		});
-
 		playButton.setOnMouseEntered(event -> {
 			playButton.setEffect(shadow);
-
 		});
 		playButton.setOnMouseExited(event -> {
 			playButton.setEffect(null);
 		});
-
 		exitButton.setOnMouseEntered(event -> {
 			exitButton.setEffect(shadow);
-
 		});
 		exitButton.setOnMouseExited(event -> {
 			exitButton.setEffect(null);
 		});
-
+		smallBoard.setOnMouseEntered(event -> {
+			smallBoard.setEffect(shadow);
+		});
+		smallBoard.setOnMouseExited(event -> {
+			smallBoard.setEffect(null);
+		});
+		mediumBoard.setOnMouseEntered(event -> {
+			mediumBoard.setEffect(shadow);
+		});
+		mediumBoard.setOnMouseExited(event -> {
+			mediumBoard.setEffect(null);
+		});				
+		largeBoard.setOnMouseEntered(event -> {
+			largeBoard.setEffect(shadow);
+		});
+		largeBoard.setOnMouseExited(event -> {
+			largeBoard.setEffect(null);
+		});
 	}
 }
