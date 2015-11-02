@@ -34,12 +34,13 @@ public class Main extends Application {
 			Rules rules = new Rules();
 
 			FreePane root = new FreePane();
-			Scene scene = new Scene(root, 800, 600);
+			Scene scene = new Scene(root, 1280, 720);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			StartMenu start = new StartMenu();
 			root.setPane(start);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
+			primaryStage.sizeToScene();
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
 			
@@ -112,7 +113,7 @@ public class Main extends Application {
 			});
 
 			gameBoard.grid.setOnMouseClicked(me -> {
-				Test tt = new Test(); // Trying player turn methods...
+//				Test tt = new Test(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -128,7 +129,7 @@ public class Main extends Application {
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 
-							tt.playerTurn(turn); // Checks and changes player
+//							tt.playerTurn(turn); // Checks and changes player
 													// for next turn.
 						}
 					}
