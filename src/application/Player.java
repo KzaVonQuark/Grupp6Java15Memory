@@ -7,7 +7,6 @@ public class Player {
 	private Deck playerWinningHand;
 
 	public Player(String name) {
-		super();
 		this.name = name;
 		this.points = 0;
 		this.moves = 0;
