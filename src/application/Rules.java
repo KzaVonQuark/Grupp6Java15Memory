@@ -63,8 +63,8 @@ public class Rules {
 			pairSound.play();
 			System.out.println("Du hittade ett par!");
 		}else{
-			 nopairSound.play();}
-			System.out.println("Du hittade inget par!");
+			 nopairSound.play();
+			System.out.println("Du hittade inget par!");}
 		Timeline delay = new Timeline(); // Delay timern innan korten v�nds
 											// tillbaka eller tas bort
 		delay.setCycleCount(Timeline.INDEFINITE);
