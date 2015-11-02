@@ -27,7 +27,7 @@ public class GameBoard extends BorderPane {
 		int row = 0;
 		int col = 0;
 		for (int i = 0; i < decks.getDeckSize(); i++) {
-			if (col > 5) {
+			if (col > (decks.getDeckSize()/6)-1) {
 				col = 0;
 				row++;
 			}
