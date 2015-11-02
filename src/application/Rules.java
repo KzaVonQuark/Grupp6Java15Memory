@@ -99,11 +99,11 @@ public class Rules {
 		delay.play();
 		
 		if (this.compareCards(card1, card2)) {
-			System.out.println("Du hittade ett par!");
+//			System.out.println("Du hittade ett par!");
 			return true;
 			}
 		else {
-			System.out.println("Du hittade inget par!");
+//			System.out.println("Du hittade inget par!");
 			return false;
 		}
 	}
