@@ -3,8 +3,6 @@ package application;
 import java.io.File;
 import java.util.Random;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -18,19 +16,16 @@ import javafx.scene.control.Toggle;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Main extends Application {
 
 	private AudioClip playSound = new AudioClip(new File("src/Sounds/Start.wav").toURI().toString());
-	private static AudioClip swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 
 			FileManager fm = new FileManager();
-			Rules rules = new Rules();
 
 			FreePane root = new FreePane();
 			Scene scene = new Scene(root, 1280, 720);
@@ -132,58 +127,12 @@ public class Main extends Application {
 
 			});
 
-			gameBoard.getGrid().setOnMouseClicked(me -> {
-				Test tt = new Test(); // Trying player turn methods...
-				try {
-					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
-					if (!cardIv.equals(rules.getCardOne())) {// Check if player
-						// choose
-						// same card
-						if (rules.getCardOne() == null) {
-							rules.setCardOne(cardIv);
-							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
-							flipAnimation(rules.getCardOne());
-						} else if (rules.getCardTwo() == null) {
-							rules.setCardTwo(cardIv);
-							flipAnimation(rules.getCardTwo());
-							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
-							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
-
-							tt.playerTurn(turn); // Checks and changes player
-
-						}
-					}
-				} catch (ClassCastException e) {
-				}
-			});
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void flipAnimation(CardImageView cardX) {
 
-		Timeline flipAnimation = new Timeline();
-		flipAnimation.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
-			if (cardX.getScaleX() < 0) {
-				cardX.Flip();
-			}
-			if (!cardX.isFlipped()) {
-				cardX.setScaleX(cardX.getScaleX() - 0.15);
-			} else {
-				cardX.setScaleX(cardX.getScaleX() + 0.25);
-				if (cardX.getScaleX() >= 1.0) {
-					cardX.setScaleX(1.0);
-					flipAnimation.stop();
-				}
-			}
-		});
-		flipAnimation.getKeyFrames().add(flipFrames);
-		swishSound.play();
-		flipAnimation.play();
-	}
 
 	public static void main(String[] args) {
 		launch(args);
