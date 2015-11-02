@@ -16,7 +16,7 @@ public class Rules {
 	private CardImageView cardOne = null;
 	private CardImageView cardTwo = null;
 	
-	private AudioClip nopairSound = new AudioClip(new File("src/Sounds/Wrong.wav").toURI().toString());
+	private AudioClip noPairSound = new AudioClip(new File("src/Sounds/Wrong.wav").toURI().toString());
 	private AudioClip pairSound = new AudioClip(new File("src/Sounds/Point.wav").toURI().toString());
 
 	public int getTimePassed() {
@@ -61,13 +61,14 @@ public class Rules {
 	public boolean confirmPair(CardImageView card1, CardImageView card2) { 
 		
 		
-		if (this.compareCards(card1, card2)){
+		if (this.compareCards(card1, card2)) {
 			pairSound.play();
 			System.out.println("Du hittade ett par!");
-		}else{
+		} else {
 
-			 nopairSound.play();
-			System.out.println("Du hittade inget par!");}
+			 noPairSound.play();
+			System.out.println("Du hittade inget par!");
+		}
 
 		Timeline delay = new Timeline(); // Delay timern innan korten v�nds
 											// tillbaka eller tas bort
