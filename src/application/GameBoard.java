@@ -1,8 +1,6 @@
 package application;
 
-import java.awt.List;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,22 +14,24 @@ import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 
 public class GameBoard extends BorderPane {
-	
+
 	private GridPane grid;
 	private Deck decks;
 	private Queue<Player> q;
 	private Player[] players;
 	private AudioClip swishSound;
-	
+
 	Rules rules = new Rules();
 
-	GameBoard(Player[] players, int deckSize) { // Get players from "participants". // % Player[] player
+	GameBoard(Player[] players, int deckSize) { // Get players from
+												// "participants". // % Player[]
+												// player
 
 		this.q = new LinkedList<Player>();
 		addPlayers(players);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
-		
+
 		grid = new GridPane();
 		this.setCenter(grid);
 		decks = new Deck(36, "frontimage2");
@@ -43,7 +43,7 @@ public class GameBoard extends BorderPane {
 		int row = 0;
 		int col = 0;
 		for (int i = 0; i < decks.getDeckSize(); i++) {
-			if (col > (decks.getDeckSize()/6)-1) {
+			if (col > (decks.getDeckSize() / 6) - 1) {
 				col = 0;
 				row++;
 			}
@@ -57,7 +57,6 @@ public class GameBoard extends BorderPane {
 			// }
 
 			this.getGrid().setOnMouseClicked(me -> {
-				Test tt = new Test(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -73,7 +72,7 @@ public class GameBoard extends BorderPane {
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 
-							tt.playerTurn(turn); // Checks and changes player
+							playerTurn(turn); // Checks and changes player
 
 						}
 					}
@@ -91,7 +90,45 @@ public class GameBoard extends BorderPane {
 		 * this.setLeft(leaderBoard);
 		 */
 	}
-	
+
+	void playerTurn(boolean gotPair) {
+
+		// Reads first element in queue.
+		if (gotPair == true) {
+			getQ().peek().setPoints(getQ().peek().getPoints() + 1);
+			getQ().peek().setMoves(getQ().peek().getMoves() + 1);
+		}
+
+		// Reads, removes and put element last in queue
+		else {
+			getQ().peek().setMoves(getQ().peek().getMoves() + 1);
+			getQ().add(getQ().poll());
+		}
+	}
+
+	private void flipAnimation(CardImageView cardX) {
+
+		Timeline flipAnimation = new Timeline();
+		flipAnimation.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
+			if (cardX.getScaleX() < 0) {
+				cardX.Flip();
+			}
+			if (!cardX.isFlipped()) {
+				cardX.setScaleX(cardX.getScaleX() - 0.15);
+			} else {
+				cardX.setScaleX(cardX.getScaleX() + 0.25);
+				if (cardX.getScaleX() >= 1.0) {
+					cardX.setScaleX(1.0);
+					flipAnimation.stop();
+				}
+			}
+		});
+		flipAnimation.getKeyFrames().add(flipFrames);
+		this.swishSound.play();
+		flipAnimation.play();
+	}
+
 	public void addPlayers(Player[] players) {
 		for (Player player : players) {
 			this.q.add(player);
@@ -128,29 +165,6 @@ public class GameBoard extends BorderPane {
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
-	}
-
-	private void flipAnimation(CardImageView cardX) {
-
-		Timeline flipAnimation = new Timeline();
-		flipAnimation.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
-			if (cardX.getScaleX() < 0) {
-				cardX.Flip();
-			}
-			if (!cardX.isFlipped()) {
-				cardX.setScaleX(cardX.getScaleX() - 0.15);
-			} else {
-				cardX.setScaleX(cardX.getScaleX() + 0.25);
-				if (cardX.getScaleX() >= 1.0) {
-					cardX.setScaleX(1.0);
-					flipAnimation.stop();
-				}
-			}
-		});
-		flipAnimation.getKeyFrames().add(flipFrames);
-		this.swishSound.play();
-		flipAnimation.play();
 	}
 
 }
