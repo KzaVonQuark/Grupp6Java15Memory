@@ -47,15 +47,11 @@ public class Main extends Application {
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
 			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
 			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
+			scoreType.setPromptText("Highscores");
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> HighScoreList = new ListView<Player>();
 			HighScoreList.setId("HighScoreList");
 
-			/* Choose size
-			RadioButton boardSmall = new RadioButton("Small");
-			RadioButton boardMedium = new RadioButton("Medium");
-			RadioButton boardLarge = new RadioButton("Large");
-*/
 			start.playButton.setOnAction(e -> {
 				int i = 0;
 				String[] temp = start.playersLabel.getText().split("[\n]");
@@ -81,11 +77,16 @@ public class Main extends Application {
 			 * -> { }); });
 			 */
 
+			start.playButton.setOnAction(e -> {
+				playSound.play();
+				root.fadeChange(gameBoard, Color.BLACK);
+			});
+			
 			start.newGameButton.setOnAction(event -> {
 				fm.load();
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard, start.largeBoard, scoreType, start.playButton, HighScoreList);
-				scoreType.setPromptText("Highscores");
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, 
+							start.mediumBoard, start.largeBoard, start.playButton);
 				start.choosePlayers.setOnAction(event1 -> {
 					start.fieldOption.getChildren().clear();
 					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersLabel);
@@ -123,6 +124,11 @@ public class Main extends Application {
 				Platform.exit();
 			});
 
+			start.highScoreButton.setOnAction(even ->{
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
+			});
+			
 			gameBoard.grid.setOnMouseClicked(me -> {
 	 //Test tt = new Test(); // Trying player turn methods...
 				try {
