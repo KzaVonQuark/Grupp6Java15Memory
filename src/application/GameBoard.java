@@ -13,7 +13,9 @@ public class GameBoard extends BorderPane {
 	private Queue<Player> q;
 	private Player[] players;
 
-	GameBoard() { // Get players from "participants". // % Player[] player
+	GameBoard(Player[] players, int deckSize) { // Get players from "participants". // % Player[] player
+		
+		this.q = null;
 		
 		grid = new GridPane();
 		setCenter(grid);
@@ -42,7 +44,6 @@ public class GameBoard extends BorderPane {
 	}
 	
 	public void addPlayers(Player[] players) {
-		
 		for (Player player : players) {
 			this.q.add(player);
 		}

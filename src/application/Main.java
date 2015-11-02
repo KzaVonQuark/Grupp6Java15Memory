@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.util.Random;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,14 +23,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application {
-  
+
 	private AudioClip playSound = new AudioClip(new File("src/Sounds/Start.wav").toURI().toString());
 	private static AudioClip swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
-			GameBoard gameBoard = new GameBoard();
+
 			FileManager fm = new FileManager();
 			Rules rules = new Rules();
 
@@ -43,7 +44,7 @@ public class Main extends Application {
 			primaryStage.sizeToScene();
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
-			
+
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
 			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
@@ -54,22 +55,25 @@ public class Main extends Application {
 			HighScoreList.setId("HighScoreList");
 
 			start.playButton.setOnAction(e -> {
+				
 				int i = 0;
 				String[] temp = start.playersLabel.getText().split("[\n]");
 				Player[] players = new Player[temp.length];
+				Random rand = new Random();
 				for (String name : temp) {
-					if (fm.playerMap.containsKey(name))
-						players[i] = fm.playerMap.get(name);
-					else
-						players[i] = new Player(name);
-					i++;
+					i = rand.nextInt(temp.length);
+					while (players[i] != null) {
+						if (fm.playerMap.containsKey(name))
+							players[i] = fm.playerMap.get(name);
+						else
+							players[i] = new Player(name);
+					}
 				}
-				
+				GameBoard gameBoard = new GameBoard(players, 2);
 				gameBoard.addPlayers(players);
-					playSound.play();
-					root.fadeChange(gameBoard, Color.BLACK);
-				});
-
+				playSound.play();
+				root.fadeChange(gameBoard, Color.BLACK);
+			});
 
 			// Events
 			/*
@@ -80,17 +84,17 @@ public class Main extends Application {
 			 * -> { }); });
 			 */
 
-
 			start.newGameButton.setOnAction(event -> {
 				fm.load();
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, 
-							start.mediumBoard, start.largeBoard, start.playButton);
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
+						start.largeBoard, start.playButton);
 				start.choosePlayers.setOnAction(event1 -> {
 					start.fieldOption.getChildren().clear();
 					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersLabel);
 					start.playersLabel.setText(start.playersLabel.getText() + start.choosePlayers.getValue() + "\n");
 				});
+
 				scoreType.setOnAction(event2 -> {
 					highScoreEntries.clear();
 					HighScoreList.setItems(highScoreEntries);
@@ -123,13 +127,13 @@ public class Main extends Application {
 				Platform.exit();
 			});
 
-			start.highScoreButton.setOnAction(even ->{
+			start.highScoreButton.setOnAction(even -> {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 			});
-			
+
 			gameBoard.getGrid().setOnMouseClicked(me -> {
-	 //Test tt = new Test(); // Trying player turn methods...
+				Test tt = new Test(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -145,7 +149,7 @@ public class Main extends Application {
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 
-//							tt.playerTurn(turn); // Checks and changes player
+							tt.playerTurn(turn); // Checks and changes player
 
 						}
 					}
@@ -158,8 +162,8 @@ public class Main extends Application {
 		}
 	}
 
-	public static void flipAnimation(CardImageView cardX){
-		
+	public static void flipAnimation(CardImageView cardX) {
+
 		Timeline flipAnimation = new Timeline();
 		flipAnimation.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
