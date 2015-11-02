@@ -76,7 +76,7 @@ public class Main extends Application {
 
 			start.newGameButton.setOnAction(event -> {
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields, start.playButton, scoreType, HighScoreList);
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields, scoreType, start.playButton, HighScoreList);
 				scoreType.setPromptText("Highscores");
 				start.choosePlayers.setOnAction(event1 -> {
 					start.fieldOption.getChildren().clear();

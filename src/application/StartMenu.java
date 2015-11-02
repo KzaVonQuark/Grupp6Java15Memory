@@ -46,7 +46,7 @@ public class StartMenu extends BorderPane {
 		playersLabel = new Text("");
 		playersLabel.setFill(Color.ORANGE);
 		playersLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
-		playersHeadLine = new Label("Paticipant");
+		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
 		playersHeadLine.setPrefSize(175, 10);
