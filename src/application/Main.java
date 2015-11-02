@@ -39,6 +39,7 @@ public class Main extends Application {
 			StartMenu start = new StartMenu();
 			root.setPane(start);
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
 			
