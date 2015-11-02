@@ -1,8 +1,6 @@
 package application;
 
-import java.awt.List;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -52,32 +50,32 @@ public class GameBoard extends BorderPane {
 			// return;
 			// }
 
-			this.getGrid().setOnMouseClicked(me -> {
-				Test tt = new Test(); // Trying player turn methods...
-				try {
-					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
-					if (!cardIv.equals(rules.getCardOne())) {// Check if player
-						// choose
-						// same card
-						if (rules.getCardOne() == null) {
-							rules.setCardOne(cardIv);
-							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
-							flipAnimation(rules.getCardOne());
-						} else if (rules.getCardTwo() == null) {
-							rules.setCardTwo(cardIv);
-							flipAnimation(rules.getCardTwo());
-							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
-							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
-
-							tt.playerTurn(turn); // Checks and changes player
-
-						}
-					}
-				} catch (ClassCastException e) {
-				}
-			});
 
 		}
+		this.getGrid().setOnMouseClicked(me -> {
+			Test tt = new Test(); // Trying player turn methods...
+			try {
+				CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
+				if (!cardIv.equals(rules.getCardOne())) {// Check if player
+					// choose
+					// same card
+					if (rules.getCardOne() == null) {
+						rules.setCardOne(cardIv);
+						System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
+						flipAnimation(rules.getCardOne());
+					} else if (rules.getCardTwo() == null) {
+						rules.setCardTwo(cardIv);
+						flipAnimation(rules.getCardTwo());
+						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
+						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
+
+						// tt.playerTurn(turn); // Checks and changes player
+
+					}
+				}
+			} catch (ClassCastException e) {
+			}
+		});
 
 		// Leaderboard on gameboard
 		/*
