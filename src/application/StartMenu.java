@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Shadow;
@@ -27,6 +28,7 @@ public class StartMenu extends BorderPane {
 	ComboBox<String> choosePlayers, playFields;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox;
+	RadioButton small, medium, large;
 
 	StartMenu() {
 		
@@ -44,7 +46,7 @@ public class StartMenu extends BorderPane {
 		playersLabel = new Text("");
 		playersLabel.setFill(Color.ORANGE);
 		playersLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
-		playersHeadLine = new Label("Paticipant");
+		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
 		playersHeadLine.setPrefSize(175, 10);
@@ -90,7 +92,7 @@ public class StartMenu extends BorderPane {
 		alignmentBox = new VBox(5);
 		alignmentBox.setPadding(new Insets(0, 10, 0, 10));
 		alignmentBox.setAlignment(Pos.TOP_CENTER);
-		alignmentBox.getChildren().addAll(newGameButton, createButton, playButton, exitButton);
+		alignmentBox.getChildren().addAll(newGameButton, createButton, exitButton);
 
 		setTop(labelBox);
 		setLeft(alignmentBox);
