@@ -28,6 +28,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
 			Rules rules = new Rules();
@@ -61,9 +62,10 @@ public class Main extends Application {
 						players[i] = fm.playerMap.get(name);
 					else
 						players[i] = new Player(name);
-					i++;	
+					i++;
 				}
-				gameBoard.setPlayers(players);
+				
+				gameBoard.addPlayers(players);
 					playSound.play();
 					root.fadeChange(gameBoard, Color.BLACK);
 				});
