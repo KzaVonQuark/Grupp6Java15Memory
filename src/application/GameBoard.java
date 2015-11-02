@@ -29,6 +29,9 @@ public class GameBoard extends BorderPane {
 
 		this.q = new LinkedList<Player>();
 		addPlayers(players);
+		System.out.println(q.size());
+		int p = this.q.peek().getPoints() + 1;
+		this.q.peek().setPoints(p);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 
@@ -94,14 +97,14 @@ public class GameBoard extends BorderPane {
 
 		// Reads first element in queue.
 		if (gotPair == true) {
-			getQ().peek().setPoints(getQ().peek().getPoints() + 1);
-			getQ().peek().setMoves(getQ().peek().getMoves() + 1);
+			this.q.peek().setPoints(this.q.peek().getPoints() + 1);
+			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 		}
 
 		// Reads, removes and put element last in queue
 		else {
-			getQ().peek().setMoves(getQ().peek().getMoves() + 1);
-			getQ().add(getQ().poll());
+			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
+			this.q.add(this.q.poll());
 		}
 	}
 
