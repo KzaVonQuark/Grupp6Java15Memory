@@ -141,6 +141,12 @@ public class StartMenu extends BorderPane {
 		playButton.setOnMouseExited(event -> {
 			playButton.setEffect(null);
 		});
+		highScoreButton.setOnMouseEntered(event -> {
+			highScoreButton.setEffect(shadow);
+		});
+		highScoreButton.setOnMouseExited(event -> {
+			highScoreButton.setEffect(null);
+		});
 		exitButton.setOnMouseEntered(event -> {
 			exitButton.setEffect(shadow);
 		});
