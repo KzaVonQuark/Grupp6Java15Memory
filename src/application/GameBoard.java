@@ -56,31 +56,30 @@ public class GameBoard extends BorderPane {
 			// return;
 			// }
 
-			this.getGrid().setOnMouseClicked(me -> {
-				try {
-					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
-					if (!cardIv.equals(rules.getCardOne())) {// Check if player
-						// choose
-						// same card
-						if (rules.getCardOne() == null) {
-							rules.setCardOne(cardIv);
-							System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
-							flipAnimation(rules.getCardOne());
-						} else if (rules.getCardTwo() == null) {
-							rules.setCardTwo(cardIv);
-							flipAnimation(rules.getCardTwo());
-							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
-							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
-
-							playerTurn(turn); // Checks and changes player
-
-						}
-					}
-				} catch (ClassCastException e) {
-				}
-			});
-
 		}
+		this.getGrid().setOnMouseClicked(me -> {
+			try {
+				CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
+				if (!cardIv.equals(rules.getCardOne())) {// Check if player
+					// choose
+					// same card
+					if (rules.getCardOne() == null) {
+						rules.setCardOne(cardIv);
+						System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
+						flipAnimation(rules.getCardOne());
+					} else if (rules.getCardTwo() == null) {
+						rules.setCardTwo(cardIv);
+						flipAnimation(rules.getCardTwo());
+						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
+						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
+
+						playerTurn(turn); // Checks and changes player
+
+					}
+				}
+			} catch (ClassCastException e) {
+			}
+		});
 
 		// Leaderboard on gameboard
 		/*
