@@ -10,14 +10,14 @@ public class Test {
 		
 		// Reads first element in queue.
 		if (gotPair == true) {
-			gb.q.peek().setPoints(gb.q.peek().getPoints() + 1);
-			gb.q.peek().setMoves(gb.q.peek().getMoves() + 1);
+			gb.getQ().peek().setPoints(gb.getQ().peek().getPoints() + 1);
+			gb.getQ().peek().setMoves(gb.getQ().peek().getMoves() + 1);
 		}
 		
 		// Reads, removes and put element last in queue
 		else {
-			gb.q.peek().setMoves(gb.q.peek().getMoves() + 1);
-			gb.q.add(gb.q.poll());
+			gb.getQ().peek().setMoves(gb.getQ().peek().getMoves() + 1);
+			gb.getQ().add(gb.getQ().poll());
 		}
 }
 }
