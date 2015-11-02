@@ -119,8 +119,7 @@ public class StartMenu extends BorderPane {
 		setCenter(centerBox);
 		setRight(fieldOption);
 
-		setStyle(
-				"-fx-background-color: #0f0f0f; -fx-background-image: url(\"images/background.jpg\"); -fx-background-position: center center; -fx-background-repeat: no-repeat;");
+		this.getStyleClass().add("startMenu");
 
 		newGameButton.setOnMouseEntered(event -> {
 			newGameButton.setEffect(shadow);
