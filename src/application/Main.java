@@ -1,5 +1,7 @@
 package application;
 
+import java.io.File;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -14,12 +16,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application {
-
+  
+	private AudioClip playSound = new AudioClip(new File("src/Sounds/Start.wav").toURI().toString());
+	private static AudioClip swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -36,7 +41,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
-
+			
 			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
 			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
@@ -55,6 +60,7 @@ public class Main extends Application {
 			boardLarge.setToggleGroup(tg);
 
 			start.playButton.setOnAction(e -> {
+				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
 
@@ -138,7 +144,8 @@ public class Main extends Application {
 		}
 	}
 
-	public static void flipAnimation(CardImageView cardX) {
+	public static void flipAnimation(CardImageView cardX){
+		
 		Timeline flipAnimation = new Timeline();
 		flipAnimation.setCycleCount(Timeline.INDEFINITE);
 		KeyFrame flipFrames = new KeyFrame(Duration.seconds(0.02), e -> {
@@ -156,6 +163,7 @@ public class Main extends Application {
 			}
 		});
 		flipAnimation.getKeyFrames().add(flipFrames);
+		swishSound.play();
 		flipAnimation.play();
 	}
 
