@@ -64,9 +64,10 @@ public class Main extends Application {
 					i++;	
 				}
 				GameBoard gameBoard = new GameBoard(players);
-				playSound.play();
-				root.fadeChange(gameBoard, Color.BLACK);
-			});
+					playSound.play();
+					root.fadeChange(gameBoard, Color.BLACK);
+				});
+
 
 			// Events
 			/*
@@ -77,11 +78,7 @@ public class Main extends Application {
 			 * -> { }); });
 			 */
 
-			start.playButton.setOnAction(e -> {
-				playSound.play();
-				root.fadeChange(gameBoard, Color.BLACK);
-			});
-			
+
 			start.newGameButton.setOnAction(event -> {
 				fm.load();
 				start.centerBox.getChildren().clear();
