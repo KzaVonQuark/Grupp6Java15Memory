@@ -34,12 +34,13 @@ public class Main extends Application {
 			Rules rules = new Rules();
 
 			FreePane root = new FreePane();
-			Scene scene = new Scene(root, 800, 600);
+			Scene scene = new Scene(root, 1280, 720);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			StartMenu start = new StartMenu();
 			root.setPane(start);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
+			primaryStage.sizeToScene();
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
 			
