@@ -21,8 +21,8 @@ public class GameBoard extends BorderPane {
 	private AudioClip swishSound;
 
 	GameBoard(Player[] players, int deckSize) { // Get players from "participants". // % Player[] player
+
 		
-		this.q = null;
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 		
 		grid = new GridPane();
