@@ -115,7 +115,7 @@ public class Main extends Application {
 			});
 
 			gameBoard.grid.setOnMouseClicked(me -> {
-				tunrtest tt = new tunrtest(); // Trying player turn methods...
+				Test tt = new Test(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
