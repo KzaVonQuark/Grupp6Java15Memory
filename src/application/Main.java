@@ -1,7 +1,8 @@
 package application;
 
 import java.io.File;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -48,20 +49,25 @@ public class Main extends Application {
 			HighScoreList.setId("HighScoreList");
 
 			start.playButton.setOnAction(e -> {
-				
-				int i = 0;
+
+				// int i = 0;
 				String[] temp = start.participantsList.getText().split("[\n]");
 				Player[] players = new Player[temp.length];
-				Random rand = new Random();
-				for (String name : temp) {
-					i = rand.nextInt(temp.length);
-					while (players[i] != null) {
-						if (fm.playerMap.containsKey(name))
-							players[i] = fm.playerMap.get(name);
-						else
-							players[i] = new Player(name);
-					}
+				// Random rand = new Random();
+				for (int i = 0; i < temp.length; i++) {
+					if (fm.playerMap.containsKey(temp[i]))
+						players[i] = fm.playerMap.get(temp[i]);
+					else
+						players[i] = new Player(temp[i]);
 				}
+				// Psuedo kod for shuffling the order of the players. Can be
+				// changed later.
+				ArrayList<Player> shufflePlayers = new ArrayList<Player>();
+				for (Player player_entity : players) {
+					shufflePlayers.add(player_entity);
+				}
+				Collections.shuffle(shufflePlayers);
+				players = shufflePlayers.toArray(new Player[players.length]);
 
 				GameBoard gameBoard = new GameBoard(players, 2);
 				playSound.play();
@@ -80,12 +86,13 @@ public class Main extends Application {
 			start.newGameButton.setOnAction(event -> {
 				fm.load();
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, 
-							start.mediumBoard, start.largeBoard, start.playButton);
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
+						start.largeBoard, start.playButton);
 				start.choosePlayers.setOnAction(event2 -> {
 					start.fieldOption.getChildren().clear();
 					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
-					start.participantsList.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					start.participantsList
+							.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 				});
 			});
 
@@ -96,7 +103,8 @@ public class Main extends Application {
 
 			start.creatorTexfield.setOnAction(event -> {
 
-				start.participantsList.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
+				start.participantsList
+						.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
 				start.creatorTexfield.clear();
 				start.centerBox.getChildren().clear();
 			});
@@ -105,7 +113,7 @@ public class Main extends Application {
 				Platform.exit();
 			});
 
-			start.highScoreButton.setOnAction(even ->{
+			start.highScoreButton.setOnAction(even -> {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 				scoreType.setOnAction(event -> {
@@ -129,8 +137,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-
-
 
 	public static void main(String[] args) {
 		launch(args);
