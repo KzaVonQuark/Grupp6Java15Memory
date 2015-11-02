@@ -58,8 +58,10 @@ public class Main extends Application {
 				for (int i = 0; i < temp.length; i++) {
 					if (fm.playerMap.containsKey(temp[i]))
 						players[i] = fm.playerMap.get(temp[i]);
-					else
+					else {
 						players[i] = new Player(temp[i]);
+						fm.save(players[i]);
+					}
 				}
 				// Psuedo kod for shuffling the order of the players. Can be
 				// changed later.
