@@ -10,10 +10,15 @@ public class GameBoard extends BorderPane {
 	GridPane grid;
 	Deck decks;
 	Queue<Player> q;
+	Player[] players;
 
-	GameBoard() { // Get players from "participants". // % Player[] players
+	GameBoard(Player[] players) { // Get players from "participants". // % Player[] players
 		
-		this.q = null;
+		this.players = players;
+		for (Player player : players) {
+			this.q.add(player);
+		}
+		
 		grid = new GridPane();
 		setCenter(grid);
 		decks = new Deck(36, "frontimage2");

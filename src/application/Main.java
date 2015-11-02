@@ -29,7 +29,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
 			Rules rules = new Rules();
 
@@ -60,9 +59,20 @@ public class Main extends Application {
 			boardSmall.setToggleGroup(tg);
 			boardMedium.setToggleGroup(tg);
 			boardLarge.setToggleGroup(tg);
+			boardSmall.setSelected(true);
 
 			start.playButton.setOnAction(e -> {
-				Player[] players = new Player[] {};
+				int i = 0;
+				String[] temp = start.playersLabel.getText().split("[\n]");
+				Player[] players = new Player[temp.length];
+				for (String name : temp) {
+					if (fm.playerMap.containsKey(name))
+						players[i] = fm.playerMap.get(name);
+					else
+						players[i] = new Player(name);
+					i++;	
+				}
+				GameBoard gameBoard = new GameBoard(players);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});

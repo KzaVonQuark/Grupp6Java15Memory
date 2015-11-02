@@ -26,9 +26,8 @@ public class FileManager {
 
 			String temp;
 			while ((temp = br.readLine()) != null) {
-
 				String tempArray[] = temp.split("[ ]");
-				player.setName(tempArray[0]);
+				player = new Player(tempArray[0]);
 				player.setHighestPoint(Integer.parseInt(tempArray[1]));
 				player.setFastestGame(Integer.parseInt(tempArray[2]));
 				playerMap.put(player.getName(), player);
