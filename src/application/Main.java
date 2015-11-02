@@ -51,16 +51,11 @@ public class Main extends Application {
 			ListView<Player> HighScoreList = new ListView<Player>();
 			HighScoreList.setId("HighScoreList");
 
-			// Choose size
+			/* Choose size
 			RadioButton boardSmall = new RadioButton("Small");
 			RadioButton boardMedium = new RadioButton("Medium");
 			RadioButton boardLarge = new RadioButton("Large");
-			ToggleGroup tg = new ToggleGroup();
-			boardSmall.setToggleGroup(tg);
-			boardMedium.setToggleGroup(tg);
-			boardLarge.setToggleGroup(tg);
-			boardSmall.setSelected(true);
-
+*/
 			start.playButton.setOnAction(e -> {
 				int i = 0;
 				String[] temp = start.playersLabel.getText().split("[\n]");
@@ -89,7 +84,7 @@ public class Main extends Application {
 			start.newGameButton.setOnAction(event -> {
 				fm.load();
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields, scoreType, start.playButton, HighScoreList);
+				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard, start.largeBoard, scoreType, start.playButton, HighScoreList);
 				scoreType.setPromptText("Highscores");
 				start.choosePlayers.setOnAction(event1 -> {
 					start.fieldOption.getChildren().clear();
@@ -99,12 +94,12 @@ public class Main extends Application {
 				scoreType.setOnAction(event2 -> {
 					highScoreEntries.clear();
 					HighScoreList.setItems(highScoreEntries);
-					tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+					start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 						@Override
 						public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
 								Toggle newValue) {
 							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(),
-									tg.getSelectedToggle().getUserData().toString()));
+									start.tg.getSelectedToggle().getUserData().toString()));
 						}
 
 					});

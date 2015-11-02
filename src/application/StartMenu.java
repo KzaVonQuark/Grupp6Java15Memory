@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.layout.BorderPane;
@@ -28,13 +29,23 @@ public class StartMenu extends BorderPane {
 	ComboBox<String> choosePlayers, playFields;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox;
-	RadioButton small, medium, large;
-
+	RadioButton smallBoard, mediumBoard, largeBoard;
+	ToggleGroup tg;
+	
 	StartMenu() {
 		
 		FileManager fm = new FileManager();
 		DropShadow shadow = new DropShadow(5, Color.WHITE);
-
+		
+		smallBoard = new RadioButton("12 Pictures");
+		mediumBoard = new RadioButton("18 Pictures");
+		largeBoard = new RadioButton("24 Pictures");
+		
+		tg = new ToggleGroup();
+		smallBoard.setToggleGroup(tg);
+		mediumBoard.setToggleGroup(tg);
+		largeBoard.setToggleGroup(tg);
+		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your ID");
