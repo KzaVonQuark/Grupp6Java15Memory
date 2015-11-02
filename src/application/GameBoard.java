@@ -4,6 +4,7 @@ import java.util.Queue;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -20,7 +21,7 @@ public class GameBoard extends BorderPane {
 		}
 		
 		grid = new GridPane();
-		setCenter(grid);
+		this.setCenter(grid);
 		decks = new Deck(36, "frontimage2");
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -43,6 +44,14 @@ public class GameBoard extends BorderPane {
 			// return;
 			// }
 		}
+
+		Label leaderBoard = new Label();
+		String lb = "";
+		for (Player player : this.getPlayers()) {
+			lb += player.getName() + ": " + player.getPoints() + " Points\n";
+		}
+		leaderBoard.setText(lb);
+		this.setLeft(leaderBoard);
 	}
 
 	public GridPane getGrid() {
