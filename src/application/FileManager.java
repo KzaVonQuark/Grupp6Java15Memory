@@ -68,14 +68,14 @@ public class FileManager {
 
 	public List<Player> loadHighScore(String sortType, String boardSize) {
 		ArrayList<Player> highScore = new ArrayList<Player>();
-
+		highScore.clear();
 		try {
 			BufferedReader br = null;
-			if (boardSize.equals("Small"))
+			if (boardSize.equals("Easy"))
 				br = new BufferedReader(new FileReader(pathName + "HighScoreSmall.txt"));
-			else if (boardSize.equals("Medium"))
+			else if (boardSize.equals("Normal"))
 				br = new BufferedReader(new FileReader(pathName + "HighScoreMedium.txt"));
-			else if (boardSize.equals("Large"))
+			else if (boardSize.equals("Hard"))
 				br = new BufferedReader(new FileReader(pathName + "HighScoreLarge.txt"));
 
 			String temp;
@@ -106,8 +106,8 @@ public class FileManager {
 
 	public void save(Player player) {
 
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt"))) {
-			bw.append(player.getName() + " " + player.getHighestPoint() + " " + player.getFastestGame());
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
+			bw.append("\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

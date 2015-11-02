@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
@@ -43,7 +44,7 @@ public class Main extends Application {
 			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
 			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
 			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
-			scoreType.setPromptText("Highscores");
+			scoreType.setValue("Highest point");
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> HighScoreList = new ListView<Player>();
 			HighScoreList.setId("HighScoreList");
@@ -57,8 +58,10 @@ public class Main extends Application {
 				for (int i = 0; i < temp.length; i++) {
 					if (fm.playerMap.containsKey(temp[i]))
 						players[i] = fm.playerMap.get(temp[i]);
-					else
+					else {
 						players[i] = new Player(temp[i]);
+						fm.save(players[i]);
+					}
 				}
 				// Psuedo kod for shuffling the order of the players. Can be
 				// changed later.
@@ -75,15 +78,6 @@ public class Main extends Application {
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
-
-			// Events
-			/*
-			 * addPlayer.setOnAction(event -> { if (!playerName.equals("")) { }
-			 * });
-			 * 
-			 * loadPlayer.setOnAction(event -> { getPlayer.setOnAction(getEvent
-			 * -> { }); });
-			 */
 
 			start.newGameButton.setOnAction(event -> {
 				fm.load();
@@ -117,22 +111,21 @@ public class Main extends Application {
 
 			start.highScoreButton.setOnAction(even -> {
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
-				scoreType.setOnAction(event -> {
-					highScoreEntries.clear();
-					HighScoreList.setItems(highScoreEntries);
+				start.centerBox.getChildren().addAll(scoreType, start.smallBoard, start.mediumBoard,
+														start.largeBoard, HighScoreList);
+				
 					start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 						@Override
 						public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
 								Toggle newValue) {
-							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(),
-									start.tg.getSelectedToggle().getUserData().toString()));
+							
+							highScoreEntries.clear();
+							HighScoreList.setItems(highScoreEntries);
+							RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
+							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), check.getText()));
+							HighScoreList.setItems(highScoreEntries);
 						}
-
-					});
-					HighScoreList.setItems(highScoreEntries);
 				});
-
 			});
 
 		} catch (Exception e) {

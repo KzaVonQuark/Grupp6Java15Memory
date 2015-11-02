@@ -40,9 +40,16 @@ public class Deck {
 	}
 
 	public void populateDeck(int deckSize, String frontImage) {
+		LinkedList<Integer> imageList = new LinkedList<Integer>();
+		for (int i = 0; i < 24; i++) {
+			imageList.add(i+1);
+		}
+		Collections.shuffle(imageList);
+		int selectedMotive;
 		for (int i = 0; i < (deckSize / 2); i++) {
-			deck.add(new Card(i + 1, frontImage, i + 1));
-			deck.add(new Card(i + 1, frontImage, i + 1));
+			selectedMotive=imageList.pop();
+			deck.add(new Card(selectedMotive, frontImage, selectedMotive));
+			deck.add(new Card(selectedMotive, frontImage, selectedMotive));
 		}
 	}
 
