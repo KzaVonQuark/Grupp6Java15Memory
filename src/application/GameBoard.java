@@ -8,14 +8,11 @@ import javafx.scene.layout.GridPane;
 public class GameBoard extends BorderPane {
 	GridPane grid;
 	Deck decks;
-
-	// % = Added by Linus.
-	Queue<Player> q; // %
+	Queue<Player> q;
 
 	GameBoard() { // Get players from "participants". // % Player[] players
-		/*
-		 * for (Player player : players) { q.add(player); } //%
-		 */
+		
+		this.q = null;
 		grid = new GridPane();
 		setCenter(grid);
 		decks = new Deck(36, "frontimage2");

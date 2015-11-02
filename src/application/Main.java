@@ -60,6 +60,7 @@ public class Main extends Application {
 			boardLarge.setToggleGroup(tg);
 
 			start.playButton.setOnAction(e -> {
+				Player[] players = new Player[] {};
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
@@ -74,6 +75,7 @@ public class Main extends Application {
 			 */
 
 			start.newGameButton.setOnAction(event -> {
+				fm.load();
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.playFields, scoreType, HighScoreList);
 				scoreType.setPromptText("Highscores");
@@ -115,7 +117,7 @@ public class Main extends Application {
 			});
 
 			gameBoard.grid.setOnMouseClicked(me -> {
-				Test tt = new Test(); // Trying player turn methods...
+				//Test tt = new Test(); // Testclass for player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
 					if (!cardIv.equals(rules.getCardOne())) {// Check if player
@@ -131,7 +133,7 @@ public class Main extends Application {
 							System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 							boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 
-							tt.playerTurn(turn); // Checks and changes player
+							//tt.playerTurn(turn); // Checks and changes player
 													// for next turn.
 						}
 					}
