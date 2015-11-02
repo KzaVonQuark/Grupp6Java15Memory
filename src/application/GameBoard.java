@@ -8,14 +8,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 public class GameBoard extends BorderPane {
-	GridPane grid;
-	Deck decks;
-	Queue<Player> q;
-	Player[] players;
+	private GridPane grid;
+	private Deck decks;
+	private Queue<Player> q;
+	private Player[] players;
 
-	GameBoard(Player[] players) { // Get players from "participants". // % Player[] players
+	GameBoard() { // Get players from "participants". // % Player[] player
 		
-		this.players = players;
 		for (Player player : players) {
 			this.q.add(player);
 		}
@@ -44,6 +43,38 @@ public class GameBoard extends BorderPane {
 			// return;
 			// }
 		}
+	}
+
+	public GridPane getGrid() {
+		return grid;
+	}
+
+	public void setGrid(GridPane grid) {
+		this.grid = grid;
+	}
+
+	public Deck getDecks() {
+		return decks;
+	}
+
+	public void setDecks(Deck decks) {
+		this.decks = decks;
+	}
+
+	public Queue<Player> getQ() {
+		return q;
+	}
+
+	public void setQ(Queue<Player> q) {
+		this.q = q;
+	}
+
+	public Player[] getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Player[] players) {
+		this.players = players;
 	}
 
 }

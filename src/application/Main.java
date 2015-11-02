@@ -28,7 +28,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-
+			GameBoard gameBoard = new GameBoard();
 			FileManager fm = new FileManager();
 			Rules rules = new Rules();
 
@@ -63,7 +63,7 @@ public class Main extends Application {
 						players[i] = new Player(name);
 					i++;	
 				}
-				GameBoard gameBoard = new GameBoard(players);
+				gameBoard.setPlayers(players);
 					playSound.play();
 					root.fadeChange(gameBoard, Color.BLACK);
 				});
@@ -126,7 +126,7 @@ public class Main extends Application {
 				start.centerBox.getChildren().addAll(scoreType, HighScoreList);
 			});
 			
-			gameBoard.grid.setOnMouseClicked(me -> {
+			gameBoard.getGrid().setOnMouseClicked(me -> {
 	 //Test tt = new Test(); // Trying player turn methods...
 				try {
 					CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
