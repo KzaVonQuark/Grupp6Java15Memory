@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
-	int frontSelection=1;
+	int frontSelection=3;
 	TextField creatorTexfield;
 	Text participantsList;
 	Label headLine, playersHeadLine, cardThemeLabel;

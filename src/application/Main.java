@@ -77,7 +77,7 @@ public class Main extends Application {
 				else if (start.tg.getSelectedToggle().equals(start.largeBoard))
 					boardSize = 2;
 
-				GameBoard gameBoard = new GameBoard(players, boardSize);
+				GameBoard gameBoard = new GameBoard(players, boardSize,start.frontSelection);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
