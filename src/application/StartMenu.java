@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
 
@@ -63,10 +64,11 @@ public class StartMenu extends BorderPane {
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		participantsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
-		playersHeadLine.setPrefSize(175, 10);
+		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
 		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
@@ -135,6 +137,7 @@ public class StartMenu extends BorderPane {
 
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_CENTER);
+		fieldOption.setPrefWidth(175);
 		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
 
 		centerBox = new VBox(10);
