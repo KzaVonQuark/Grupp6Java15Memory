@@ -101,7 +101,7 @@ public class Player {
 	@Override
 	public String toString() {
 		
-		if (false)
+		if (sortType==true)
 			return this.getName() + " Moves " + this.getLeastMoves();
 		else
 			return this.getName() + " Points " + this.getHighestPoint();
