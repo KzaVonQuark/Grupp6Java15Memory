@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -206,23 +207,27 @@ public class StartMenu extends BorderPane {
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
-//		wildcardFront.setOnMouseEntered(event ->{
-//			wildcardFront.setEffect(dShadow);
-//		});
-//		wildcardFront.setOnMouseExited(event ->{
-//			wildcardFront.setEffect(null);
-//		});
-//		nackademinFront.setOnMouseEntered(event ->{
-//			nackademinFront.setEffect(dShadow);
-//		});
-//		nackademinFront.setOnMouseExited(event ->{
-//			nackademinFront.setEffect(null);
-//		});
-//		javaFront.setOnMouseEntered(event ->{
-//			javaFront.setEffect(dShadow);
-//		});
-//		javaFront.setOnMouseExited(event ->{
-//			javaFront.setEffect(null);
-//		});
+		Bloom blomster = new Bloom ();
+		blomster.setThreshold(0.6);
+		
+		
+		wildcardFront.setOnMouseEntered(event ->{
+			wildcardFront.setEffect(blomster);
+		});
+		wildcardFront.setOnMouseExited(event ->{
+			wildcardFront.setEffect(null);
+		});
+		nackademinFront.setOnMouseEntered(event ->{
+			nackademinFront.setEffect(blomster);
+		});
+		nackademinFront.setOnMouseExited(event ->{
+			nackademinFront.setEffect(null);
+		});
+		javaFront.setOnMouseEntered(event ->{
+			javaFront.setEffect(blomster);
+		});
+		javaFront.setOnMouseExited(event ->{
+			javaFront.setEffect(null);
+		});
 	}
 	}
