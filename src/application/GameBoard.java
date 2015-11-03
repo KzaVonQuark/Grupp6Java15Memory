@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
@@ -63,7 +64,9 @@ public class GameBoard extends BorderPane {
 		grid.setAlignment(Pos.CENTER);
 		grid.setPadding(new Insets(10));
 		
-        CheckBox musicCheck = new CheckBox(" Want some Memory Music?");
+        CheckBox musicCheck = new CheckBox(" Want Some Memory Music?");
+        musicCheck.setStyle("-fx-font: 25px Serif");
+	    musicCheck.setTextFill(Color.HOTPINK);
         setBottom(musicCheck);
         
         
