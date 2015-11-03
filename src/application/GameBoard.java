@@ -160,6 +160,12 @@ public class GameBoard extends BorderPane {
 
 	void playerTurn(boolean gotPair) {
 
+		if (this.q.size()==1) {
+			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
+		this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
+		}
+
+		else {
 		// Reads first element in queue.
 		if (gotPair == true) {
 			this.q.peek().setPoints(this.q.peek().getPoints() + 1);
@@ -172,6 +178,7 @@ public class GameBoard extends BorderPane {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.q.add(this.q.poll());
 			this.playerTurnInfo.setText(this.getQ().peek().getName());
+		}
 		}
 	}
 

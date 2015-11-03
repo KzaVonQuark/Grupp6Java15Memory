@@ -18,7 +18,7 @@ public class Rules {
 									// de f�rsvinner eller flippas tillbaka.
 	private CardImageView cardOne = null;
 	private CardImageView cardTwo = null;
-	
+
 	private AudioClip noPairSound = new AudioClip(new File("src/Sounds/Wrong.wav").toURI().toString());
 	private AudioClip pairSound = new AudioClip(new File("src/Sounds/Point.wav").toURI().toString());
 
@@ -61,15 +61,14 @@ public class Rules {
 	}
 
 	// Added return true/false if player got pair or not.
-	public boolean confirmPair(CardImageView card1, CardImageView card2) { 
-		
-		
+	public boolean confirmPair(CardImageView card1, CardImageView card2) {
+
 		if (this.compareCards(card1, card2)) {
 			pairSound.play();
 			System.out.println("Du hittade ett par!");
 		} else {
 
-			 noPairSound.play();
+			noPairSound.play();
 			System.out.println("Du hittade inget par!");
 		}
 
@@ -79,7 +78,8 @@ public class Rules {
 		// ska separeras fr�n metod och flyttas till eventet
 		KeyFrame cardFlip = new KeyFrame(Duration.seconds(1.0), e -> {
 			if (this.timePassed + 1 >= this.timeToSeeCard) {
-				// +1 f�r n�n anledning b�rjar Timern p� -1 verkar det som.
+				// +1 f�r n�n anledning b�rjar Timern p� -1 verkar det
+				// som.
 				if (this.compareCards(card1, card2)) {
 					card1.Remove();
 					card2.Remove();
@@ -97,20 +97,18 @@ public class Rules {
 				this.timePassed++;
 			}
 		});
-		
+
 		delay.getKeyFrames().add(cardFlip);
 		delay.play();
-		
+
 		if (this.compareCards(card1, card2)) {
-//			System.out.println("Du hittade ett par!");
+			// System.out.println("Du hittade ett par!");
 			return true;
-			}
-		else {
-//			System.out.println("Du hittade inget par!");
+		} else {
+			// System.out.println("Du hittade inget par!");
 			return false;
 		}
 	}
-	
 
 	// Winning player
 	public Player winner(Player[] players) {
@@ -121,28 +119,33 @@ public class Rules {
 	// Leaderboard realtime
 	public String leaderBoard(List<Player> players) {
 
-		Compare comp = new Compare();
-		comp.setSortType("Points");
 		String tempStr = "";
-		List<Player> tempPlayers = players;
-		Collections.sort(tempPlayers, comp);
-		Player tempPlayerPrev;
-		Player tempPlayer;
+		if (players.size() == 1)
+			tempStr += players.get(0).getName() + " " + players.get(0).getMoves() + " Moves\n";
+		else {
 
-		ListIterator<Player> iterator = tempPlayers.listIterator();
-		int standing = 1;
-		while (iterator.hasNext()) {
-			if (iterator.hasPrevious()) {
-				tempPlayerPrev = iterator.previous();
-				tempPlayer = iterator.next();
-				tempPlayer = iterator.next();
-				if (tempPlayerPrev.getPoints() != tempPlayer.getPoints()) {
-					standing++;
+			Compare comp = new Compare();
+			comp.setSortType("Points");
+			List<Player> tempPlayers = players;
+			Collections.sort(tempPlayers, comp);
+			Player tempPlayerPrev;
+			Player tempPlayer;
+
+			ListIterator<Player> iterator = tempPlayers.listIterator();
+			int standing = 1;
+			while (iterator.hasNext()) {
+				if (iterator.hasPrevious()) {
+					tempPlayerPrev = iterator.previous();
+					tempPlayer = iterator.next();
+					tempPlayer = iterator.next();
+					if (tempPlayerPrev.getPoints() != tempPlayer.getPoints()) {
+						standing++;
+					}
+				} else {
+					tempPlayer = iterator.next();
 				}
-			} else {
-				tempPlayer = iterator.next();
+				tempStr += standing + ") " + tempPlayer.getName() + " " + tempPlayer.getPoints() + " Points\n";
 			}
-			tempStr += standing + ") " + tempPlayer.getName() + " " + tempPlayer.getPoints() + " Points\n";
 		}
 
 		return tempStr;
@@ -156,7 +159,7 @@ public class Rules {
 
 	public void checkHighScore(Player[] playersInGame) {
 		FileManager fm = new FileManager();
-		
+
 		for (Player player : playersInGame) {
 			if (player.getPoints() > player.getHighestPoint())
 				player.setHighestPoint(player.getPoints());
@@ -165,6 +168,6 @@ public class Rules {
 				player.setLeastMoves(player.getMoves());
 		}
 		fm.saveHighScore(playersInGame);
-		
+
 	}
 }

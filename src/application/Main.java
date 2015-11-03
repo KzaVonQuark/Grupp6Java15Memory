@@ -178,6 +178,18 @@ public class Main extends Application {
 						highScoreList.setItems(highScoreEntries);
 					}
 				});
+				
+				start.solo.setOnAction(event3 -> {
+										highScoreEntries.clear();
+										highScoreList.setItems(highScoreEntries);
+										if (start.smallBoard.isSelected())
+											highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
+										else if (start.mediumBoard.isSelected())
+											highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
+										else if (start.largeBoard.isSelected())
+											highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
+										highScoreList.setItems(highScoreEntries);
+					 				});
 
 				start.clearHighScore.setOnAction(event3 -> {
 					Alert alert = new Alert(AlertType.CONFIRMATION);
