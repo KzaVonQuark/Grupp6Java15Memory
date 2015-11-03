@@ -40,15 +40,9 @@ public class Main extends Application {
 			primaryStage.show();
 			primaryStage.setTitle("Java15:Grupp6:Memory");
 
-			ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
-			ComboBox<String> getPlayer = new ComboBox<String>(playerEntries);
-			ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
-			ComboBox<String> scoreType = new ComboBox<String>(scoreEntries);
-			scoreType.setValue("Highest point");
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
-			ListView<Player> HighScoreList = new ListView<Player>();
-			HighScoreList.setId("HighScoreList");
-
+			ListView<Player> highScoreList = new ListView<Player>();
+			highScoreList.setId("HighScoreList");
 			start.playButton.setOnAction(e -> {
 
 				// int i = 0;
@@ -110,34 +104,24 @@ public class Main extends Application {
 			});
 
 			start.highScoreButton.setOnAction(even -> {
-				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(scoreType, start.smallBoard, start.mediumBoard,
-														start.largeBoard, HighScoreList);
 				
-					start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+				start.centerBox.getChildren().clear();
+				start.centerBox.getChildren().addAll(start.scoreType, start.smallBoard, start.mediumBoard,
+														start.largeBoard);
+				start.fieldOption.getChildren().add(highScoreList);
+				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 						@Override
 						public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
 								Toggle newValue) {
+							
 							highScoreEntries.clear();
-							HighScoreList.setItems(highScoreEntries);
+							highScoreList.setItems(highScoreEntries);
 							RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
-							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), check.getText()));
-							HighScoreList.setItems(highScoreEntries);
+							highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), check.getText()));
+							highScoreList.setItems(highScoreEntries);
 						}
 				});
-					scoreType.setOnAction(event -> {
-						highScoreEntries.clear();
-						HighScoreList.setItems(highScoreEntries);
-						if (start.smallBoard.isSelected())
-							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), "Easy"));
-						else if (start.mediumBoard.isSelected())
-							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), "Normal"));
-						else if (start.largeBoard.isSelected())
-							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), "Hard"));
-						HighScoreList.setItems(highScoreEntries);
-					});
 			});
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
