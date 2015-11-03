@@ -1,7 +1,9 @@
 package application;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -120,16 +122,31 @@ public class Rules {
 	public String leaderBoard(List<Player> players) {
 
 		Compare comp = new Compare();
-
+		comp.setSortType("Points");
 		String tempStr = "";
 		List<Player> tempPlayers = players;
+		Collections.sort(tempPlayers, comp);
+		Player tempPlayerPrev;
+		Player tempPlayer;
 
-		// System.out.println(tempPlayers[0].getName() + " " +
-		// tempPlayers[0].getPoints());
-
-		for (Player player : players) {
-			tempStr += player.getName() + " " + player.getPoints() + "\n";
+		ListIterator<Player> iterator = tempPlayers.listIterator();
+		int standing = 1;
+		while (iterator.hasNext()) {
+			if (iterator.hasPrevious()) {
+				tempPlayerPrev = iterator.previous();
+				System.out.println(tempPlayerPrev.getName());
+				tempPlayer = iterator.next();
+				tempPlayer = iterator.next();
+				System.out.println(tempPlayer.getName());
+				if (tempPlayerPrev.getPoints() != tempPlayer.getPoints()) {
+					standing++;
+				}
+			} else {
+				tempPlayer = iterator.next();
+			}
+			tempStr += standing + ") " + tempPlayer.getName() + " " + tempPlayer.getPoints() + " Points\n";
 		}
+
 		return tempStr;
 	}
 
