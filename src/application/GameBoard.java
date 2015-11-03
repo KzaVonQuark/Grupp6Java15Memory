@@ -49,7 +49,6 @@ public class GameBoard extends BorderPane {
 		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
         
 		grid = new GridPane();
-		this.setStyle("-fx-background-color: #ff9933;");
 		this.setPadding(new Insets(10));
 		this.setCenter(grid);
 		int cardsInDeck=0;
