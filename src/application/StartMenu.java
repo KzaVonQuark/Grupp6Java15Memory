@@ -227,27 +227,27 @@ public class StartMenu extends BorderPane {
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
-
-		Bloom blomster = new Bloom ();
-		blomster.setThreshold(0.6);
-		Glow glow = new Glow(1.0);
+		Glow glow = new Glow(0.9);
 		
 		
 		
 		wildcardFront.setOnMouseEntered(event ->{
 			wildcardFront.setEffect(glow);
+			
 		});
 		wildcardFront.setOnMouseExited(event ->{
 			wildcardFront.setEffect(null);
 		});
 		nackademinFront.setOnMouseEntered(event ->{
 			nackademinFront.setEffect(glow);
+			
 		});
 		nackademinFront.setOnMouseExited(event ->{
 			nackademinFront.setEffect(null);
 		});
 		javaFront.setOnMouseEntered(event ->{
 			javaFront.setEffect(glow);
+			
 
 		
 		});
