@@ -54,6 +54,10 @@ public class Main extends Application {
 						players.add(fm.playerMap.get(temp[i]));
 					else {
 						players.add(new Player(temp[i]));
+
+						if(players.get(i).getName().equals("")){
+							players.get(i).setName("Guest");
+						}
 						if(!players.get(i).getName().equals("Guest"))
 						fm.save(players.get(i));
 					}
