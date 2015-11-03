@@ -84,6 +84,11 @@ public class FileManager {
 				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				highScore.add(player);
+				
+				if (sortType.equals("Least moves"))
+					player.setSortType(true);
+				else
+					player.setSortType(false);
 			}
 
 		} catch (FileNotFoundException e) {
@@ -97,7 +102,7 @@ public class FileManager {
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
-
+		
 		return highScore;
 	}
 
