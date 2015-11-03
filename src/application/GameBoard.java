@@ -2,8 +2,6 @@ package application;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -38,7 +36,7 @@ public class GameBoard extends BorderPane {
 												// "participants". // % Player[]
 												// player
 
-
+		this.q = new LinkedList<Player>();		
 		this.players = new ArrayList<Player>();
 		this.players = players;
 		addPlayers(players);
