@@ -77,7 +77,7 @@ public class Main extends Application {
 				else if (start.tg.getSelectedToggle().equals(start.largeBoard))
 					boardSize = 2;
 
-				GameBoard gameBoard = new GameBoard(players, boardSize);
+				GameBoard gameBoard = new GameBoard(players, boardSize,start.frontSelection);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
 			});
@@ -102,9 +102,24 @@ public class Main extends Application {
 								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 					}
 				});
-//				start.javaFront.setOnMouseClicked(event3 -> {
-//					start.javaFront.setEffect(start.headShadow);
-//				});
+				start.jBox.setOnMouseClicked(event3 -> {
+					start.jBox.setStyle("-fx-background-color: #FFFFFF;");
+					start.nBox.setStyle(null);
+					start.wBox.setStyle(null);
+					start.frontSelection=3;
+				});
+				start.nBox.setOnMouseClicked(event3 -> {
+					start.nBox.setStyle("-fx-background-color: #FFFFFF;");
+					start.jBox.setStyle(null);
+					start.wBox.setStyle(null);
+					start.frontSelection=2;
+				});
+				start.wBox.setOnMouseClicked(event3 -> {
+					start.wBox.setStyle("-fx-background-color: #FFFFFF;");
+					start.nBox.setStyle(null);
+					start.jBox.setStyle(null);
+					start.frontSelection=1;
+				});
 			});
 
 			start.createButton.setOnAction(event -> {

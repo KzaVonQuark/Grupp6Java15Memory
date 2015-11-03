@@ -13,6 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -24,7 +28,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
-
+	int frontSelection=3;
 	TextField creatorTexfield;
 	Text participantsList;
 	Label headLine, playersHeadLine, cardThemeLabel;
@@ -37,6 +41,7 @@ public class StartMenu extends BorderPane {
 	RadioButton smallBoard, mediumBoard, largeBoard, solo;
 	ToggleGroup tg, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
+	HBox jBox, nBox, wBox;
 	
 	DropShadow dShadow = new DropShadow(5, Color.WHITE);
 	DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
@@ -46,13 +51,27 @@ public class StartMenu extends BorderPane {
 		FileManager fm = new FileManager();
 		
 		headShadow.setSpread(0.5);
-		
+		jBox=new HBox();
+		nBox=new HBox();
+		wBox=new HBox();
 		javaFront = new ImageView("/images/frontimage3.png");
-		javaFront.setId("front1");
+		jBox.getChildren().add(javaFront);
 		nackademinFront = new ImageView("/images/frontimage2.png");
+		nBox.getChildren().add(nackademinFront);
 		wildcardFront = new ImageView("/images/frontimage1.png");
+		wBox.getChildren().add(wildcardFront);
 		
-
+		jBox.setStyle("-fx-background-color: #FFFFFF;");
+		jBox.setAlignment(Pos.CENTER);
+		jBox.setMinHeight(110);
+		jBox.setMinWidth(110);
+		nBox.setAlignment(Pos.CENTER);
+		nBox.setMinHeight(110);
+		nBox.setMinWidth(110);
+		wBox.setAlignment(Pos.CENTER);
+		wBox.setMinHeight(110);
+		wBox.setMinWidth(110);
+		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your Name");
@@ -128,7 +147,8 @@ public class StartMenu extends BorderPane {
 		scoreType.setValue("Highest point");
 		
 		picBox = new HBox(5);
-		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
+//		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
+		picBox.getChildren().addAll(jBox,nBox,wBox);
 		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
@@ -207,24 +227,29 @@ public class StartMenu extends BorderPane {
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
+
 		Bloom blomster = new Bloom ();
 		blomster.setThreshold(0.6);
+		Glow glow = new Glow(1.0);
+		
 		
 		
 		wildcardFront.setOnMouseEntered(event ->{
-			wildcardFront.setEffect(blomster);
+			wildcardFront.setEffect(glow);
 		});
 		wildcardFront.setOnMouseExited(event ->{
 			wildcardFront.setEffect(null);
 		});
 		nackademinFront.setOnMouseEntered(event ->{
-			nackademinFront.setEffect(blomster);
+			nackademinFront.setEffect(glow);
 		});
 		nackademinFront.setOnMouseExited(event ->{
 			nackademinFront.setEffect(null);
 		});
 		javaFront.setOnMouseEntered(event ->{
-			javaFront.setEffect(blomster);
+			javaFront.setEffect(glow);
+
+		
 		});
 		javaFront.setOnMouseExited(event ->{
 			javaFront.setEffect(null);
