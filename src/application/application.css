@@ -4,9 +4,9 @@
 }
 
 #HighScoreList .cell {
-		-fx-background-color: black;
+		-fx-background-color: transparent;
 		-fx-font-size: 14pt;
-		-fx-text-fill: crimson;
+		-fx-text-fill: orange;
 		-fx-text-alignment: center;
 }
 
