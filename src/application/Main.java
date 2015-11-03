@@ -88,10 +88,19 @@ public class Main extends Application {
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
 						start.largeBoard, start.playButton);
 				start.choosePlayers.setOnAction(event2 -> {
-					start.fieldOption.getChildren().clear();
-					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
-					start.participantsList
-							.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					String[] temp = start.participantsList.getText().split("[\n]");
+					boolean found=false;
+					for(String p_list : temp){
+						if(p_list.equals(start.choosePlayers.getValue())){
+							found=true;
+						}
+					}
+					if(!found){
+						start.fieldOption.getChildren().clear();
+						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
+						start.participantsList
+								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					}
 				});
 			});
 
@@ -101,11 +110,20 @@ public class Main extends Application {
 			});
 
 			start.creatorTexfield.setOnAction(event -> {
-
+				String[] temp = start.participantsList.getText().split("[\n]");
+				boolean found=false;
+				System.out.println();
+				for(String p_list : temp){
+					if(p_list.equals(start.creatorTexfield.getText())){
+						found=true;
+					}
+				}
+				if(!found){
 				start.participantsList
 						.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
 				start.creatorTexfield.clear();
 				start.centerBox.getChildren().clear();
+				}
 			});
 
 			start.exitButton.setOnAction(event -> {
