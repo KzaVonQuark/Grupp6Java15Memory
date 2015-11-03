@@ -99,7 +99,7 @@ public class FileManager {
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
 
-		return highScore.subList(0, 4);
+		return highScore;
 	}
 
 	// Save methods.

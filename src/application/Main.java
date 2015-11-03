@@ -118,7 +118,6 @@ public class Main extends Application {
 						@Override
 						public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
 								Toggle newValue) {
-							
 							highScoreEntries.clear();
 							HighScoreList.setItems(highScoreEntries);
 							RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
@@ -126,6 +125,17 @@ public class Main extends Application {
 							HighScoreList.setItems(highScoreEntries);
 						}
 				});
+					scoreType.setOnAction(event -> {
+						highScoreEntries.clear();
+						HighScoreList.setItems(highScoreEntries);
+						if (start.smallBoard.isSelected())
+							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), "Easy"));
+						else if (start.mediumBoard.isSelected())
+							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), "Normal"));
+						else if (start.largeBoard.isSelected())
+							highScoreEntries.setAll(fm.loadHighScore(scoreType.getValue(), "Hard"));
+						HighScoreList.setItems(highScoreEntries);
+					});
 			});
 
 		} catch (Exception e) {
