@@ -43,6 +43,7 @@ public class Main extends Application {
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> highScoreList = new ListView<Player>();
 			highScoreList.setId("HighScoreList");
+			
 			start.playButton.setOnAction(e -> {
 
 				// int i = 0;
@@ -60,10 +61,12 @@ public class Main extends Application {
 				}
 				// Psuedo kod for shuffling the order of the players. Can be
 				// changed later.
+
 				Collections.shuffle(players);
 				int boardSize=0;
 				if(start.tg.getSelectedToggle().equals(start.mediumBoard))boardSize=1;
 				else if(start.tg.getSelectedToggle().equals(start.largeBoard))boardSize=2;
+
 				GameBoard gameBoard = new GameBoard(players, boardSize);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);
@@ -100,22 +103,34 @@ public class Main extends Application {
 			});
 
 			start.highScoreButton.setOnAction(even -> {
-				
+
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.scoreType, start.smallBoard, start.mediumBoard,
-														start.largeBoard);
+						start.largeBoard);
 				start.fieldOption.getChildren().add(highScoreList);
 				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-						@Override
-						public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
-								Toggle newValue) {
-							
-							highScoreEntries.clear();
-							highScoreList.setItems(highScoreEntries);
-							RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
-							highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), check.getText()));
-							highScoreList.setItems(highScoreEntries);
-						}
+					@Override
+					public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
+							Toggle newValue) {
+
+						highScoreEntries.clear();
+						highScoreList.setItems(highScoreEntries);
+						RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
+						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), check.getText()));
+						highScoreList.setItems(highScoreEntries);
+					}
+				});
+				
+				start.scoreType.setOnAction(event -> {
+					highScoreEntries.clear();
+					highScoreList.setItems(highScoreEntries);
+					if (start.smallBoard.isSelected())
+						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Easy"));
+					else if (start.mediumBoard.isSelected())
+						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Normal"));
+					else if (start.largeBoard.isSelected())
+						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Hard"));
+					highScoreList.setItems(highScoreEntries);
 				});
 			});
 		} catch (Exception e) {
