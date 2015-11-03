@@ -120,9 +120,24 @@ public class FileManager {
 		for (Player player : players) {
 			this.playerMap.replace(this.playerMap.get(player).getName(), player);
 		}
-		
+
 		for (Player player : playerMap.values()) {
 			save(player);
+		}
+	}
+
+	public void clearHighScore(String boardSize) {
+		try {
+			BufferedWriter bw = null;
+			if (boardSize.equals("Easy"))
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreSmall.txt"));
+			else if (boardSize.equals("Normal"))
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreMedium.txt"));
+			else if (boardSize.equals("Hard"))
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreLarge.txt"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
