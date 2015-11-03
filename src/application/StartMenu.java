@@ -24,7 +24,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class StartMenu extends BorderPane {
-
+	int frontSelection=1;
 	TextField creatorTexfield;
 	Text participantsList;
 	Label headLine, playersHeadLine, cardThemeLabel;
@@ -37,6 +37,7 @@ public class StartMenu extends BorderPane {
 	RadioButton smallBoard, mediumBoard, largeBoard;
 	ToggleGroup tg, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
+	HBox jBox, nBox, wBox;
 	
 	DropShadow dShadow = new DropShadow(5, Color.WHITE);
 	DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
@@ -46,13 +47,27 @@ public class StartMenu extends BorderPane {
 		FileManager fm = new FileManager();
 		
 		headShadow.setSpread(0.5);
-		
+		jBox=new HBox();
+		nBox=new HBox();
+		wBox=new HBox();
 		javaFront = new ImageView("/images/frontimage3.png");
-		javaFront.setId("front1");
+		jBox.getChildren().add(javaFront);
 		nackademinFront = new ImageView("/images/frontimage2.png");
+		nBox.getChildren().add(nackademinFront);
 		wildcardFront = new ImageView("/images/frontimage1.png");
+		wBox.getChildren().add(wildcardFront);
 		
-
+		jBox.setStyle("-fx-background-color: #FFFFFF;");
+		jBox.setAlignment(Pos.CENTER);
+		jBox.setMinHeight(110);
+		jBox.setMinWidth(110);
+		nBox.setAlignment(Pos.CENTER);
+		nBox.setMinHeight(110);
+		nBox.setMinWidth(110);
+		wBox.setAlignment(Pos.CENTER);
+		wBox.setMinHeight(110);
+		wBox.setMinWidth(110);
+		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your Name");
@@ -125,7 +140,8 @@ public class StartMenu extends BorderPane {
 		scoreType.setValue("Highest point");
 		
 		picBox = new HBox(5);
-		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
+//		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
+		picBox.getChildren().addAll(jBox,nBox,wBox);
 		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
@@ -203,23 +219,23 @@ public class StartMenu extends BorderPane {
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
-//		wildcardFront.setOnMouseEntered(event ->{
-//			wildcardFront.setEffect(dShadow);
-//		});
-//		wildcardFront.setOnMouseExited(event ->{
-//			wildcardFront.setEffect(null);
-//		});
-//		nackademinFront.setOnMouseEntered(event ->{
-//			nackademinFront.setEffect(dShadow);
-//		});
-//		nackademinFront.setOnMouseExited(event ->{
-//			nackademinFront.setEffect(null);
-//		});
-//		javaFront.setOnMouseEntered(event ->{
-//			javaFront.setEffect(dShadow);
-//		});
-//		javaFront.setOnMouseExited(event ->{
-//			javaFront.setEffect(null);
-//		});
+		wildcardFront.setOnMouseEntered(event ->{
+			wildcardFront.setEffect(dShadow);
+		});
+		wildcardFront.setOnMouseExited(event ->{
+			wildcardFront.setEffect(null);
+		});
+		nackademinFront.setOnMouseEntered(event ->{
+			nackademinFront.setEffect(dShadow);
+		});
+		nackademinFront.setOnMouseExited(event ->{
+			nackademinFront.setEffect(null);
+		});
+		javaFront.setOnMouseEntered(event ->{
+			javaFront.setEffect(dShadow);
+		});
+		javaFront.setOnMouseExited(event ->{
+			javaFront.setEffect(null);
+		});
 	}
 }
