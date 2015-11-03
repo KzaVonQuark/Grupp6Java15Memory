@@ -118,7 +118,9 @@ public class Main extends Application {
 			});
 
 			start.creatorTexfield.setOnAction(event -> {
-				start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+				if (start.creatorTexfield.getLength() > 8) {
+					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+				}
 				String[] temp = start.participantsList.getText().split("[\n]");
 				boolean found=false;
 				System.out.println();
