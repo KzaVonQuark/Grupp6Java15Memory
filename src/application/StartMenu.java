@@ -88,6 +88,7 @@ public class StartMenu extends BorderPane {
 		smallBoard.setToggleGroup(tg);
 		mediumBoard.setToggleGroup(tg);
 		largeBoard.setToggleGroup(tg);
+		smallBoard.setSelected(true);
 		
 		ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 		choosePlayers = new ComboBox<>(playerEntries);
