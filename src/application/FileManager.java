@@ -107,7 +107,7 @@ public class FileManager {
 	public void save(Player player) {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
-			bw.append("\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves());
+			bw.append("\r\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

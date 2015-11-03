@@ -52,7 +52,9 @@ public class Main extends Application {
 					if (fm.playerMap.containsKey(temp[i]))
 						players[i] = fm.playerMap.get(temp[i]);
 					else {
+						
 						players[i] = new Player(temp[i]);
+						if(!players[i].getName().equals("Guest"))
 						fm.save(players[i]);
 					}
 				}
