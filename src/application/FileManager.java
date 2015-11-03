@@ -115,7 +115,14 @@ public class FileManager {
 		}
 	}
 
-	public void saveHighScore(Player player) {
-
+	public void saveHighScore(Player[] players) {
+		load();
+		for (Player player : players) {
+			this.playerMap.replace(this.playerMap.get(player).getName(), player);
+		}
+		
+		for (Player player : playerMap.values()) {
+			save(player);
+		}
 	}
 }
