@@ -10,6 +10,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -25,8 +26,11 @@ public class GameBoard extends BorderPane {
 	private List<Player> players;
 	private AudioClip swishSound;
 	private Label leaderBoard;
-
+	private AudioClip backSound;
+	
 	Rules rules = new Rules();
+	
+//	this.backSound = new AudioClip(new File (" src/Sounds/BackgroundMusic.wav").toURI().toString());
 
 	GameBoard(List<Player> players, int mode) { // Get players from
 												// "participants". // % Player[]
@@ -38,7 +42,8 @@ public class GameBoard extends BorderPane {
 		addPlayers(players);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
-
+		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
+        
 		grid = new GridPane();
 		this.setPadding(new Insets(20));
 		this.setCenter(grid);
@@ -56,7 +61,23 @@ public class GameBoard extends BorderPane {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
-
+		grid.setPadding(new Insets(10));
+		
+        CheckBox musicCheck = new CheckBox("Want some Meomery Music?");
+        setBottom(musicCheck);
+        
+        
+        musicCheck.setOnAction(event -> {
+        if (musicCheck.isSelected()) {
+				backSound.play();
+				backSound.setVolume(1.0);
+				backSound.setCycleCount(5);
+				
+			} else {
+				backSound.stop();
+			
+			}});
+        
 		int row = 0;
 		int col = 0;
 		for (int i = 0; i < decks.getDeckSize(); i++) {

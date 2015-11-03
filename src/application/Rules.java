@@ -130,7 +130,6 @@ public class Rules {
 		for (Player player : players) {
 			tempStr += player.getName() + " " + player.getPoints() + "\n";
 		}
-
 		return tempStr;
 	}
 
@@ -140,17 +139,17 @@ public class Rules {
 		return (dealerDeck.getDeck().size() == 0) ? true : false;
 	}
 
-	public void checkHighScore(Player[] inGame) {
-
-		for (Player player : inGame) {
+	public void checkHighScore(Player[] playersInGame) {
+		FileManager fm = new FileManager();
+		
+		for (Player player : playersInGame) {
 			if (player.getPoints() > player.getHighestPoint())
 				player.setHighestPoint(player.getPoints());
 
 			if (player.getMoves() < player.getLeastMoves())
 				player.setLeastMoves(player.getMoves());
-
-			if (player.getTime() < player.getFastestGame())
-				player.setFastestGame(player.getTime());
 		}
+		fm.saveHighScore(playersInGame);
+		
 	}
 }
