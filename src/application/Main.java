@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,7 +12,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -82,10 +88,19 @@ public class Main extends Application {
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
 						start.largeBoard, start.playButton);
 				start.choosePlayers.setOnAction(event2 -> {
-					start.fieldOption.getChildren().clear();
-					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
-					start.participantsList
-							.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					String[] temp = start.participantsList.getText().split("[\n]");
+					boolean found=false;
+					for(String p_list : temp){
+						if(p_list.equals(start.choosePlayers.getValue())){
+							found=true;
+						}
+					}
+					if(!found){
+						start.fieldOption.getChildren().clear();
+						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
+						start.participantsList
+								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					}
 				});
 			});
 
@@ -95,28 +110,36 @@ public class Main extends Application {
 			});
 
 			start.creatorTexfield.setOnAction(event -> {
-
+				String[] temp = start.participantsList.getText().split("[\n]");
+				boolean found=false;
+				System.out.println();
+				for(String p_list : temp){
+					if(p_list.equals(start.creatorTexfield.getText())){
+						found=true;
+					}
+				}
+				if(!found){
 				start.participantsList
 						.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
 				start.creatorTexfield.clear();
 				start.centerBox.getChildren().clear();
+				}
 			});
 
 			start.exitButton.setOnAction(event -> {
 				Platform.exit();
 			});
 
-			start.highScoreButton.setOnAction(even -> {
+			start.highScoreButton.setOnAction(event -> {
 
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.scoreType, start.smallBoard, start.mediumBoard,
-						start.largeBoard);
+						start.largeBoard, start.clearHighScore);
 				start.fieldOption.getChildren().add(highScoreList);
 				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 					@Override
 					public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
 							Toggle newValue) {
-
 						highScoreEntries.clear();
 						highScoreList.setItems(highScoreEntries);
 						RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
@@ -125,7 +148,7 @@ public class Main extends Application {
 					}
 				});
 				
-				start.scoreType.setOnAction(event -> {
+				start.scoreType.setOnAction(event2 -> {
 					highScoreEntries.clear();
 					highScoreList.setItems(highScoreEntries);
 					if (start.smallBoard.isSelected())
@@ -135,6 +158,23 @@ public class Main extends Application {
 					else if (start.largeBoard.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Hard"));
 					highScoreList.setItems(highScoreEntries);
+				});
+				
+				start.clearHighScore.setOnAction(event3 -> {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Confirm clear");
+					String s = "Do you really want to clear Highscore!?";
+					alert.setContentText(s);
+					Optional<ButtonType> result = alert.showAndWait();
+					if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+						if (start.smallBoard.isSelected())
+							fm.clearHighScore("Easy");
+						else if (start.mediumBoard.isSelected())
+							fm.clearHighScore("Normal");
+						else if (start.largeBoard.isSelected())
+							fm.clearHighScore("Hard");
+					}
+
 				});
 			});
 		} catch (Exception e) {
