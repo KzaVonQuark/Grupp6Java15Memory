@@ -33,7 +33,7 @@ public class StartMenu extends BorderPane {
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox;
-	RadioButton smallBoard, mediumBoard, largeBoard;
+	RadioButton smallBoard, mediumBoard, largeBoard, solo;
 	ToggleGroup tg;
 	
 	StartMenu() {
@@ -85,7 +85,9 @@ public class StartMenu extends BorderPane {
 		clearHighScore.setStyle(playButton.getStyle());
 		clearHighScore.setFont(playButton.getFont());
 		
-		
+		solo = new RadioButton("Solo game");
+		solo.setTextFill(Color.ORANGE);
+		solo.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
 		smallBoard = new RadioButton("Easy");
 		smallBoard.setTextFill(Color.ORANGE);
 		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
@@ -187,4 +189,4 @@ public class StartMenu extends BorderPane {
 			largeBoard.setEffect(null);
 		});
 	}
-}
+	}

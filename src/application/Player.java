@@ -5,6 +5,7 @@ public class Player {
 	private String name;
 	private int points, moves, time, highestPoint, leastMoves, fastestGame, streak;
 	private Deck playerWinningHand;
+	private boolean sortType;
 
 	public Player(String name) {
 		this.name = name;
@@ -89,8 +90,20 @@ public class Player {
 		this.playerWinningHand = playerWinningHand;
 	}
 
+	public boolean isSortType() {
+		return sortType;
+	}
+
+	public void setSortType(boolean sortType) {
+		this.sortType = sortType;
+	}
+
 	@Override
 	public String toString() {
-		return this.getName() + " Points " + this.getHighestPoint() + " Moves " + this.getLeastMoves();
+		
+		if (false)
+			return this.getName() + " Moves " + this.getLeastMoves();
+		else
+			return this.getName() + " Points " + this.getHighestPoint();
 	}
 }
