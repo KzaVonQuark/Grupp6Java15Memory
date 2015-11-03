@@ -21,3 +21,11 @@
 	-fx-background-position: center center;
 	-fx-background-repeat: no-repeat;
 }
+#front1:hover{
+	-fx-effect: dropshadow(gaussian, #ff0000, 1,1,1,1);
+	
+}
+#front1:pressed{
+	-fx-effect: dropshadow(gaussian, #ffffff, 1,1,1,1);
+	
+}

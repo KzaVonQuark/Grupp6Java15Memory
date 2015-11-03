@@ -4,17 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,27 +20,38 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
 
 	TextField creatorTexfield;
 	Text participantsList;
-	Label headLine, playersHeadLine;
+	Label headLine, playersHeadLine, cardThemeLabel;
 	Button playButton, exitButton, newGameButton, createButton, highScoreButton, clearHighScore;
+
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
-	HBox playersBox, labelBox;
+	HBox playersBox, labelBox, picBox;
 	RadioButton smallBoard, mediumBoard, largeBoard, solo;
-	ToggleGroup tg;
+	ToggleGroup tg, pictg;
+	ImageView javaFront, nackademinFront, wildcardFront;
+	
+	DropShadow dShadow = new DropShadow(5, Color.WHITE);
+	DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
 	
 	StartMenu() {
 		
 		FileManager fm = new FileManager();
-		DropShadow dShadow = new DropShadow(5, Color.WHITE);
-		DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
+		
 		headShadow.setSpread(0.5);
 		
+		javaFront = new ImageView("/images/frontimage3.png");
+		javaFront.setId("front1");
+		nackademinFront = new ImageView("/images/frontimage2.png");
+		wildcardFront = new ImageView("/images/frontimage1.png");
+		
+
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your Name");
@@ -55,11 +64,16 @@ public class StartMenu extends BorderPane {
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		participantsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
-		playersHeadLine.setPrefSize(175, 10);
-
+		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
+		cardThemeLabel = new Label("Choose Card Theme: ");
+		cardThemeLabel.setTextFill(Color.ORANGE);
+		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		
+		
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
@@ -72,7 +86,7 @@ public class StartMenu extends BorderPane {
 		newGameButton.setTextFill(playButton.getTextFill());
 		newGameButton.setStyle(playButton.getStyle());
 		newGameButton.setFont(playButton.getFont());
-		createButton = new Button("Create");
+		createButton = new Button("Create New Player");
 		createButton.setTextFill(playButton.getTextFill());
 		createButton.setStyle(playButton.getStyle());
 		createButton.setFont(playButton.getFont());
@@ -112,6 +126,9 @@ public class StartMenu extends BorderPane {
 		scoreType = new ComboBox<String>(scoreEntries);
 		scoreType.setValue("Highest point");
 		
+		picBox = new HBox(5);
+		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
+		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
@@ -122,6 +139,7 @@ public class StartMenu extends BorderPane {
 
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_CENTER);
+		fieldOption.setPrefWidth(175);
 		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
 
 		centerBox = new VBox(10);
@@ -188,5 +206,23 @@ public class StartMenu extends BorderPane {
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
+//		wildcardFront.setOnMouseEntered(event ->{
+//			wildcardFront.setEffect(dShadow);
+//		});
+//		wildcardFront.setOnMouseExited(event ->{
+//			wildcardFront.setEffect(null);
+//		});
+//		nackademinFront.setOnMouseEntered(event ->{
+//			nackademinFront.setEffect(dShadow);
+//		});
+//		nackademinFront.setOnMouseExited(event ->{
+//			nackademinFront.setEffect(null);
+//		});
+//		javaFront.setOnMouseEntered(event ->{
+//			javaFront.setEffect(dShadow);
+//		});
+//		javaFront.setOnMouseExited(event ->{
+//			javaFront.setEffect(null);
+//		});
 	}
 	}

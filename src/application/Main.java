@@ -86,13 +86,25 @@ public class Main extends Application {
 				fm.load();
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
-						start.largeBoard, start.playButton);
+						start.largeBoard, start.playButton, start.cardThemeLabel, start.picBox);
 				start.choosePlayers.setOnAction(event2 -> {
-					start.fieldOption.getChildren().clear();
-					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
-					start.participantsList
-							.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					String[] temp = start.participantsList.getText().split("[\n]");
+					boolean found=false;
+					for(String p_list : temp){
+						if(p_list.equals(start.choosePlayers.getValue())){
+							found=true;
+						}
+					}
+					if(!found){
+						start.fieldOption.getChildren().clear();
+						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
+						start.participantsList
+								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
+					}
 				});
+//				start.javaFront.setOnMouseClicked(event3 -> {
+//					start.javaFront.setEffect(start.headShadow);
+//				});
 			});
 
 			start.createButton.setOnAction(event -> {
@@ -100,12 +112,31 @@ public class Main extends Application {
 				start.centerBox.getChildren().add(start.creatorTexfield);
 			});
 
-			start.creatorTexfield.setOnAction(event -> {
+			start.creatorTexfield.setOnKeyReleased(ae -> {
+				if (start.creatorTexfield.getLength() > 8) {
+					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+					start.creatorTexfield.positionCaret(8);
+				}
+			});
 
+			start.creatorTexfield.setOnAction(event -> {
+				if (start.creatorTexfield.getLength() > 8) {
+					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+				}
+				String[] temp = start.participantsList.getText().split("[\n]");
+				boolean found=false;
+				System.out.println();
+				for(String p_list : temp){
+					if(p_list.equals(start.creatorTexfield.getText())){
+						found=true;
+					}
+				}
+				if(!found){
 				start.participantsList
 						.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
 				start.creatorTexfield.clear();
 				start.centerBox.getChildren().clear();
+				}
 			});
 
 			start.exitButton.setOnAction(event -> {
