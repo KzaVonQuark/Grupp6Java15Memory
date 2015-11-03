@@ -134,10 +134,8 @@ public class Rules {
 		while (iterator.hasNext()) {
 			if (iterator.hasPrevious()) {
 				tempPlayerPrev = iterator.previous();
-				System.out.println(tempPlayerPrev.getName());
 				tempPlayer = iterator.next();
 				tempPlayer = iterator.next();
-				System.out.println(tempPlayer.getName());
 				if (tempPlayerPrev.getPoints() != tempPlayer.getPoints()) {
 					standing++;
 				}
