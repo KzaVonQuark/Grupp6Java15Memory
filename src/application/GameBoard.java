@@ -76,7 +76,7 @@ public class GameBoard extends BorderPane {
         if (musicCheck.isSelected()) {
 				backSound.play();
 				backSound.setVolume(1.0);
-				backSound.setCycleCount(5);
+				backSound.setCycleCount(-1);
 				
 			} else {
 				backSound.stop();
