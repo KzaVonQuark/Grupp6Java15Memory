@@ -12,7 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,14 +25,15 @@ public class StartMenu extends BorderPane {
 
 	TextField creatorTexfield;
 	Text participantsList;
-	Label headLine, playersHeadLine;
+	Label headLine, playersHeadLine, cardThemeLabel;
 	Button playButton, exitButton, newGameButton, createButton, highScoreButton;
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
-	HBox playersBox, labelBox;
+	HBox playersBox, labelBox, picBox;
 	RadioButton smallBoard, mediumBoard, largeBoard;
 	ToggleGroup tg;
+	ImageView javaFront, nackademinFront, wildcardFront;
 	
 	StartMenu() {
 		
@@ -40,6 +41,10 @@ public class StartMenu extends BorderPane {
 		DropShadow dShadow = new DropShadow(5, Color.WHITE);
 		DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
 		headShadow.setSpread(0.5);
+		
+		javaFront = new ImageView("/images/frontimage3.png");
+		nackademinFront = new ImageView("/images/frontimage2.png");
+		wildcardFront = new ImageView("/images/frontimage1.png");
 		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
@@ -57,7 +62,11 @@ public class StartMenu extends BorderPane {
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
 		playersHeadLine.setPrefSize(175, 10);
-
+		cardThemeLabel = new Label("Choose Card Theme: ");
+		cardThemeLabel.setTextFill(Color.ORANGE);
+		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		
+		
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
@@ -102,6 +111,9 @@ public class StartMenu extends BorderPane {
 		ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
 		scoreType = new ComboBox<String>(scoreEntries);
 		scoreType.setValue("Highest point");
+		
+		picBox = new HBox(5);
+		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
 		
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
@@ -178,6 +190,24 @@ public class StartMenu extends BorderPane {
 		});
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
+		});
+		wildcardFront.setOnMouseEntered(event ->{
+			wildcardFront.setEffect(dShadow);
+		});
+		wildcardFront.setOnMouseExited(event ->{
+			wildcardFront.setEffect(null);
+		});
+		nackademinFront.setOnMouseEntered(event ->{
+			nackademinFront.setEffect(dShadow);
+		});
+		nackademinFront.setOnMouseExited(event ->{
+			nackademinFront.setEffect(null);
+		});
+		javaFront.setOnMouseEntered(event ->{
+			javaFront.setEffect(dShadow);
+		});
+		javaFront.setOnMouseExited(event ->{
+			javaFront.setEffect(null);
 		});
 	}
 }

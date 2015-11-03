@@ -80,7 +80,7 @@ public class Main extends Application {
 				fm.load();
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
-						start.largeBoard, start.playButton);
+						start.largeBoard, start.playButton, start.cardThemeLabel, start.picBox);
 				start.choosePlayers.setOnAction(event2 -> {
 					start.fieldOption.getChildren().clear();
 					start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
