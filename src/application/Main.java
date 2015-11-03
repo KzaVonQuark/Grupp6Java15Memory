@@ -12,12 +12,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -109,7 +107,15 @@ public class Main extends Application {
 				start.centerBox.getChildren().add(start.creatorTexfield);
 			});
 
+			start.creatorTexfield.setOnKeyReleased(ae -> {
+				if (start.creatorTexfield.getLength() > 8) {
+					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+					start.creatorTexfield.positionCaret(8);
+				}
+			});
+
 			start.creatorTexfield.setOnAction(event -> {
+				start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
 				String[] temp = start.participantsList.getText().split("[\n]");
 				boolean found=false;
 				System.out.println();
