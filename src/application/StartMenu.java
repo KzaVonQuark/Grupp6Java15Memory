@@ -33,20 +33,24 @@ public class StartMenu extends BorderPane {
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox, picBox;
 	RadioButton smallBoard, mediumBoard, largeBoard;
-	ToggleGroup tg;
+	ToggleGroup tg, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
+	
+	DropShadow dShadow = new DropShadow(5, Color.WHITE);
+	DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
 	
 	StartMenu() {
 		
 		FileManager fm = new FileManager();
-		DropShadow dShadow = new DropShadow(5, Color.WHITE);
-		DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
+		
 		headShadow.setSpread(0.5);
 		
 		javaFront = new ImageView("/images/frontimage3.png");
+		javaFront.setId("front1");
 		nackademinFront = new ImageView("/images/frontimage2.png");
 		wildcardFront = new ImageView("/images/frontimage1.png");
 		
+
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your Name");
@@ -197,23 +201,23 @@ public class StartMenu extends BorderPane {
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
-		wildcardFront.setOnMouseEntered(event ->{
-			wildcardFront.setEffect(dShadow);
-		});
-		wildcardFront.setOnMouseExited(event ->{
-			wildcardFront.setEffect(null);
-		});
-		nackademinFront.setOnMouseEntered(event ->{
-			nackademinFront.setEffect(dShadow);
-		});
-		nackademinFront.setOnMouseExited(event ->{
-			nackademinFront.setEffect(null);
-		});
-		javaFront.setOnMouseEntered(event ->{
-			javaFront.setEffect(dShadow);
-		});
-		javaFront.setOnMouseExited(event ->{
-			javaFront.setEffect(null);
-		});
+//		wildcardFront.setOnMouseEntered(event ->{
+//			wildcardFront.setEffect(dShadow);
+//		});
+//		wildcardFront.setOnMouseExited(event ->{
+//			wildcardFront.setEffect(null);
+//		});
+//		nackademinFront.setOnMouseEntered(event ->{
+//			nackademinFront.setEffect(dShadow);
+//		});
+//		nackademinFront.setOnMouseExited(event ->{
+//			nackademinFront.setEffect(null);
+//		});
+//		javaFront.setOnMouseEntered(event ->{
+//			javaFront.setEffect(dShadow);
+//		});
+//		javaFront.setOnMouseExited(event ->{
+//			javaFront.setEffect(null);
+//		});
 	}
 }
