@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -47,29 +48,24 @@ public class Main extends Application {
 
 				// int i = 0;
 				String[] temp = start.participantsList.getText().split("[\n]");
-				Player[] players = new Player[temp.length];
+				List<Player> players = new ArrayList<Player>();
 				// Random rand = new Random();
 				for (int i = 0; i < temp.length; i++) {
 					if (fm.playerMap.containsKey(temp[i]))
-						players[i] = fm.playerMap.get(temp[i]);
+						players.add(fm.playerMap.get(temp[i]));
 					else {
-						players[i] = new Player(temp[i]);
-						fm.save(players[i]);
+						players.add(new Player(temp[i]));
+						fm.save(players.get(i));
 					}
 				}
 				// Psuedo kod for shuffling the order of the players. Can be
 				// changed later.
-				ArrayList<Player> shufflePlayers = new ArrayList<Player>();
-				for (Player player_entity : players) {
-					shufflePlayers.add(player_entity);
-				}
-				Collections.shuffle(shufflePlayers);
-				players = shufflePlayers.toArray(new Player[players.length]);
-				int boardSize = 0;
-				if (start.tg.getSelectedToggle().equals(start.mediumBoard))
-					boardSize = 1;
-				else if (start.tg.getSelectedToggle().equals(start.largeBoard))
-					boardSize = 2;
+
+				Collections.shuffle(players);
+				int boardSize=0;
+				if(start.tg.getSelectedToggle().equals(start.mediumBoard))boardSize=1;
+				else if(start.tg.getSelectedToggle().equals(start.largeBoard))boardSize=2;
+
 				GameBoard gameBoard = new GameBoard(players, boardSize);
 				playSound.play();
 				root.fadeChange(gameBoard, Color.BLACK);

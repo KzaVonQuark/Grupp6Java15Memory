@@ -1,7 +1,11 @@
 package application;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import javafx.animation.KeyFrame;
@@ -9,9 +13,11 @@ import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class GameBoard extends BorderPane {
@@ -19,29 +25,29 @@ public class GameBoard extends BorderPane {
 	private GridPane grid;
 	private Deck decks;
 	private Queue<Player> q;
-	private Player[] players;
+	private List<Player> players;
 	private AudioClip swishSound;
+	private Label leaderBoard;
 	private AudioClip backSound;
 	
-
 	Rules rules = new Rules();
 	
 //	this.backSound = new AudioClip(new File (" src/Sounds/BackgroundMusic.wav").toURI().toString());
 
-	GameBoard(Player[] players, int mode) { // Get players from
+	GameBoard(List<Player> players, int mode) { // Get players from
 												// "participants". // % Player[]
 												// player
 
-		this.q = new LinkedList<Player>();
+
+		this.players = new ArrayList<Player>();
+		this.players = players;
 		addPlayers(players);
-		System.out.println(q.size());
-		int p = this.q.peek().getPoints() + 1;
-		this.q.peek().setPoints(p);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
 		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
         
 		grid = new GridPane();
+		this.setPadding(new Insets(20));
 		this.setCenter(grid);
 		int cardsInDeck=0;
 		if(mode==0){
@@ -116,12 +122,11 @@ public class GameBoard extends BorderPane {
 		});
 
 		// Leaderboard on gameboard
-		/*
-		 * Label leaderBoard = new Label(); String lb = ""; for (Player player :
-		 * this.getPlayers()) { lb += player.getName() + ": " +
-		 * player.getPoints() + " Points\n"; } leaderBoard.setText(lb);
-		 * this.setLeft(leaderBoard);
-		 */
+		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
+		leaderBoard.setFont(new Font(24));
+		leaderBoard.setAlignment(Pos.CENTER);
+		this.setLeft(leaderBoard);
+
 	}
 
 	void playerTurn(boolean gotPair) {
@@ -130,6 +135,7 @@ public class GameBoard extends BorderPane {
 		if (gotPair == true) {
 			this.q.peek().setPoints(this.q.peek().getPoints() + 1);
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
+			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
 		}
 
 		// Reads, removes and put element last in queue
@@ -162,7 +168,7 @@ public class GameBoard extends BorderPane {
 		flipAnimation.play();
 	}
 
-	public void addPlayers(Player[] players) {
+	public void addPlayers(List<Player> players) {
 		for (Player player : players) {
 			this.q.add(player);
 		}
@@ -192,11 +198,11 @@ public class GameBoard extends BorderPane {
 		this.q = q;
 	}
 
-	public Player[] getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Player[] players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 
