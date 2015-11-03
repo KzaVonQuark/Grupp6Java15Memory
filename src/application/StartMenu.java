@@ -4,10 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -22,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
 	int frontSelection=1;
@@ -34,7 +33,7 @@ public class StartMenu extends BorderPane {
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox, picBox;
-	RadioButton smallBoard, mediumBoard, largeBoard;
+	RadioButton smallBoard, mediumBoard, largeBoard, solo;
 	ToggleGroup tg, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
 	HBox jBox, nBox, wBox;
@@ -80,10 +79,11 @@ public class StartMenu extends BorderPane {
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		participantsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
-		playersHeadLine.setPrefSize(175, 10);
+		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
 		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
@@ -101,7 +101,7 @@ public class StartMenu extends BorderPane {
 		newGameButton.setTextFill(playButton.getTextFill());
 		newGameButton.setStyle(playButton.getStyle());
 		newGameButton.setFont(playButton.getFont());
-		createButton = new Button("Create");
+		createButton = new Button("Create New Player");
 		createButton.setTextFill(playButton.getTextFill());
 		createButton.setStyle(playButton.getStyle());
 		createButton.setFont(playButton.getFont());
@@ -114,7 +114,9 @@ public class StartMenu extends BorderPane {
 		clearHighScore.setStyle(playButton.getStyle());
 		clearHighScore.setFont(playButton.getFont());
 		
-		
+		solo = new RadioButton("Solo game");
+		solo.setTextFill(Color.ORANGE);
+		solo.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
 		smallBoard = new RadioButton("Easy");
 		smallBoard.setTextFill(Color.ORANGE);
 		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
@@ -153,6 +155,7 @@ public class StartMenu extends BorderPane {
 
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_CENTER);
+		fieldOption.setPrefWidth(175);
 		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
 
 		centerBox = new VBox(10);
@@ -238,4 +241,4 @@ public class StartMenu extends BorderPane {
 			javaFront.setEffect(null);
 		});
 	}
-}
+	}

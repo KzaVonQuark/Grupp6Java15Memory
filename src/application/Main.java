@@ -12,12 +12,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -49,7 +47,7 @@ public class Main extends Application {
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> highScoreList = new ListView<Player>();
 			highScoreList.setId("HighScoreList");
-			
+
 			start.playButton.setOnAction(e -> {
 
 				// int i = 0;
@@ -62,20 +60,22 @@ public class Main extends Application {
 					else {
 						players.add(new Player(temp[i]));
 
-						if(players.get(i).getName().equals("")){
+						if (players.get(i).getName().equals("")) {
 							players.get(i).setName("Guest");
 						}
-						if(!players.get(i).getName().equals("Guest"))
-						fm.save(players.get(i));
+						if (!players.get(i).getName().equals("Guest"))
+							fm.save(players.get(i));
 					}
 				}
 				// Psuedo kod for shuffling the order of the players. Can be
 				// changed later.
 
 				Collections.shuffle(players);
-				int boardSize=0;
-				if(start.tg.getSelectedToggle().equals(start.mediumBoard))boardSize=1;
-				else if(start.tg.getSelectedToggle().equals(start.largeBoard))boardSize=2;
+				int boardSize = 0;
+				if (start.tg.getSelectedToggle().equals(start.mediumBoard))
+					boardSize = 1;
+				else if (start.tg.getSelectedToggle().equals(start.largeBoard))
+					boardSize = 2;
 
 				GameBoard gameBoard = new GameBoard(players, boardSize);
 				playSound.play();
@@ -127,7 +127,17 @@ public class Main extends Application {
 				start.centerBox.getChildren().add(start.creatorTexfield);
 			});
 
+			start.creatorTexfield.setOnKeyReleased(ae -> {
+				if (start.creatorTexfield.getLength() > 8) {
+					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+					start.creatorTexfield.positionCaret(8);
+				}
+			});
+
 			start.creatorTexfield.setOnAction(event -> {
+				if (start.creatorTexfield.getLength() > 8) {
+					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
+				}
 				String[] temp = start.participantsList.getText().split("[\n]");
 				boolean found=false;
 				System.out.println();
@@ -151,8 +161,8 @@ public class Main extends Application {
 			start.highScoreButton.setOnAction(event -> {
 
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.scoreType, start.smallBoard, start.mediumBoard,
-						start.largeBoard, start.clearHighScore);
+				start.centerBox.getChildren().addAll(start.solo, start.smallBoard, start.mediumBoard, start.largeBoard,
+						start.clearHighScore);
 				start.fieldOption.getChildren().add(highScoreList);
 				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 					@Override
@@ -161,23 +171,14 @@ public class Main extends Application {
 						highScoreEntries.clear();
 						highScoreList.setItems(highScoreEntries);
 						RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
-						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), check.getText()));
+							if (start.solo.isSelected())
+								highScoreEntries.setAll(fm.loadHighScore("Least moves", check.getText()));
+							else
+								highScoreEntries.setAll(fm.loadHighScore("Highest point", check.getText()));
 						highScoreList.setItems(highScoreEntries);
 					}
 				});
-				
-				start.scoreType.setOnAction(event2 -> {
-					highScoreEntries.clear();
-					highScoreList.setItems(highScoreEntries);
-					if (start.smallBoard.isSelected())
-						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Easy"));
-					else if (start.mediumBoard.isSelected())
-						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Normal"));
-					else if (start.largeBoard.isSelected())
-						highScoreEntries.setAll(fm.loadHighScore(start.scoreType.getValue(), "Hard"));
-					highScoreList.setItems(highScoreEntries);
-				});
-				
+
 				start.clearHighScore.setOnAction(event3 -> {
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Confirm clear");
@@ -198,7 +199,9 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
+	
 
 	public static void main(String[] args) {
 		launch(args);

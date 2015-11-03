@@ -135,7 +135,7 @@ public class GameBoard extends BorderPane {
 		seperatorLB.setStyle("-fx-background: black;");
 		seperatorLB.setPadding(new Insets(5, 0, 5, 0));
 		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
-		this.leaderBoard.setFont(new Font(18));
+		this.leaderBoard.setFont(new Font(16));
 		vBoxLB.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
 		this.setLeft(vBoxLB);
 
