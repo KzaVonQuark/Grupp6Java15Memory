@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -116,19 +117,21 @@ public class Rules {
 	}
 
 	// Leaderboard realtime
-	public Player[] leaderBoard(Player[] players) {
+	public String leaderBoard(List<Player> players) {
 
-		for (int i = players.length - 1; i > 1; i--) {
-			for (int j = 0; j < i; j++) {
-				if (players[j].getPoints() > players[j + 1].getPoints()) {
-					Player tempVal = players[j];
-					players[j] = players[j + 1];
-					players[j + 1] = tempVal;
-				}
-			}
+		Compare comp = new Compare();
+
+		String tempStr = "";
+		List<Player> tempPlayers = players;
+
+		// System.out.println(tempPlayers[0].getName() + " " +
+		// tempPlayers[0].getPoints());
+
+		for (Player player : players) {
+			tempStr += player.getName() + " " + player.getPoints() + "\n";
 		}
 
-		return players;
+		return tempStr;
 	}
 
 	// End of game
