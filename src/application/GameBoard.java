@@ -63,7 +63,7 @@ public class GameBoard extends BorderPane {
 		grid.setAlignment(Pos.CENTER);
 		grid.setPadding(new Insets(10));
 		
-        CheckBox musicCheck = new CheckBox("Want some Meomery Music?");
+        CheckBox musicCheck = new CheckBox(" Want some Memory Music?");
         setBottom(musicCheck);
         
         
