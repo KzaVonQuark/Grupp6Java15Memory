@@ -68,7 +68,7 @@ public class GameBoard extends BorderPane {
 		
         CheckBox musicCheck = new CheckBox(" Want Some Memory Music?");
         musicCheck.setStyle("-fx-font: 25px Serif");
-	    musicCheck.setTextFill(Color.HOTPINK);
+	    musicCheck.setTextFill(Color.MIDNIGHTBLUE);
         setBottom(musicCheck);
         
         
