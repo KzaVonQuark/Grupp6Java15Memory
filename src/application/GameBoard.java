@@ -12,9 +12,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
@@ -26,6 +29,7 @@ public class GameBoard extends BorderPane {
 	private List<Player> players;
 	private AudioClip swishSound;
 	private Label leaderBoard;
+	private Label playerTurnInfo;
 	private AudioClip backSound;
 	
 	Rules rules = new Rules();
@@ -45,7 +49,8 @@ public class GameBoard extends BorderPane {
 		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
         
 		grid = new GridPane();
-		this.setPadding(new Insets(20));
+		this.setStyle("-fx-background-color: #ff9933;");
+		this.setPadding(new Insets(10));
 		this.setCenter(grid);
 		int cardsInDeck=0;
 		if(mode==0){
@@ -61,9 +66,10 @@ public class GameBoard extends BorderPane {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
-		grid.setPadding(new Insets(10));
 		
-        CheckBox musicCheck = new CheckBox("Want some Meomery Music?");
+        CheckBox musicCheck = new CheckBox(" Want Some Memory Music?");
+        musicCheck.setStyle("-fx-font: 25px Serif");
+	    musicCheck.setTextFill(Color.HOTPINK);
         setBottom(musicCheck);
         
         
@@ -120,10 +126,36 @@ public class GameBoard extends BorderPane {
 		});
 
 		// Leaderboard on gameboard
+		VBox vBoxLB = new VBox();
+		vBoxLB.setPrefWidth(175);
+		Label lbHeader = new Label("Leaderboard");
+		lbHeader.setFont(new Font(24));
+		lbHeader.setPrefWidth(175);
+		lbHeader.setAlignment(Pos.CENTER);
+		Separator seperatorLB = new Separator();
+		seperatorLB.setStyle("-fx-background: black;");
+		seperatorLB.setPadding(new Insets(5, 0, 5, 0));
 		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
-		leaderBoard.setFont(new Font(24));
-		leaderBoard.setAlignment(Pos.CENTER);
-		this.setLeft(leaderBoard);
+		this.leaderBoard.setFont(new Font(18));
+		vBoxLB.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
+		this.setLeft(vBoxLB);
+
+		// Display whos turn it is
+		VBox vBoxPT = new VBox();
+		vBoxPT.setPrefWidth(175);
+		Label ptHeader = new Label("Players turn");
+		ptHeader.setFont(new Font(24));
+		ptHeader.setPrefWidth(175);
+		ptHeader.setAlignment(Pos.CENTER);
+		Separator seperatorPT = new Separator();
+		seperatorPT.setStyle("-fx-background: black;");
+		seperatorPT.setPadding(new Insets(5, 0, 5, 0));
+		this.playerTurnInfo = new Label(this.getQ().peek().getName());
+		this.playerTurnInfo.setFont(new Font(18));
+		this.playerTurnInfo.setPrefWidth(175);
+		this.playerTurnInfo.setAlignment(Pos.CENTER);
+		vBoxPT.getChildren().addAll(ptHeader, seperatorPT, this.playerTurnInfo);
+		this.setRight(vBoxPT);
 
 	}
 
@@ -140,6 +172,7 @@ public class GameBoard extends BorderPane {
 		else {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.q.add(this.q.poll());
+			this.playerTurnInfo.setText(this.getQ().peek().getName());
 		}
 	}
 
@@ -202,6 +235,22 @@ public class GameBoard extends BorderPane {
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+
+	public Label getLeaderBoard() {
+		return leaderBoard;
+	}
+
+	public void setLeaderBoard(Label leaderBoard) {
+		this.leaderBoard = leaderBoard;
+	}
+
+	public Label getPlayerTurnInfo() {
+		return playerTurnInfo;
+	}
+
+	public void setPlayerTurnInfo(Label playerTurnInfo) {
+		this.playerTurnInfo = playerTurnInfo;
 	}
 
 }

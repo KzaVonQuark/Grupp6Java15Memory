@@ -126,13 +126,23 @@ public class Rules {
 		String tempStr = "";
 		List<Player> tempPlayers = players;
 		Collections.sort(tempPlayers, comp);
+		Player tempPlayerPrev;
+		Player tempPlayer;
 
 		ListIterator<Player> iterator = tempPlayers.listIterator();
 		int standing = 1;
 		while (iterator.hasNext()) {
-			Player tempPlayer = iterator.next();
+			if (iterator.hasPrevious()) {
+				tempPlayerPrev = iterator.previous();
+				tempPlayer = iterator.next();
+				tempPlayer = iterator.next();
+				if (tempPlayerPrev.getPoints() != tempPlayer.getPoints()) {
+					standing++;
+				}
+			} else {
+				tempPlayer = iterator.next();
+			}
 			tempStr += standing + ") " + tempPlayer.getName() + " " + tempPlayer.getPoints() + " Points\n";
-			standing++;
 		}
 
 		return tempStr;
