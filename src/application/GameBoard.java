@@ -36,7 +36,7 @@ public class GameBoard extends BorderPane {
 												// "participants". // % Player[]
 												// player
 
-		this.q = new LinkedList<Player>();
+		this.q = new LinkedList<Player>();		
 		this.players = new ArrayList<Player>();
 		this.players = players;
 		addPlayers(players);

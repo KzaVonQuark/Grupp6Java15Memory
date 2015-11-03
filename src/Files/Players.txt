@@ -3,5 +3,3 @@ Masih 12 4
 Owen 7 9
 Ian 9 63
 Tomas 11 11
- 0 0
-Guest 0 0
