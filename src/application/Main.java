@@ -102,6 +102,9 @@ public class Main extends Application {
 								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 					}
 				});
+//				start.javaFront.setOnMouseClicked(event3 -> {
+//					start.javaFront.setEffect(start.headShadow);
+//				});
 			});
 
 			start.createButton.setOnAction(event -> {
