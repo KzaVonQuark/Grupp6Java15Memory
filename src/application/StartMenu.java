@@ -2,7 +2,6 @@ package application;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,15 +37,18 @@ public class StartMenu extends BorderPane {
 	StartMenu() {
 		
 		FileManager fm = new FileManager();
-		DropShadow shadow = new DropShadow(5, Color.WHITE);
+		DropShadow dShadow = new DropShadow(5, Color.WHITE);
+		DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
+		headShadow.setSpread(0.5);
 		
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your Name");
 
 		headLine = new Label("Memory");
+		headLine.setEffect(headShadow);
 		headLine.setAlignment(Pos.CENTER);
-		headLine.setTextFill(Color.WHITESMOKE);
+		headLine.setTextFill(Color.ORANGE);
 		headLine.setStyle("-fx-font: 100px Tahoma;");
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
@@ -92,8 +95,6 @@ public class StartMenu extends BorderPane {
 		mediumBoard.setSelected(true);
 		largeBoard.setToggleGroup(tg);
 		
-		
-		
 		ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 		choosePlayers = new ComboBox<>(playerEntries);
 		choosePlayers.setPrefSize(150, 15);
@@ -131,49 +132,49 @@ public class StartMenu extends BorderPane {
 		
 		
 		newGameButton.setOnMouseEntered(event -> {
-			newGameButton.setEffect(shadow);
+			newGameButton.setEffect(dShadow);
 		});
 		newGameButton.setOnMouseExited(event -> {
 			newGameButton.setEffect(null);
 		});
 		createButton.setOnMouseEntered(event -> {
-			createButton.setEffect(shadow);
+			createButton.setEffect(dShadow);
 		});
 		createButton.setOnMouseExited(event -> {
 			createButton.setEffect(null);
 		});
 		playButton.setOnMouseEntered(event -> {
-			playButton.setEffect(shadow);
+			playButton.setEffect(dShadow);
 		});
 		playButton.setOnMouseExited(event -> {
 			playButton.setEffect(null);
 		});
 		highScoreButton.setOnMouseEntered(event -> {
-			highScoreButton.setEffect(shadow);
+			highScoreButton.setEffect(dShadow);
 		});
 		highScoreButton.setOnMouseExited(event -> {
 			highScoreButton.setEffect(null);
 		});
 		exitButton.setOnMouseEntered(event -> {
-			exitButton.setEffect(shadow);
+			exitButton.setEffect(dShadow);
 		});
 		exitButton.setOnMouseExited(event -> {
 			exitButton.setEffect(null);
 		});
 		smallBoard.setOnMouseEntered(event -> {
-			smallBoard.setEffect(shadow);
+			smallBoard.setEffect(dShadow);
 		});
 		smallBoard.setOnMouseExited(event -> {
 			smallBoard.setEffect(null);
 		});
 		mediumBoard.setOnMouseEntered(event -> {
-			mediumBoard.setEffect(shadow);
+			mediumBoard.setEffect(dShadow);
 		});
 		mediumBoard.setOnMouseExited(event -> {
 			mediumBoard.setEffect(null);
 		});				
 		largeBoard.setOnMouseEntered(event -> {
-			largeBoard.setEffect(shadow);
+			largeBoard.setEffect(dShadow);
 		});
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
