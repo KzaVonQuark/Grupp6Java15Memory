@@ -1,10 +1,6 @@
-Linus 25 33
-Masih 12 4
-Owen 7 9
-Ian 9 63
-<<<<<<< HEAD
-Tomas 11 11
-Zaher 0 0
-=======
-Tomas 11 11
->>>>>>> branch 'master' of https://github.com/KzaVonQuark/Grupp6Java15Memory
+Linus 25 33 5
+Masih 12 4 5
+Owen 7 9 5
+Ian 9 63 5
+Tomas 11 11 5
+Zaher 0 0 5
