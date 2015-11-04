@@ -28,7 +28,7 @@ public class FileManager {
 				String tempArray[] = temp.split("[ ]");
 				player = new Player(tempArray[0]);
 				player.setHighestPoint(Integer.parseInt(tempArray[1]));
-				player.setMoves(Integer.parseInt(tempArray[2]));
+				player.setLeastMoves(Integer.parseInt(tempArray[2]));
 				player.setWonGames(Integer.parseInt(tempArray[3]));
 				playerMap.put(player.getName(), player);
 
@@ -86,7 +86,7 @@ public class FileManager {
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				player.setWonGames(Integer.parseInt(tempSplit[3]));
 				highScore.add(player);
-				
+
 				if (sortType.equals("Least moves"))
 					player.setSortType(1);
 				else if (sortType.equals("Won games"))
@@ -106,6 +106,8 @@ public class FileManager {
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
+		if (!highScore.isEmpty())
+			return highScore.subList(0, 4);
 		
 		return highScore;
 	}
@@ -115,7 +117,8 @@ public class FileManager {
 	public void save(Player player) {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
-			bw.append("\r\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves() + " " + player.getWonGames());
+			bw.append("\r\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves() + " "
+					+ player.getWonGames());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

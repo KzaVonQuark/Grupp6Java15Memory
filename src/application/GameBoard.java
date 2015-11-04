@@ -171,8 +171,10 @@ public class GameBoard extends BorderPane {
 						playerTurn(turn); // Checks and changes player
 						// System.out.println(decks.getDeckSize());
 						// System.out.println(rules.gameOver(decks));
+						
 						if (rules.gameOver(decks)) {
 							winner.setText("Winner is " + rules.winner(this.players).getName());
+							/*
 							FlowPane winnerPane = new FlowPane();
 							grid.add(winnerPane, 0, 0);
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
@@ -185,6 +187,7 @@ public class GameBoard extends BorderPane {
 								winnerPane.getChildren().add(imageView);
 								
 							}
+							*/
 							grid.add(winner, 0, 0);
 						}
 					}

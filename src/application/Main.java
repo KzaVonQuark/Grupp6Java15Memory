@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -80,7 +81,12 @@ public class Main extends Application {
 
 				GameBoard gameBoard = new GameBoard(players, boardSize,start.frontSelection);
 				gameBoard.getBackToStartMenu().setOnMousePressed(ae -> {
+					start.centerBox.getChildren().clear();
+					start.setBottom(null);
 					start.participantsList.setText("");
+					start.choosePlayers = new ComboBox<String>(FXCollections.observableArrayList(fm.loadNames()));
+					start.choosePlayers.setPrefSize(150, 15);
+					start.choosePlayers.setPromptText("Choose Player");
 					root.fadeChange(start, Color.BLACK);
 				});
 				playSound.play();
@@ -147,6 +153,7 @@ public class Main extends Application {
 				if (start.creatorTexfield.getLength() > 8) {
 					start.creatorTexfield.setText(start.creatorTexfield.getText().substring(0, 8));
 				}
+				start.creatorTexfield.setText((start.creatorTexfield.getText().replace(" ", "-")));
 				String[] temp = start.participantsList.getText().split("[\n]");
 				boolean found=false;
 				System.out.println();

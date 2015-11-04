@@ -1,0 +1,5 @@
+Linus 0 0 0
+Masih 7 9 2
+Owen 12 5 5
+Ian 4 4 4
+Tomas 9 6 3
