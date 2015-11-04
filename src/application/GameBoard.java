@@ -34,7 +34,7 @@ public class GameBoard extends BorderPane {
 	
 	Rules rules = new Rules();
 	
-//	this.backSound = new AudioClip(new File (" src/Sounds/BackgroundMusic.wav").toURI().toString());
+
 
 	GameBoard(List<Player> players, int mode, int frontSelection) { // Get players from
 												// "participants". // % Player[]
@@ -46,7 +46,7 @@ public class GameBoard extends BorderPane {
 		addPlayers(players);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
-		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
+		
         
 		grid = new GridPane();
 		this.setPadding(new Insets(10));
@@ -66,22 +66,6 @@ public class GameBoard extends BorderPane {
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
 		
-        CheckBox musicCheck = new CheckBox(" Want Some Memory Music?");
-        musicCheck.setStyle("-fx-font: 25px Serif");
-	    musicCheck.setTextFill(Color.MIDNIGHTBLUE);
-        setBottom(musicCheck);
-        
-        
-        musicCheck.setOnAction(event -> {
-        if (musicCheck.isSelected()) {
-				backSound.play();
-				backSound.setVolume(1.0);
-				backSound.setCycleCount(-1);
-				
-			} else {
-				backSound.stop();
-			
-			}});
         
 		int row = 0;
 		int col = 0;
@@ -136,7 +120,9 @@ public class GameBoard extends BorderPane {
 		seperatorLB.setPadding(new Insets(5, 0, 5, 0));
 		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
 		this.leaderBoard.setFont(new Font(16));
-		vBoxLB.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
+		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png", "src/Sounds/BackgroundMusic.wav", false);
+		vBoxLB.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard,musicImage);
+		
 		this.setLeft(vBoxLB);
 
 		// Display whos turn it is
