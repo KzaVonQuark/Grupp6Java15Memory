@@ -119,7 +119,7 @@ public class StartMenu extends BorderPane {
 		solo.setFont(Font.font(null, FontWeight.BOLD, 15));
 		wonGames = new RadioButton("Won games");
 		wonGames.setTextFill(Color.ORANGE);
-		wonGames.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		wonGames.setFont(Font.font(null, FontWeight.BOLD, 15));
 		tg2 = new ToggleGroup();
 
 		smallBoard = new RadioButton("Easy");
