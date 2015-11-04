@@ -19,6 +19,10 @@ public class MusicImage extends ImageView {
 			audioFile.play();
 		else
 			setImage(new Image(imgres2));
+		
+		setOnMouseReleased(e->{
+			togglePlay();
+		});
 	}
 
 	public void togglePlay() {
