@@ -80,7 +80,7 @@ public class StartMenu extends BorderPane {
 		headLine.setEffect(headShadow);
 		headLine.setAlignment(Pos.CENTER);
 		headLine.setTextFill(Color.ORANGE);
-		headLine.setStyle("-fx-font: 100px Tahoma;");
+		headLine.setStyle("-fx-font: 100px null;");
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
@@ -97,7 +97,7 @@ public class StartMenu extends BorderPane {
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
-		playButton.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
+		playButton.setFont(Font.font(null, FontWeight.BOLD, 20));
 		exitButton = new Button("Leave Game");
 		exitButton.setTextFill(playButton.getTextFill());
 		exitButton.setStyle(playButton.getStyle());
@@ -121,16 +121,16 @@ public class StartMenu extends BorderPane {
 		
 		solo = new RadioButton("Solo game");
 		solo.setTextFill(Color.ORANGE);
-		solo.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		solo.setFont(Font.font(null, FontWeight.BOLD, 15));
 		smallBoard = new RadioButton("Easy");
 		smallBoard.setTextFill(Color.ORANGE);
-		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		smallBoard.setFont(Font.font(null, FontWeight.BOLD, 15));
 		mediumBoard = new RadioButton("Normal");
 		mediumBoard.setTextFill(Color.ORANGE);
-		mediumBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		mediumBoard.setFont(Font.font(null, FontWeight.BOLD, 15));
 		largeBoard = new RadioButton("Hard");
 		largeBoard.setTextFill(Color.ORANGE);
-		largeBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		largeBoard.setFont(Font.font(null, FontWeight.BOLD, 15));
 		
 		tg = new ToggleGroup();
 		smallBoard.setToggleGroup(tg);
