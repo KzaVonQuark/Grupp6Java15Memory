@@ -145,6 +145,13 @@ public class GameBoard extends BorderPane {
 		}
 
 		Label winner = new Label();
+		winner.setPrefWidth(800);
+		winner.setStyle("-fx-font: 48px Tahoma; -fx-font-weight: bold;");
+		winner.setTextFill(Color.GOLD);
+		winner.setAlignment(Pos.CENTER);
+		DropShadow winnerDS = new DropShadow(12, Color.DARKSLATEGREY);
+		ds.setSpread(0.9);
+		winner.setEffect(winnerDS);
 
 		this.getGrid().setOnMouseClicked(me -> {
 			try {
@@ -165,7 +172,7 @@ public class GameBoard extends BorderPane {
 						// System.out.println(decks.getDeckSize());
 						// System.out.println(rules.gameOver(decks));
 						if (rules.gameOver(decks)) {
-							winner.setText(rules.winner(this.players).getName());
+							winner.setText("Winner is " + rules.winner(this.players).getName());
 
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
 
