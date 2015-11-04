@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -141,7 +142,6 @@ public class GameBoard extends BorderPane {
 			// if(i >= 4){
 			// return;
 			// }
-
 		}
 
 		Label winner = new Label();
@@ -173,24 +173,19 @@ public class GameBoard extends BorderPane {
 						// System.out.println(rules.gameOver(decks));
 						if (rules.gameOver(decks)) {
 							winner.setText("Winner is " + rules.winner(this.players).getName());
-
+							FlowPane winnerPane = new FlowPane();
+							grid.add(winnerPane, 0, 0);
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
-
+								
 								CardImageView imageView = new CardImageView(
 										this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(),
 										decks.dealCard(i));
 								imageView.setFitHeight(100);
 								imageView.setFitWidth(100);
-								grid.add(imageView, 2, 2);
+								winnerPane.getChildren().add(imageView);
+								
 							}
-							/*
-							 * for (int i = 0; i <
-							 * this.players.get(0).getPlayerWinningHand().
-							 * getDeck().size(); i++) {
-							 * grid.add(this.players.get(0).getPlayerWinningHand
-							 * ().getDeck().get(i), 4, 4); }
-							 */
-							grid.add(winner, 1, 4);
+							grid.add(winner, 0, 0);
 						}
 					}
 				}
@@ -213,6 +208,8 @@ public class GameBoard extends BorderPane {
 		if (this.q.size() == 1) {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
+			decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+			decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
 		}
 
 		else {
@@ -224,8 +221,6 @@ public class GameBoard extends BorderPane {
 				this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
 				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
 				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
-				// decks.getDeck().remove(rules.getCardOne().getCard());
-				// decks.getDeck().remove(rules.getCardOne().getCard());
 			}
 
 			// Reads, removes and put element last in queue

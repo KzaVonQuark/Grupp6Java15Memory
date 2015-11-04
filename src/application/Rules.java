@@ -169,6 +169,11 @@ public class Rules {
 				player.setLeastMoves(player.getMoves());
 		}
 		fm.saveHighScore(players);
+		
+		for (Player player : players) {
+			player.setMoves(0);
+			player.setPoints(0);
+		}
 
 	}
 }
