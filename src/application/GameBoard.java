@@ -46,7 +46,7 @@ public class GameBoard extends BorderPane {
 		this.players = players;
 		addPlayers(players);
 
-		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
+		this.swishSound = new AudioClip(new File("src/sounds/Swish.wav").toURI().toString());
 
 		grid = new GridPane();
 		this.setPadding(new Insets(10));
@@ -86,7 +86,7 @@ public class GameBoard extends BorderPane {
 		HBox hBoxFill = new HBox();
 		hBoxFill.setPrefHeight(200);
 		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png",
-				"src/Sounds/BackgroundMusic.wav", false);
+				"src/sounds/BackgroundMusic.wav", false);
 		vBoxLB.getChildren().addAll(vBoxLB2, hBoxFill, musicImage);
 		this.setLeft(vBoxLB);
 
