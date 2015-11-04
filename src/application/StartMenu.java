@@ -158,6 +158,7 @@ public class StartMenu extends BorderPane {
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_LEFT);
 		fieldOption.setPrefWidth(175);
+		fieldOption.getChildren().add(playersHeadLine);
 
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
