@@ -8,12 +8,12 @@ public class Compare implements Comparator<Player> {
 
 	@Override
 	public int compare(Player p1, Player p2) {
-		
-		if (sortType.equals("Points")){
-				if (p1.getPoints() >= p2.getPoints())
-					return -1;
-				else
-					return 1;
+
+		if (sortType.equals("Points")) {
+			if (p1.getPoints() >= p2.getPoints())
+				return -1;
+			else
+				return 1;
 		}
 
 		if (sortType.equals("Highest point")) {
@@ -30,12 +30,13 @@ public class Compare implements Comparator<Player> {
 				return 1;
 		}
 
-		if (sortType.equals("Fastest time")) {
-			if (p1.getFastestGame() <= p2.getFastestGame())
+		if (sortType.equals("Won games")) {
+			if (p1.getWonGames() <= p2.getWonGames())
 				return -1;
 			else
 				return 1;
 		}
+
 		return 0;
 
 	}

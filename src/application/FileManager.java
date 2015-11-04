@@ -28,7 +28,8 @@ public class FileManager {
 				String tempArray[] = temp.split("[ ]");
 				player = new Player(tempArray[0]);
 				player.setHighestPoint(Integer.parseInt(tempArray[1]));
-				player.setFastestGame(Integer.parseInt(tempArray[2]));
+				player.setMoves(Integer.parseInt(tempArray[2]));
+				player.setWonGames(Integer.parseInt(tempArray[3]));
 				playerMap.put(player.getName(), player);
 
 			}
@@ -111,7 +112,7 @@ public class FileManager {
 	public void save(Player player) {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
-			bw.append("\r\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves());
+			bw.append("\r\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves() + " " + player.getWonGames());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -119,7 +120,7 @@ public class FileManager {
 		}
 	}
 
-	public void saveHighScore(Player[] players) {
+	public void saveHighScore(List<Player> players) {
 		load();
 		for (Player player : players) {
 			this.playerMap.replace(this.playerMap.get(player).getName(), player);

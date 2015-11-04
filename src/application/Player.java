@@ -3,7 +3,8 @@ package application;
 public class Player {
 
 	private String name;
-	private int points, moves, time, highestPoint, leastMoves, fastestGame, streak;
+	private int points, moves, time, highestPoint, leastMoves, wonGames, streak;
+
 	private Deck playerWinningHand;
 	private boolean sortType;
 
@@ -14,10 +15,18 @@ public class Player {
 		this.time = 0;
 		this.highestPoint = 0;
 		this.leastMoves = 0;
-		this.fastestGame = 0;
+		this.wonGames = 0;
 		this.playerWinningHand = new Deck();
 	}
 
+	public int getWonGames() {
+		return wonGames;
+	}
+
+	public void setWonGames(int wonGames) {
+		this.wonGames = wonGames;
+	}
+	
 	public int getStreak() {
 		return streak;
 	}
@@ -72,14 +81,6 @@ public class Player {
 
 	public void setHighestPoint(int highestPoint) {
 		this.highestPoint = highestPoint;
-	}
-
-	public int getFastestGame() {
-		return fastestGame;
-	}
-
-	public void setFastestGame(int fastestGame) {
-		this.fastestGame = fastestGame;
 	}
 
 	public Deck getPlayerWinningHand() {

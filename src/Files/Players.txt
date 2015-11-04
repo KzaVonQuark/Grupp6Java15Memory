@@ -4,4 +4,3 @@ Owen 7 9
 Ian 9 63
 Tomas 11 11
 Zaher 1 2
-Superher 0 0

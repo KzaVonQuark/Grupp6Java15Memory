@@ -25,7 +25,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
-	int frontSelection=3;
+	int frontSelection = 3;
 	TextField creatorTexfield;
 	Text participantsList;
 	Label headLine, playersHeadLine, cardThemeLabel;
@@ -35,29 +35,29 @@ public class StartMenu extends BorderPane {
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox, picBox;
-	RadioButton smallBoard, mediumBoard, largeBoard, solo;
-	ToggleGroup tg, pictg;
+	RadioButton smallBoard, mediumBoard, largeBoard, solo, wonGames;
+	ToggleGroup tg, tg2, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
 	HBox jBox, nBox, wBox;
-	
+
 	DropShadow dShadow = new DropShadow(5, Color.WHITE);
 	DropShadow headShadow = new DropShadow(10, Color.WHITESMOKE);
-	
+
 	StartMenu() {
-		
+
 		FileManager fm = new FileManager();
-		
+
 		headShadow.setSpread(0.5);
-		jBox=new HBox();
-		nBox=new HBox();
-		wBox=new HBox();
+		jBox = new HBox();
+		nBox = new HBox();
+		wBox = new HBox();
 		javaFront = new ImageView("/images/frontimage3.png");
 		jBox.getChildren().add(javaFront);
 		nackademinFront = new ImageView("/images/frontimage2.png");
 		nBox.getChildren().add(nackademinFront);
 		wildcardFront = new ImageView("/images/frontimage1.png");
 		wBox.getChildren().add(wildcardFront);
-		
+
 		jBox.setStyle("-fx-background-color: #FFFFFF;");
 		jBox.setAlignment(Pos.CENTER);
 		jBox.setMinHeight(110);
@@ -68,7 +68,7 @@ public class StartMenu extends BorderPane {
 		wBox.setAlignment(Pos.CENTER);
 		wBox.setMinHeight(110);
 		wBox.setMinWidth(110);
-		
+
 		creatorTexfield = new TextField();
 		creatorTexfield.setMaxWidth(175);
 		creatorTexfield.setPromptText("Enter your Name");
@@ -77,24 +77,22 @@ public class StartMenu extends BorderPane {
 		headLine.setEffect(headShadow);
 		headLine.setAlignment(Pos.CENTER);
 		headLine.setTextFill(Color.ORANGE);
-		headLine.setStyle("-fx-font: 100px Tahoma;");
+		headLine.setStyle("-fx-font: 100px null;");
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
-		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
-		participantsList.setTextAlignment(TextAlignment.CENTER);
-		playersHeadLine = new Label("Participant");
+		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
+		playersHeadLine = new Label("Participants");
 		playersHeadLine.setTextFill(Color.ORANGE);
-		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
+		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
-		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
-		
-		
+		cardThemeLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
+
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
-		playButton.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
+		playButton.setFont(Font.font(null, FontWeight.BOLD, 20));
 		exitButton = new Button("Leave Game");
 		exitButton.setTextFill(playButton.getTextFill());
 		exitButton.setStyle(playButton.getStyle());
@@ -115,26 +113,31 @@ public class StartMenu extends BorderPane {
 		clearHighScore.setTextFill(playButton.getTextFill());
 		clearHighScore.setStyle(playButton.getStyle());
 		clearHighScore.setFont(playButton.getFont());
-		
+
 		solo = new RadioButton("Solo game");
 		solo.setTextFill(Color.ORANGE);
-		solo.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		solo.setFont(Font.font(null, FontWeight.BOLD, 15));
+		wonGames = new RadioButton("Won games");
+		wonGames.setTextFill(Color.ORANGE);
+		wonGames.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		tg2 = new ToggleGroup();
+
 		smallBoard = new RadioButton("Easy");
 		smallBoard.setTextFill(Color.ORANGE);
-		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		smallBoard.setFont(Font.font(null, FontWeight.BOLD, 15));
 		mediumBoard = new RadioButton("Normal");
 		mediumBoard.setTextFill(Color.ORANGE);
-		mediumBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		mediumBoard.setFont(Font.font(null, FontWeight.BOLD, 15));
 		largeBoard = new RadioButton("Hard");
 		largeBoard.setTextFill(Color.ORANGE);
-		largeBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
-		
+		largeBoard.setFont(Font.font(null, FontWeight.BOLD, 15));
+
 		tg = new ToggleGroup();
 		smallBoard.setToggleGroup(tg);
 		mediumBoard.setToggleGroup(tg);
 		mediumBoard.setSelected(true);
 		largeBoard.setToggleGroup(tg);
-		
+
 		ObservableList<String> playerEntries = FXCollections.observableArrayList(fm.loadNames());
 		choosePlayers = new ComboBox<>(playerEntries);
 		choosePlayers.setPrefSize(150, 15);
@@ -142,11 +145,10 @@ public class StartMenu extends BorderPane {
 		ObservableList<String> scoreEntries = FXCollections.observableArrayList("Highest point", "Least Moves");
 		scoreType = new ComboBox<String>(scoreEntries);
 		scoreType.setValue("Highest point");
-		
+
 		picBox = new HBox(5);
-//		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
-		picBox.getChildren().addAll(jBox,nBox,wBox);
-		
+		picBox.getChildren().addAll(jBox, nBox, wBox);
+
 		labelBox = new HBox();
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
@@ -156,9 +158,9 @@ public class StartMenu extends BorderPane {
 		playersBox.getChildren().add(participantsList);
 
 		fieldOption = new VBox(5);
-		fieldOption.setAlignment(Pos.TOP_CENTER);
+		fieldOption.setAlignment(Pos.TOP_LEFT);
 		fieldOption.setPrefWidth(175);
-		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
+		fieldOption.getChildren().add(playersHeadLine);
 
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
@@ -166,7 +168,7 @@ public class StartMenu extends BorderPane {
 		alignmentBox = new VBox(5);
 		alignmentBox.setPadding(new Insets(0, 10, 0, 10));
 		alignmentBox.setAlignment(Pos.TOP_CENTER);
-		alignmentBox.getChildren().addAll(newGameButton, createButton, highScoreButton,  exitButton);
+		alignmentBox.getChildren().addAll(newGameButton, createButton, highScoreButton, exitButton);
 
 		setTop(labelBox);
 		setLeft(alignmentBox);
@@ -174,8 +176,7 @@ public class StartMenu extends BorderPane {
 		setRight(fieldOption);
 
 		this.getStyleClass().add("startMenu");
-		
-		
+
 		newGameButton.setOnMouseEntered(event -> {
 			newGameButton.setEffect(dShadow);
 		});
@@ -217,39 +218,34 @@ public class StartMenu extends BorderPane {
 		});
 		mediumBoard.setOnMouseExited(event -> {
 			mediumBoard.setEffect(null);
-		});				
+		});
 		largeBoard.setOnMouseEntered(event -> {
 			largeBoard.setEffect(dShadow);
 		});
 		largeBoard.setOnMouseExited(event -> {
 			largeBoard.setEffect(null);
 		});
+		Glow glow = new Glow(0.9);
 
-		Bloom blomster = new Bloom ();
-		blomster.setThreshold(0.6);
-		Glow glow = new Glow(1.0);
-		
-		
-		
-		wildcardFront.setOnMouseEntered(event ->{
+		wildcardFront.setOnMouseEntered(event -> {
 			wildcardFront.setEffect(glow);
+
 		});
-		wildcardFront.setOnMouseExited(event ->{
+		wildcardFront.setOnMouseExited(event -> {
 			wildcardFront.setEffect(null);
 		});
-		nackademinFront.setOnMouseEntered(event ->{
+		nackademinFront.setOnMouseEntered(event -> {
 			nackademinFront.setEffect(glow);
+
 		});
-		nackademinFront.setOnMouseExited(event ->{
+		nackademinFront.setOnMouseExited(event -> {
 			nackademinFront.setEffect(null);
 		});
-		javaFront.setOnMouseEntered(event ->{
+		javaFront.setOnMouseEntered(event -> {
 			javaFront.setEffect(glow);
-
-		
 		});
-		javaFront.setOnMouseExited(event ->{
+		javaFront.setOnMouseExited(event -> {
 			javaFront.setEffect(null);
 		});
 	}
-	}
+}

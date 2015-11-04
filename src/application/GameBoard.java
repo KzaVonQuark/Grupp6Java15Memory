@@ -36,7 +36,7 @@ public class GameBoard extends BorderPane {
 	
 	Rules rules = new Rules();
 	
-//	this.backSound = new AudioClip(new File (" src/Sounds/BackgroundMusic.wav").toURI().toString());
+
 
 	GameBoard(List<Player> players, int mode, int frontSelection) { // Get players from
 												// "participants". // % Player[]
@@ -48,7 +48,7 @@ public class GameBoard extends BorderPane {
 		addPlayers(players);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
-		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
+		
         
 		grid = new GridPane();
 		this.setPadding(new Insets(10));
@@ -96,7 +96,9 @@ public class GameBoard extends BorderPane {
 		this.leaderBoard.setPrefWidth(175);
 		this.leaderBoard.setAlignment(Pos.CENTER);
 		vBoxLB2.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
-		vBoxLB.getChildren().addAll(vBoxLB2);
+		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png",
+				"src/Sounds/BackgroundMusic.wav", false);
+		vBoxLB.getChildren().addAll(vBoxLB2, musicImage);
 		this.setLeft(vBoxLB);
 
 		// Display whos turn it is
@@ -159,6 +161,9 @@ public class GameBoard extends BorderPane {
 			// }
 
 		}
+		
+		Label winner = new Label();
+		
 		this.getGrid().setOnMouseClicked(me -> {
 			try {
 				CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
@@ -174,15 +179,16 @@ public class GameBoard extends BorderPane {
 						flipAnimation(rules.getCardTwo());
 						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
-
 						playerTurn(turn); // Checks and changes player
-
+						if (rules.gameOver(decks)) {
+							winner.setText(rules.winner(this.players).getName());
+							grid.add(winner, 4, 4);
+						}
 					}
 				}
 			} catch (ClassCastException e) {
 			}
 		});
-
 
 		backToStartMenu.setOnMouseEntered(ae -> {
 			backToStartMenu.setStyle("-fx-font: 18px Tahoma; -fx-font-weight: bold;");
