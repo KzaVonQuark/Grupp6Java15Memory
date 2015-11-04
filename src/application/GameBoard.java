@@ -141,7 +141,6 @@ public class GameBoard extends BorderPane {
 			// if(i >= 4){
 			// return;
 			// }
-
 		}
 
 		Label winner = new Label();
