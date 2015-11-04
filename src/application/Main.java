@@ -46,6 +46,7 @@ public class Main extends Application {
 
 			ObservableList<Player> highScoreEntries = FXCollections.observableArrayList();
 			ListView<Player> highScoreList = new ListView<Player>();
+			highScoreList.setPrefWidth(175);
 			highScoreList.setId("HighScoreList");
 
 			start.playButton.setOnAction(e -> {
@@ -92,7 +93,7 @@ public class Main extends Application {
 						start.largeBoard, start.cardThemeLabel, start.picBox);
 				start.setBottom(start.playBox);
 				start.fieldOption.getChildren().clear();
-				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersBox);
 				start.choosePlayers.setOnAction(event2 -> {
 					String[] temp = start.participantsList.getText().split("[\n]");
 					boolean found=false;

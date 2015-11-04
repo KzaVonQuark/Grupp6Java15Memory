@@ -8,7 +8,8 @@
 		-fx-font-size: 15px;
 		-fx-font-weight: bold;
 		-fx-text-fill: orange;
-		-fx-text-alignment: left;
+		-fx-text-alignment: center;
+		-fx-alignment: center
 }
 
 .startMenu {
