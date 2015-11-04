@@ -13,8 +13,11 @@ public class MusicImage extends ImageView {
 
 	public MusicImage(String imgres, String imgres2, String audiores, boolean plays) {
 		super(new Image(imgres));
-		audioFile = new AudioClip(new File(audiores).toURI().toString());
+		imagePath=imgres;
+		offimagePath=imgres2;
 		playing = plays;
+		audioFile = new AudioClip(new File(audiores).toURI().toString());
+		
 		if (playing)
 			audioFile.play();
 		else
