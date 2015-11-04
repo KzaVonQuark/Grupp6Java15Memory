@@ -18,7 +18,8 @@ public class MusicImage extends ImageView {
 		offimagePath=imgres2;
 		playing = plays;
 		audioFile = new AudioClip(new File(audiores).toURI().toString());
-		Glow glow = new Glow();
+		Glow glow = new Glow(1.0);
+		
 		
 		if (playing)
 			audioFile.play();
@@ -29,7 +30,12 @@ public class MusicImage extends ImageView {
 			togglePlay();
 		});
 		
-		
+		setOnMouseEntered(e->{
+			setEffect(glow);
+		});
+		setOnMouseExited(e->{
+			setEffect(null);
+		});
 		
 	}
 
@@ -38,6 +44,7 @@ public class MusicImage extends ImageView {
 		if (playing) {
 			setImage(new Image(imagePath));
 			audioFile.play();
+			audioFile.setCycleCount(-1);
 		} else {
 			audioFile.stop();
 			setImage(new Image(offimagePath));
