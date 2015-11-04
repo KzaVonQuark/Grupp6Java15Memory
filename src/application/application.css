@@ -17,11 +17,13 @@
 	-fx-background-position: center center;
 	-fx-background-repeat: no-repeat;
 }
-#front1:hover{
-	-fx-effect: dropshadow(gaussian, #ff0000, 1,1,1,1);
-	
+
+.gameBoard {
+	-fx-background-image: url("/images/gbbackground.jpg");
 }
-#front1:pressed{
-	-fx-effect: dropshadow(gaussian, #ffffff, 1,1,1,1);
-	
+
+.whiteBox {
+	-fx-background-color: rgba(255,255,255,0.7);
+	-fx-border-style: solid;
+	-fx-border-width: 2px;
 }

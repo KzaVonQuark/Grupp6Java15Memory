@@ -2,6 +2,7 @@ package application;
 
 import java.io.File;
 
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
@@ -17,6 +18,7 @@ public class MusicImage extends ImageView {
 		offimagePath=imgres2;
 		playing = plays;
 		audioFile = new AudioClip(new File(audiores).toURI().toString());
+		Glow glow = new Glow();
 		
 		if (playing)
 			audioFile.play();
@@ -26,6 +28,9 @@ public class MusicImage extends ImageView {
 		setOnMouseReleased(e->{
 			togglePlay();
 		});
+		
+		
+		
 	}
 
 	public void togglePlay() {

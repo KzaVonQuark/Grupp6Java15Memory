@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
@@ -30,11 +31,12 @@ public class GameBoard extends BorderPane {
 	private AudioClip swishSound;
 	private Label leaderBoard;
 	private Label playerTurnInfo;
+	private Label backToStartMenu;
 	private AudioClip backSound;
 	
 	Rules rules = new Rules();
 	
-//	this.backSound = new AudioClip(new File (" src/Sounds/BackgroundMusic.wav").toURI().toString());
+
 
 	GameBoard(List<Player> players, int mode, int frontSelection) { // Get players from
 												// "participants". // % Player[]
@@ -46,10 +48,11 @@ public class GameBoard extends BorderPane {
 		addPlayers(players);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
-		this.backSound = new AudioClip(new File ("src/Sounds/BackgroundMusic.wav").toURI().toString());
+		
         
 		grid = new GridPane();
 		this.setPadding(new Insets(10));
+		this.getStyleClass().add("gameBoard");
 		this.setCenter(grid);
 		int cardsInDeck=0;
 		if(mode==0){
@@ -66,11 +69,69 @@ public class GameBoard extends BorderPane {
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
 		
+		// Music checkbox
         CheckBox musicCheck = new CheckBox(" Want Some Memory Music?");
-        musicCheck.setStyle("-fx-font: 25px Serif");
-	    musicCheck.setTextFill(Color.MIDNIGHTBLUE);
-        setBottom(musicCheck);
+		musicCheck.setStyle("-fx-font: 18px Tahoma");
+		musicCheck.setTextFill(Color.BLACK);
+		musicCheck.setAlignment(Pos.CENTER_LEFT);
+		HBox hBoxBottom = new HBox();
+		hBoxBottom.getChildren().addAll(musicCheck);
+		this.setBottom(hBoxBottom);
         
+		// Leaderboard on gameboard
+		VBox vBoxLB = new VBox();
+		vBoxLB.setPrefWidth(175);
+		VBox vBoxLB2 = new VBox();
+		vBoxLB2.setPrefWidth(175);
+		vBoxLB2.getStyleClass().add("whiteBox");
+		Label lbHeader = new Label("Leaderboard");
+		lbHeader.setFont(new Font(24));
+		lbHeader.setPrefWidth(175);
+		lbHeader.setAlignment(Pos.CENTER);
+		Separator seperatorLB = new Separator();
+		seperatorLB.setStyle("-fx-background: black;");
+		seperatorLB.setPadding(new Insets(5, 0, 5, 0));
+		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
+		this.leaderBoard.setFont(new Font(16));
+		this.leaderBoard.setPrefWidth(175);
+		this.leaderBoard.setAlignment(Pos.CENTER);
+		vBoxLB2.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
+		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png",
+				"src/Sounds/BackgroundMusic.wav", false);
+		vBoxLB.getChildren().addAll(vBoxLB2, musicImage);
+		this.setLeft(vBoxLB);
+
+		// Display whos turn it is
+		VBox vBoxPT = new VBox();
+		vBoxPT.setPrefWidth(175);
+		vBoxPT.setPrefHeight(780);
+		VBox vBoxTurn = new VBox();
+		vBoxTurn.setPrefWidth(175);
+		vBoxTurn.getStyleClass().add("whiteBox");
+		Label ptHeader = new Label("Players turn");
+		ptHeader.setFont(new Font(24));
+		ptHeader.setPrefWidth(175);
+		ptHeader.setAlignment(Pos.CENTER);
+		Separator seperatorPT = new Separator();
+		seperatorPT.setStyle("-fx-background: black;");
+		seperatorPT.setPadding(new Insets(5, 0, 5, 0));
+		this.playerTurnInfo = new Label(this.getQ().peek().getName());
+		this.playerTurnInfo.setFont(new Font(18));
+		this.playerTurnInfo.setPrefWidth(175);
+		this.playerTurnInfo.setPrefHeight(100);
+		this.playerTurnInfo.setAlignment(Pos.CENTER);
+		vBoxTurn.getChildren().addAll(ptHeader, seperatorPT, this.playerTurnInfo);
+
+		// Back to Start Menu
+		HBox hBoxStartMenu = new HBox();
+		hBoxStartMenu.setPrefWidth(175);
+		hBoxStartMenu.setPrefHeight(650);
+		backToStartMenu = new Label("Back to start menu");
+		backToStartMenu.setAlignment(Pos.BOTTOM_CENTER);
+		backToStartMenu.setStyle("-fx-font: 18px Tahoma;");
+
+		vBoxPT.getChildren().addAll(vBoxTurn, hBoxStartMenu, backToStartMenu);
+		this.setRight(vBoxPT);
         
         musicCheck.setOnAction(event -> {
         if (musicCheck.isSelected()) {
@@ -142,37 +203,13 @@ public class GameBoard extends BorderPane {
 			}
 		});
 
-		// Leaderboard on gameboard
-		VBox vBoxLB = new VBox();
-		vBoxLB.setPrefWidth(175);
-		Label lbHeader = new Label("Leaderboard");
-		lbHeader.setFont(new Font(24));
-		lbHeader.setPrefWidth(175);
-		lbHeader.setAlignment(Pos.CENTER);
-		Separator seperatorLB = new Separator();
-		seperatorLB.setStyle("-fx-background: black;");
-		seperatorLB.setPadding(new Insets(5, 0, 5, 0));
-		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
-		this.leaderBoard.setFont(new Font(16));
-		vBoxLB.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
-		this.setLeft(vBoxLB);
+		backToStartMenu.setOnMouseEntered(ae -> {
+			backToStartMenu.setStyle("-fx-font: 18px Tahoma; -fx-font-weight: bold;");
+		});
 
-		// Display whos turn it is
-		VBox vBoxPT = new VBox();
-		vBoxPT.setPrefWidth(175);
-		Label ptHeader = new Label("Players turn");
-		ptHeader.setFont(new Font(24));
-		ptHeader.setPrefWidth(175);
-		ptHeader.setAlignment(Pos.CENTER);
-		Separator seperatorPT = new Separator();
-		seperatorPT.setStyle("-fx-background: black;");
-		seperatorPT.setPadding(new Insets(5, 0, 5, 0));
-		this.playerTurnInfo = new Label(this.getQ().peek().getName());
-		this.playerTurnInfo.setFont(new Font(18));
-		this.playerTurnInfo.setPrefWidth(175);
-		this.playerTurnInfo.setAlignment(Pos.CENTER);
-		vBoxPT.getChildren().addAll(ptHeader, seperatorPT, this.playerTurnInfo);
-		this.setRight(vBoxPT);
+		backToStartMenu.setOnMouseExited(ae -> {
+			backToStartMenu.setStyle("-fx-font: 18px Tahoma; -fx-font-weight: normal;");
+		});
 
 	}
 
@@ -278,6 +315,14 @@ public class GameBoard extends BorderPane {
 
 	public void setPlayerTurnInfo(Label playerTurnInfo) {
 		this.playerTurnInfo = playerTurnInfo;
+	}
+
+	public Label getBackToStartMenu() {
+		return backToStartMenu;
+	}
+
+	public void setBackToStartMenu(Label backToStartMenu) {
+		this.backToStartMenu = backToStartMenu;
 	}
 
 }
