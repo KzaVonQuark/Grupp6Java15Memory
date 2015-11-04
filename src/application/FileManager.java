@@ -84,12 +84,15 @@ public class FileManager {
 				Player player = new Player(tempSplit[0] + "\n");
 				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
+				player.setWonGames(Integer.parseInt(tempSplit[3]));
 				highScore.add(player);
 				
 				if (sortType.equals("Least moves"))
-					player.setSortType(true);
+					player.setSortType(1);
+				else if (sortType.equals("Won games"))
+					player.setSortType(2);
 				else
-					player.setSortType(false);
+					player.setSortType(3);
 			}
 
 		} catch (FileNotFoundException e) {

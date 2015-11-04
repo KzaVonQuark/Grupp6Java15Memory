@@ -3,10 +3,9 @@ package application;
 public class Player {
 
 	private String name;
-	private int points, moves, time, highestPoint, leastMoves, wonGames, streak;
+	private int points, moves, time, highestPoint, leastMoves, wonGames, streak, sortType;
 
 	private Deck playerWinningHand;
-	private boolean sortType;
 
 	public Player(String name) {
 		this.name = name;
@@ -91,19 +90,21 @@ public class Player {
 		this.playerWinningHand = playerWinningHand;
 	}
 
-	public boolean isSortType() {
+	public int isSortType() {
 		return sortType;
 	}
 
-	public void setSortType(boolean sortType) {
+	public void setSortType(int sortType) {
 		this.sortType = sortType;
 	}
 
 	@Override
 	public String toString() {
 		
-		if (sortType==true)
+		if (sortType == 1)
 			return this.getName() + " Moves " + this.getLeastMoves();
+		else if (sortType == 2)
+			return this.getWonGames() + "Won games" + this.getWonGames();
 		else
 			return this.getName() + " Points " + this.getHighestPoint();
 	}

@@ -205,6 +205,8 @@ public class GameBoard extends BorderPane {
 		if (this.q.size() == 1) {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
+			decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+			decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
 		}
 
 		else {
