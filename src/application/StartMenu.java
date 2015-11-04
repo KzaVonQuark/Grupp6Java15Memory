@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -34,8 +35,9 @@ public class StartMenu extends BorderPane {
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox, picBox, playBox;
-	RadioButton smallBoard, mediumBoard, largeBoard, solo, wonGames;
-	ToggleGroup tg, tg2, pictg;
+	RadioButton smallBoard, mediumBoard, largeBoard;
+	CheckBox solo, wonGames;
+	ToggleGroup tg, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
 	HBox jBox, nBox, wBox;
 
@@ -80,10 +82,14 @@ public class StartMenu extends BorderPane {
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
+		participantsList.setWrappingWidth(175);
+		participantsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label("Participants");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
+		playersHeadLine.setAlignment(Pos.TOP_CENTER);
+		playersHeadLine.setPrefWidth(175);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
 		cardThemeLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
@@ -113,13 +119,12 @@ public class StartMenu extends BorderPane {
 		clearHighScore.setStyle(playButton.getStyle());
 		clearHighScore.setFont(exitButton.getFont());
 
-		solo = new RadioButton("Solo game");
+		solo = new CheckBox("Solo game");
 		solo.setTextFill(Color.ORANGE);
 		solo.setFont(Font.font(null, FontWeight.BOLD, 15));
-		wonGames = new RadioButton("Won games");
+		wonGames = new CheckBox("Won games");
 		wonGames.setTextFill(Color.ORANGE);
 		wonGames.setFont(Font.font(null, FontWeight.BOLD, 15));
-		tg2 = new ToggleGroup();
 
 		smallBoard = new RadioButton("Easy");
 		smallBoard.setTextFill(Color.ORANGE);
@@ -154,10 +159,11 @@ public class StartMenu extends BorderPane {
 
 		playersBox = new HBox(5);
 		playersBox.setAlignment(Pos.TOP_CENTER);
+		playersBox.setPrefWidth(175);
 		playersBox.getChildren().add(participantsList);
 
 		fieldOption = new VBox(5);
-		fieldOption.setAlignment(Pos.TOP_LEFT);
+		fieldOption.setAlignment(Pos.TOP_CENTER);
 		fieldOption.setPrefWidth(175);
 		fieldOption.getChildren().add(playersHeadLine);
 
