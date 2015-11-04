@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -76,7 +77,7 @@ public class GameBoard extends BorderPane {
 		VBox vBoxLB = new VBox();
 		vBoxLB.setPrefWidth(175);
 		VBox vBoxLB2 = new VBox();
-		vBoxLB2.setPrefWidth(175);
+		vBoxLB2.setPrefSize(175, 400);
 		vBoxLB2.getStyleClass().add("whiteBox");
 		Label lbHeader = new Label("Leaderboard");
 		lbHeader.setFont(new Font(24));
@@ -90,9 +91,11 @@ public class GameBoard extends BorderPane {
 		this.leaderBoard.setPrefWidth(175);
 		this.leaderBoard.setAlignment(Pos.CENTER);
 		vBoxLB2.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
+		HBox hBoxFill = new HBox();
+		hBoxFill.setPrefHeight(200);
 		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png",
 				"src/Sounds/BackgroundMusic.wav", false);
-		vBoxLB.getChildren().addAll(vBoxLB2, musicImage);
+		vBoxLB.getChildren().addAll(vBoxLB2, hBoxFill, musicImage);
 		this.setLeft(vBoxLB);
 
 		// Display whos turn it is
@@ -121,8 +124,12 @@ public class GameBoard extends BorderPane {
 		hBoxStartMenu.setPrefWidth(175);
 		hBoxStartMenu.setPrefHeight(650);
 		backToStartMenu = new Label("Back to start menu");
+		backToStartMenu.setPrefWidth(175);
 		backToStartMenu.setAlignment(Pos.BOTTOM_CENTER);
 		backToStartMenu.setStyle("-fx-font: 18px Tahoma;");
+		DropShadow ds = new DropShadow(10, Color.WHITESMOKE);
+		ds.setSpread(0.8);
+		backToStartMenu.setEffect(ds);
 
 		vBoxPT.getChildren().addAll(vBoxTurn, hBoxStartMenu, backToStartMenu);
 		this.setRight(vBoxPT);
