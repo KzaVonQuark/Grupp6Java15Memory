@@ -80,10 +80,14 @@ public class StartMenu extends BorderPane {
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
+		participantsList.setWrappingWidth(175);
+		participantsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label("Participants");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
+		playersHeadLine.setAlignment(Pos.TOP_CENTER);
+		playersHeadLine.setPrefWidth(175);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
 		cardThemeLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
@@ -154,10 +158,11 @@ public class StartMenu extends BorderPane {
 
 		playersBox = new HBox(5);
 		playersBox.setAlignment(Pos.TOP_CENTER);
+		playersBox.setPrefWidth(175);
 		playersBox.getChildren().add(participantsList);
 
 		fieldOption = new VBox(5);
-		fieldOption.setAlignment(Pos.TOP_LEFT);
+		fieldOption.setAlignment(Pos.TOP_CENTER);
 		fieldOption.setPrefWidth(175);
 		fieldOption.getChildren().add(playersHeadLine);
 

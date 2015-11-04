@@ -105,7 +105,7 @@ public class Main extends Application {
 					}
 					if(!found){
 						start.fieldOption.getChildren().clear();
-						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
+						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersBox);
 						start.participantsList
 								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 					}
