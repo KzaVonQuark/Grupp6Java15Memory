@@ -1,6 +1,0 @@
-Linus 5 15
-Masih 4 4
-Owen 7 19
-Ian 18 8
-Tomas 14 6
-Zaher 20 5
