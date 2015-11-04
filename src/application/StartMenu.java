@@ -83,15 +83,15 @@ public class StartMenu extends BorderPane {
 		headLine.setStyle("-fx-font: 100px null;");
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
-		participantsList.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
 		participantsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label("Participant");
 		playersHeadLine.setTextFill(Color.ORANGE);
-		playersHeadLine.setFont(Font.font("kristen ITC", FontWeight.BOLD, 20));
+		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
-		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		cardThemeLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
 		
 		
 		playButton = new Button("Let's play");
@@ -147,7 +147,6 @@ public class StartMenu extends BorderPane {
 		scoreType.setValue("Highest point");
 		
 		picBox = new HBox(5);
-//		picBox.getChildren().addAll(javaFront, nackademinFront, wildcardFront);
 		picBox.getChildren().addAll(jBox,nBox,wBox);
 		
 		labelBox = new HBox();
@@ -248,8 +247,6 @@ public class StartMenu extends BorderPane {
 		});
 		javaFront.setOnMouseEntered(event ->{
 			javaFront.setEffect(glow);
-
-		
 		});
 		javaFront.setOnMouseExited(event ->{
 			javaFront.setEffect(null);
