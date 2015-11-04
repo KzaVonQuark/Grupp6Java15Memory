@@ -84,8 +84,7 @@ public class StartMenu extends BorderPane {
 		participantsList = new Text("");
 		participantsList.setFill(Color.ORANGE);
 		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
-		participantsList.setTextAlignment(TextAlignment.CENTER);
-		playersHeadLine = new Label("Participant");
+		playersHeadLine = new Label("Participants");
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
@@ -157,9 +156,9 @@ public class StartMenu extends BorderPane {
 		playersBox.getChildren().add(participantsList);
 
 		fieldOption = new VBox(5);
-		fieldOption.setAlignment(Pos.TOP_CENTER);
+		fieldOption.setAlignment(Pos.TOP_LEFT);
 		fieldOption.setPrefWidth(175);
-		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
+		fieldOption.getChildren().add(playersHeadLine);
 
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);

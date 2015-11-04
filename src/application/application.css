@@ -5,14 +5,10 @@
 
 #HighScoreList .cell {
 		-fx-background-color: transparent;
-		-fx-font-size: 14pt;
+		-fx-font-size: 15px;
+		-fx-font-weight: bold;
 		-fx-text-fill: orange;
-		-fx-text-alignment: center;
-}
-
-#HighScoreList .cell:empty {
-	-fx-background-color: transparent;
-	
+		-fx-text-alignment: left;
 }
 
 .startMenu {
