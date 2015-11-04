@@ -44,6 +44,7 @@ public class MusicImage extends ImageView {
 		if (playing) {
 			setImage(new Image(imagePath));
 			audioFile.play();
+			audioFile.setCycleCount(-1);
 		} else {
 			audioFile.stop();
 			setImage(new Image(offimagePath));
