@@ -71,14 +71,7 @@ public class GameBoard extends BorderPane {
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
 		
-		// Music checkbox
-        CheckBox musicCheck = new CheckBox(" Want Some Memory Music?");
-		musicCheck.setStyle("-fx-font: 18px Tahoma");
-		musicCheck.setTextFill(Color.BLACK);
-		musicCheck.setAlignment(Pos.CENTER_LEFT);
-		HBox hBoxBottom = new HBox();
-		hBoxBottom.getChildren().addAll(musicCheck);
-		this.setBottom(hBoxBottom);
+		
         
 		// Leaderboard on gameboard
 		VBox vBoxLB = new VBox();
