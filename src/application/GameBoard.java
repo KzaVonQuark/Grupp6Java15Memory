@@ -30,7 +30,7 @@ public class GameBoard extends BorderPane {
 	private AudioClip swishSound;
 	private Label leaderBoard;
 	private Label playerTurnInfo;
-	private AudioClip backSound;
+	
 	
 	Rules rules = new Rules();
 	
@@ -125,7 +125,7 @@ public class GameBoard extends BorderPane {
 		seperatorLB.setPadding(new Insets(5, 0, 5, 0));
 		this.leaderBoard = new Label(rules.leaderBoard(this.getPlayers()));
 		this.leaderBoard.setFont(new Font(16));
-		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png", "src/Sounds/BackgroundMusic.wav", false);
+		MusicImage musicImage = new MusicImage("images/Radio.png", "images/RadioX.png", "src/Sounds/BackgroundMusic.wav", false);
 		vBoxLB.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard,musicImage);
 		
 		this.setLeft(vBoxLB);
