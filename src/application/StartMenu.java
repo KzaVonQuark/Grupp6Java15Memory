@@ -90,13 +90,8 @@ public class StartMenu extends BorderPane {
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
 		cardThemeLabel = new Label("Choose Card Theme: ");
 		cardThemeLabel.setTextFill(Color.ORANGE);
-<<<<<<< HEAD
-		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
-		
-=======
 		cardThemeLabel.setFont(Font.font(null, FontWeight.BOLD, 15));
 
->>>>>>> branch 'master' of https://github.com/KzaVonQuark/Grupp6Java15Memory
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
