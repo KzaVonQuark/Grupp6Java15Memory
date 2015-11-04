@@ -87,6 +87,8 @@ public class Main extends Application {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
 						start.largeBoard, start.playButton, start.cardThemeLabel, start.picBox);
+				start.fieldOption.getChildren().clear();
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 				start.choosePlayers.setOnAction(event2 -> {
 					String[] temp = start.participantsList.getText().split("[\n]");
 					boolean found=false;
@@ -163,7 +165,8 @@ public class Main extends Application {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.solo, start.smallBoard, start.mediumBoard, start.largeBoard,
 						start.clearHighScore);
-				start.fieldOption.getChildren().add(highScoreList);
+				start.fieldOption.getChildren().clear();
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, highScoreList);
 				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 					@Override
 					public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue,
