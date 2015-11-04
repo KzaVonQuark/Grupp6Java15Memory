@@ -79,6 +79,7 @@ public class Main extends Application {
 
 				GameBoard gameBoard = new GameBoard(players, boardSize,start.frontSelection);
 				gameBoard.getBackToStartMenu().setOnMousePressed(ae -> {
+					start.participantsList.setText("");
 					root.fadeChange(start, Color.BLACK);
 				});
 				playSound.play();

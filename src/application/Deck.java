@@ -57,7 +57,13 @@ public class Deck {
 	public Card dealCard(int cardInDeck) {
 		return deck.get(cardInDeck);
 	}
-
+	public void removeCardbyValue(int value){
+		for(int i=0;i<deck.size();i++){
+			if(deck.get(i).getValue()==value){deck.remove(i);
+			return;
+			}
+		}
+	}
 	// Add card to players win hand
 	public void addCardToDeck(Card card) {
 		for (Card playerCard : deck) {

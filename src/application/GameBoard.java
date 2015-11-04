@@ -10,7 +10,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.effect.DropShadow;
@@ -34,45 +33,38 @@ public class GameBoard extends BorderPane {
 	private Label playerTurnInfo;
 	private Label backToStartMenu;
 
-
-	
 	Rules rules = new Rules();
-	
 
+	GameBoard(List<Player> players, int mode, int frontSelection) { // Get
+																	// players
+																	// from
+		// "participants". // % Player[]
+		// player
 
-	GameBoard(List<Player> players, int mode, int frontSelection) { // Get players from
-												// "participants". // % Player[]
-												// player
-
-		this.q = new LinkedList<Player>();		
+		this.q = new LinkedList<Player>();
 		this.players = new ArrayList<Player>();
 		this.players = players;
 		addPlayers(players);
 
 		this.swishSound = new AudioClip(new File("src/Sounds/Swish.wav").toURI().toString());
-		
-        
+
 		grid = new GridPane();
 		this.setPadding(new Insets(10));
 		this.getStyleClass().add("gameBoard");
 		this.setCenter(grid);
-		int cardsInDeck=0;
-		if(mode==0){
-			cardsInDeck=6*4;
+		int cardsInDeck = 0;
+		if (mode == 0) {
+			cardsInDeck = 6 * 4;
+		} else if (mode == 1) {
+			cardsInDeck = 6 * 6;
+		} else {
+			cardsInDeck = 6 * 8;
 		}
-		else if(mode==1){
-			cardsInDeck=6*6;
-		}
-		else{
-			cardsInDeck=6*8;
-		}
-		decks = new Deck(cardsInDeck, "frontimage"+frontSelection);
+		decks = new Deck(cardsInDeck, "frontimage" + frontSelection);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
-		
-		
-        
+
 		// Leaderboard on gameboard
 		VBox vBoxLB = new VBox();
 		vBoxLB.setPrefWidth(175);
@@ -133,8 +125,7 @@ public class GameBoard extends BorderPane {
 
 		vBoxPT.getChildren().addAll(vBoxTurn, hBoxStartMenu, backToStartMenu);
 		this.setRight(vBoxPT);
-        
-        
+
 		int row = 0;
 		int col = 0;
 		for (int i = 0; i < decks.getDeckSize(); i++) {
@@ -152,9 +143,9 @@ public class GameBoard extends BorderPane {
 			// }
 
 		}
-		
+
 		Label winner = new Label();
-		
+
 		this.getGrid().setOnMouseClicked(me -> {
 			try {
 				CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
@@ -171,21 +162,27 @@ public class GameBoard extends BorderPane {
 						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						playerTurn(turn); // Checks and changes player
+						// System.out.println(decks.getDeckSize());
+						// System.out.println(rules.gameOver(decks));
 						if (rules.gameOver(decks)) {
 							winner.setText(rules.winner(this.players).getName());
 
-							for (int i = 0; i <  this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
-								
-								CardImageView imageView = new CardImageView(this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(), decks.dealCard(i));
+							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
+
+								CardImageView imageView = new CardImageView(
+										this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(),
+										decks.dealCard(i));
 								imageView.setFitHeight(100);
 								imageView.setFitWidth(100);
 								grid.add(imageView, 2, 2);
 							}
 							/*
-							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
-									grid.add(this.players.get(0).getPlayerWinningHand().getDeck().get(i), 4, 4);
-								}
-							*/
+							 * for (int i = 0; i <
+							 * this.players.get(0).getPlayerWinningHand().
+							 * getDeck().size(); i++) {
+							 * grid.add(this.players.get(0).getPlayerWinningHand
+							 * ().getDeck().get(i), 4, 4); }
+							 */
 							grid.add(winner, 1, 4);
 						}
 					}
@@ -206,28 +203,30 @@ public class GameBoard extends BorderPane {
 
 	void playerTurn(boolean gotPair) {
 
-		if (this.q.size()==1) {
-			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
-		this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
-		}
-
-		else {
-		// Reads first element in queue.
-		if (gotPair == true) {
-			this.q.peek().setPoints(this.q.peek().getPoints() + 1);
+		if (this.q.size() == 1) {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
-			this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
-			decks.getDeck().remove(rules.getCardOne().getCard());
-			decks.getDeck().remove(rules.getCardOne().getCard());
 		}
 
-		// Reads, removes and put element last in queue
 		else {
-			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
-			this.q.add(this.q.poll());
-			this.playerTurnInfo.setText(this.getQ().peek().getName());
-		}
+			// Reads first element in queue.
+			if (gotPair == true) {
+				this.q.peek().setPoints(this.q.peek().getPoints() + 1);
+				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
+				this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
+				this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
+				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+				// decks.getDeck().remove(rules.getCardOne().getCard());
+				// decks.getDeck().remove(rules.getCardOne().getCard());
+			}
+
+			// Reads, removes and put element last in queue
+			else {
+				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
+				this.q.add(this.q.poll());
+				this.playerTurnInfo.setText(this.getQ().peek().getName());
+			}
 		}
 	}
 
