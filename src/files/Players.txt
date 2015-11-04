@@ -1,4 +1,3 @@
-
 Linus 25 33 5
 Masih 12 4 5
 Owen 7 9 5
