@@ -85,7 +85,7 @@ public class GameBoard extends BorderPane {
 		vBoxLB2.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
 		HBox hBoxFill = new HBox();
 		hBoxFill.setPrefHeight(200);
-		MusicImage musicImage = new MusicImage("images/RadioX.png", "images/Radio.png",
+		MusicImage musicImage = new MusicImage("images/Radio.png", "images/RadioX.png",
 				"src/sounds/BackgroundMusic.wav", false);
 		vBoxLB.getChildren().addAll(vBoxLB2, hBoxFill, musicImage);
 		this.setLeft(vBoxLB);
