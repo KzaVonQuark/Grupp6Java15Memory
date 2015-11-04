@@ -33,7 +33,8 @@ public class GameBoard extends BorderPane {
 	private Label leaderBoard;
 	private Label playerTurnInfo;
 	private Label backToStartMenu;
-	private AudioClip backSound;
+
+
 	
 	Rules rules = new Rules();
 	
@@ -140,16 +141,6 @@ public class GameBoard extends BorderPane {
 		vBoxPT.getChildren().addAll(vBoxTurn, hBoxStartMenu, backToStartMenu);
 		this.setRight(vBoxPT);
         
-        musicCheck.setOnAction(event -> {
-        if (musicCheck.isSelected()) {
-				backSound.play();
-				backSound.setVolume(1.0);
-				backSound.setCycleCount(-1);
-				
-			} else {
-				backSound.stop();
-			
-			}});
         
 		int row = 0;
 		int col = 0;
@@ -189,7 +180,20 @@ public class GameBoard extends BorderPane {
 						playerTurn(turn); // Checks and changes player
 						if (rules.gameOver(decks)) {
 							winner.setText(rules.winner(this.players).getName());
-							grid.add(winner, 4, 4);
+
+							for (int i = 0; i <  this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
+								
+								CardImageView imageView = new CardImageView(this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(), decks.dealCard(i));
+								imageView.setFitHeight(100);
+								imageView.setFitWidth(100);
+								grid.add(imageView, 2, 2);
+							}
+							/*
+							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
+									grid.add(this.players.get(0).getPlayerWinningHand().getDeck().get(i), 4, 4);
+								}
+							*/
+							grid.add(winner, 1, 4);
 						}
 					}
 				}
@@ -220,6 +224,9 @@ public class GameBoard extends BorderPane {
 			this.q.peek().setPoints(this.q.peek().getPoints() + 1);
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
+			this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
+			decks.getDeck().remove(rules.getCardOne().getCard());
+			decks.getDeck().remove(rules.getCardOne().getCard());
 		}
 
 		// Reads, removes and put element last in queue
