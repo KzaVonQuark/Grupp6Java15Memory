@@ -110,12 +110,6 @@ public class Rules {
 		}
 	}
 
-	// Winning player
-	public Player winner(Player[] players) {
-
-		return players[0];
-	}
-
 	// Leaderboard realtime
 	public String leaderBoard(List<Player> players) {
 
@@ -157,17 +151,24 @@ public class Rules {
 		return (dealerDeck.getDeck().size() == 0) ? true : false;
 	}
 
-	public void checkHighScore(Player[] playersInGame) {
+	// Winning player
+	public Player winner(List<Player> players) {
+		players.get(0).setWonGames(players.get(0).getWonGames() + 1);
+		return players.get(0);
+	}
+	
+	//Update Highscore
+	public void checkHighScore(List<Player> players) {
 		FileManager fm = new FileManager();
 
-		for (Player player : playersInGame) {
+		for (Player player : players) {
 			if (player.getPoints() > player.getHighestPoint())
 				player.setHighestPoint(player.getPoints());
 
 			if (player.getMoves() < player.getLeastMoves())
 				player.setLeastMoves(player.getMoves());
 		}
-		fm.saveHighScore(playersInGame);
+		fm.saveHighScore(players);
 
 	}
 }
