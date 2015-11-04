@@ -86,7 +86,8 @@ public class Main extends Application {
 				fm.load();
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.choosePlayers, start.smallBoard, start.mediumBoard,
-						start.largeBoard, start.playButton, start.cardThemeLabel, start.picBox);
+						start.largeBoard, start.cardThemeLabel, start.picBox);
+				start.setBottom(start.playBox);
 				start.fieldOption.getChildren().clear();
 				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 				start.choosePlayers.setOnAction(event2 -> {
@@ -127,6 +128,7 @@ public class Main extends Application {
 			start.createButton.setOnAction(event -> {
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().add(start.creatorTexfield);
+				start.setBottom(null);
 			});
 
 			start.creatorTexfield.setOnKeyReleased(ae -> {
@@ -161,7 +163,7 @@ public class Main extends Application {
 			});
 
 			start.highScoreButton.setOnAction(event -> {
-
+				start.setBottom(null);
 				start.centerBox.getChildren().clear();
 				start.centerBox.getChildren().addAll(start.solo, start.smallBoard, start.mediumBoard, start.largeBoard,
 						start.clearHighScore);

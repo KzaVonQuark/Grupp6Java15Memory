@@ -37,7 +37,7 @@ public class StartMenu extends BorderPane {
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
-	HBox playersBox, labelBox, picBox;
+	HBox playersBox, labelBox, picBox, playBox;
 	RadioButton smallBoard, mediumBoard, largeBoard, solo, wonGames;
 	ToggleGroup tg, tg2, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
@@ -95,27 +95,27 @@ public class StartMenu extends BorderPane {
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
-		playButton.setFont(Font.font(null, FontWeight.BOLD, 20));
+		playButton.setFont(Font.font(null, FontWeight.BOLD, 100));
 		exitButton = new Button("Leave Game");
 		exitButton.setTextFill(playButton.getTextFill());
 		exitButton.setStyle(playButton.getStyle());
-		exitButton.setFont(playButton.getFont());
+		exitButton.setFont(Font.font(null, FontWeight.BOLD, 20));
 		newGameButton = new Button("New Game");
 		newGameButton.setTextFill(playButton.getTextFill());
 		newGameButton.setStyle(playButton.getStyle());
-		newGameButton.setFont(playButton.getFont());
+		newGameButton.setFont(exitButton.getFont());
 		createButton = new Button("Create New Player");
 		createButton.setTextFill(playButton.getTextFill());
 		createButton.setStyle(playButton.getStyle());
-		createButton.setFont(playButton.getFont());
+		createButton.setFont(exitButton.getFont());
 		highScoreButton = new Button("Highscores");
 		highScoreButton.setTextFill(playButton.getTextFill());
 		highScoreButton.setStyle(playButton.getStyle());
-		highScoreButton.setFont(playButton.getFont());
+		highScoreButton.setFont(exitButton.getFont());
 		clearHighScore = new Button("Clear High Score");
 		clearHighScore.setTextFill(playButton.getTextFill());
 		clearHighScore.setStyle(playButton.getStyle());
-		clearHighScore.setFont(playButton.getFont());
+		clearHighScore.setFont(exitButton.getFont());
 
 		solo = new RadioButton("Solo game");
 		solo.setTextFill(Color.ORANGE);
@@ -165,6 +165,10 @@ public class StartMenu extends BorderPane {
 		fieldOption.setPrefWidth(175);
 		fieldOption.getChildren().add(playersHeadLine);
 
+		playBox = new HBox();
+		playBox.setAlignment(Pos.BASELINE_CENTER);
+		playBox.getChildren().add(playButton);
+		
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
 
