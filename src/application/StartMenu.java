@@ -38,8 +38,8 @@ public class StartMenu extends BorderPane {
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
 	HBox playersBox, labelBox, picBox;
-	RadioButton smallBoard, mediumBoard, largeBoard, solo;
-	ToggleGroup tg, pictg;
+	RadioButton smallBoard, mediumBoard, largeBoard, solo, wonGames;
+	ToggleGroup tg, tg2, pictg;
 	ImageView javaFront, nackademinFront, wildcardFront;
 	HBox jBox, nBox, wBox;
 	
@@ -93,7 +93,6 @@ public class StartMenu extends BorderPane {
 		cardThemeLabel.setTextFill(Color.ORANGE);
 		cardThemeLabel.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
 		
-		
 		playButton = new Button("Let's play");
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
@@ -122,6 +121,11 @@ public class StartMenu extends BorderPane {
 		solo = new RadioButton("Solo game");
 		solo.setTextFill(Color.ORANGE);
 		solo.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		wonGames = new RadioButton("Won games");
+		wonGames.setTextFill(Color.ORANGE);
+		wonGames.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));
+		tg2 = new ToggleGroup();
+		
 		smallBoard = new RadioButton("Easy");
 		smallBoard.setTextFill(Color.ORANGE);
 		smallBoard.setFont(Font.font("kristen ITC", FontWeight.BOLD, 15));

@@ -100,6 +100,9 @@ public class GameBoard extends BorderPane {
 			// }
 
 		}
+		
+		Label winner = new Label();
+		
 		this.getGrid().setOnMouseClicked(me -> {
 			try {
 				CardImageView cardIv = (CardImageView) me.getPickResult().getIntersectedNode();
@@ -115,9 +118,11 @@ public class GameBoard extends BorderPane {
 						flipAnimation(rules.getCardTwo());
 						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
-
 						playerTurn(turn); // Checks and changes player
-
+						if (rules.gameOver(decks)) {
+							winner.setText(rules.winner(this.players).getName());
+							grid.add(winner, 4, 4);
+						}
 					}
 				}
 			} catch (ClassCastException e) {
