@@ -19,8 +19,8 @@ public class Rules {
 	private CardImageView cardOne = null;
 	private CardImageView cardTwo = null;
 
-	private AudioClip noPairSound = new AudioClip(new File("src/Sounds/Wrong.wav").toURI().toString());
-	private AudioClip pairSound = new AudioClip(new File("src/Sounds/Point.wav").toURI().toString());
+	private AudioClip noPairSound = new AudioClip(new File("src/sounds/Wrong.wav").toURI().toString());
+	private AudioClip pairSound = new AudioClip(new File("src/sounds/Point.wav").toURI().toString());
 
 	public int getTimePassed() {
 		return timePassed;
