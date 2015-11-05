@@ -16,9 +16,8 @@ public class FileManager {
 	String pathName = "src/Files/";
 	Player player;
 	TreeMap<String, Player> playerMap;
-	static String gameMode;
+	String gameMode;
 
-	/*
 	public String getGameMode() {
 		return gameMode;
 	}
@@ -26,8 +25,7 @@ public class FileManager {
 	public void setGameMode(String gameMode) {
 		this.gameMode = gameMode;
 	}
-	*/
-
+	
 	// Load methods
 	public void loadPlayer() {
 		playerMap = new TreeMap<String, Player>();
@@ -89,7 +87,7 @@ public class FileManager {
 			String temp;
 			while ((temp = br.readLine()) != null) {
 				String tempSplit[] = temp.split("[ ]");
-				Player player = new Player(tempSplit[0] + "\n");
+				Player player = new Player(tempSplit[0]);
 				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				player.setWonGames(Integer.parseInt(tempSplit[3]));
@@ -155,21 +153,21 @@ public class FileManager {
 		try {
 			BufferedWriter bw = null;
 			if (gameMode.equals("Easy")) {
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt", true));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
 				for (Player player : this.playerMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
 						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
 			else if (gameMode.equals("Normal")){
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt", true));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
 				for (Player player : this.playerMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
 						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
 			else if (gameMode.equals("Hard")){
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt", true));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
 				for (Player player : this.playerMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
 						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
