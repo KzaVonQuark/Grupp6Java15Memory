@@ -67,11 +67,11 @@ public class FileManager {
 		try {
 			BufferedReader br = null;
 			if (boardSize.equals("Easy"))
-				br = new BufferedReader(new FileReader(pathName + "HighScoreSmall.txt"));
+				br = new BufferedReader(new FileReader(pathName + "HighScoreEasy.txt"));
 			else if (boardSize.equals("Normal"))
-				br = new BufferedReader(new FileReader(pathName + "HighScoreMedium.txt"));
+				br = new BufferedReader(new FileReader(pathName + "HighScoreNormal.txt"));
 			else if (boardSize.equals("Hard"))
-				br = new BufferedReader(new FileReader(pathName + "HighScoreLarge.txt"));
+				br = new BufferedReader(new FileReader(pathName + "HighScoreHard.txt"));
 
 			String temp;
 			while ((temp = br.readLine()) != null) {
@@ -128,12 +128,27 @@ public class FileManager {
 		
 		try {
 			BufferedWriter bw;
-			if (gameMode.equals("Easy"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreSmall.txt"));
-			else if (gameMode.equals("Normal"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreMedium.txt"));
-			else if (gameMode.equals("Hard"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreLarge.txt"));
+			if (gameMode.equals("Easy")) {
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
+				for (Player player : this.playerMap.values()) {
+					bw.write(player.getName() + " " + player.getHighestPoint()
+						+ " " + player.getLeastMoves() + " " + player.getWonGames());
+				}
+			}
+			else if (gameMode.equals("Normal")){
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
+				for (Player player : this.playerMap.values()) {
+					bw.write(player.getName() + " " + player.getHighestPoint()
+						+ " " + player.getLeastMoves() + " " + player.getWonGames());
+				}
+			}
+			else if (gameMode.equals("Hard")){
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
+				for (Player player : this.playerMap.values()) {
+					bw.write(player.getName() + " " + player.getHighestPoint()
+						+ " " + player.getLeastMoves() + " " + player.getWonGames());
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,11 +159,11 @@ public class FileManager {
 		try {
 			BufferedWriter bw;
 			if (boardSize.equals("Easy"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreSmall.txt"));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
 			else if (boardSize.equals("Normal"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreMedium.txt"));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
 			else if (boardSize.equals("Hard"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreLarge.txt"));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
