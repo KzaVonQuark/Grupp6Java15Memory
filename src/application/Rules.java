@@ -151,7 +151,6 @@ public class Rules {
 	// Winning player
 	public String winner(List<Player> players) {
 		players.get(0).setWonGames(players.get(0).getWonGames() + 1);
-		checkHighScore(players);
 		return players.get(0).getName();
 	}
 
@@ -159,23 +158,25 @@ public class Rules {
 	public void checkHighScore(List<Player> players) {
 		FileManager fm = new FileManager();
 		
+		if (players.size() == 1) {
 		for (Player player : players) {
-			if (players.size() == 1) {
-				if (player.getMoves() < player.getLeastMoves())
+				if (player.getMoves() < player.getLeastMoves() || player.getMoves() == player.getLeastMoves())
 					player.setLeastMoves(player.getMoves());
 			}
-			else {
+		fm.saveHighScore(players, "Moves");
+		}
+		else {
+			for (Player player : players) {
 				if (player.getPoints() > player.getHighestPoint())
 					player.setHighestPoint(player.getPoints());
 			}
+		fm.saveHighScore(players, "Points");
 		}
+
 
 		for (Player player : players) {
 			player.setMoves(0);
 			player.setPoints(0);
-			
-		fm.saveHighScore(players);
-
 		}
 
 	}

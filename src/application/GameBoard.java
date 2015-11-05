@@ -45,7 +45,7 @@ public class GameBoard extends BorderPane {
 		this.q = new LinkedList<Player>();
 		this.players = new ArrayList<Player>();
 		this.players = players;
-		addPlayers(players);
+		this.q.addAll(players);
 
 		this.swishSound = new AudioClip(new File("src/sounds/Swish.wav").toURI().toString());
 
@@ -61,7 +61,7 @@ public class GameBoard extends BorderPane {
 		} else {
 			cardsInDeck = 6 * 8;
 		}
-		decks = new Deck(cardsInDeck, "frontimage" + frontSelection);
+		decks = new Deck(6, "frontimage" + frontSelection);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
@@ -169,7 +169,10 @@ public class GameBoard extends BorderPane {
 						playerTurn(turn); // Checks and changes player
 
 						if (rules.gameOver(decks)) {
-							winner.setText("Winner is " + rules.winner(this.players));
+							if (players.size() != 1)
+								winner.setText("Winner is " + rules.winner(players));
+							else
+								winner.setText("CONGRATULATIONS! " + players.get(0).getName());
 
 							 FlowPane winnerPane = new FlowPane();
 							 grid.add(winnerPane, 0, 0); for (int i = 0; i <
@@ -190,6 +193,8 @@ public class GameBoard extends BorderPane {
 							if (mode == 2)
 								colSpan = 8;
 							grid.add(winner, 0, 0, colSpan, 1);
+							
+							rules.checkHighScore(players);
 						}
 					}
 				}
@@ -221,6 +226,7 @@ public class GameBoard extends BorderPane {
 		else {
 			// Reads first element in queue.
 			if (gotPair == true) {
+				
 				this.q.peek().setPoints(this.q.peek().getPoints() + 1);
 				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 				this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
@@ -260,13 +266,13 @@ public class GameBoard extends BorderPane {
 		this.swishSound.play();
 		flipAnimation.play();
 	}
-
+/*
 	public void addPlayers(List<Player> players) {
 		for (Player player : players) {
 			this.q.add(player);
 		}
 	}
-
+*/
 	public GridPane getGrid() {
 		return grid;
 	}

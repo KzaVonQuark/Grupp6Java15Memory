@@ -4,7 +4,6 @@ public class Player {
 
 	private String name;
 	private int points, moves, time, highestPoint, leastMoves, wonGames, streak, sortType;
-
 	private Deck playerWinningHand;
 
 	public Player(String name) {

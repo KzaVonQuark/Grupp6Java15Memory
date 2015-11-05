@@ -16,7 +16,17 @@ public class FileManager {
 	String pathName = "src/Files/";
 	Player player;
 	TreeMap<String, Player> playerMap;
-	String gameMode;
+	static String gameMode;
+
+	/*
+	public String getGameMode() {
+		return gameMode;
+	}
+
+	public void setGameMode(String gameMode) {
+		this.gameMode = gameMode;
+	}
+	*/
 
 	// Load methods
 	public void loadPlayer() {
@@ -26,7 +36,9 @@ public class FileManager {
 
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				player = new Player(temp);
+				String[] tempArray = temp.split("[ ]");
+				player = new Player(tempArray[0]);
+				player.setWonGames(Integer.parseInt(tempArray[1]));
 				playerMap.put(player.getName(), player);
 
 			}
@@ -47,7 +59,8 @@ public class FileManager {
 		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "Players.txt"))) {
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				names.add(temp);
+				String[] tempArray = temp.split("[ ]");
+				names.add(tempArray[0]);
 			}
 
 		} catch (FileNotFoundException e) {
@@ -89,7 +102,7 @@ public class FileManager {
 				else
 					player.setSortType(3);
 			}
-
+			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +114,7 @@ public class FileManager {
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
-		if (!highScore.isEmpty())
+		if (highScore.size() > 4)
 			return highScore.subList(0, 4);
 		
 		return highScore;
@@ -112,7 +125,7 @@ public class FileManager {
 	public void save(Player player) {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
-			bw.append("\r\n" + player.getName());
+			bw.append("\r\n" + player.getName() + " " + player.getWonGames());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -120,35 +133,49 @@ public class FileManager {
 		}
 	}
 
-	public void saveHighScore(List<Player> players) {
-		loadPlayer();
+	public void saveHighScore(List<Player> players, String sortType) {
+		
+		playerMap = new TreeMap<String, Player>();
+		
+		for (Player player : loadHighScore(sortType, gameMode)) {
+			this.playerMap.put(player.getName(), player);
+		}
+		
 		for (Player player : players) {
-			this.playerMap.replace(this.playerMap.get(player).getName(), player);
+			if (this.playerMap.isEmpty())
+				this.playerMap.put(player.getName(), player);
+			else {
+				if (this.playerMap.containsKey(player.getName()))
+					this.playerMap.replace(this.playerMap.get(player).getName(), player);
+				else
+					this.playerMap.put(player.getName(), player);
+			}
 		}
 		
 		try {
-			BufferedWriter bw;
+			BufferedWriter bw = null;
 			if (gameMode.equals("Easy")) {
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt", true));
 				for (Player player : this.playerMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
-						+ " " + player.getLeastMoves() + " " + player.getWonGames());
+						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
 			else if (gameMode.equals("Normal")){
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt", true));
 				for (Player player : this.playerMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
-						+ " " + player.getLeastMoves() + " " + player.getWonGames());
+						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
 			else if (gameMode.equals("Hard")){
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt", true));
 				for (Player player : this.playerMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
-						+ " " + player.getLeastMoves() + " " + player.getWonGames());
+						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
+			bw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

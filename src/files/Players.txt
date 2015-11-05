@@ -1,8 +1,2 @@
-Linus
-Pontus
-Gurra
-Masih
-Tomas
-Owen
-Ian
-Zaher
+Linus 0
+Tomas 0
