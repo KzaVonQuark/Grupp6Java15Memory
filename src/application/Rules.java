@@ -153,8 +153,8 @@ public class Rules {
 		players.get(0).setWonGames(players.get(0).getWonGames() + 1);
 		return players.get(0);
 	}
-	
-	//Update Highscore
+
+	// Update Highscore
 	public void checkHighScore(List<Player> players) {
 		FileManager fm = new FileManager();
 
@@ -166,7 +166,7 @@ public class Rules {
 				player.setLeastMoves(player.getMoves());
 		}
 		fm.saveHighScore(players);
-		
+
 		for (Player player : players) {
 			player.setMoves(0);
 			player.setPoints(0);

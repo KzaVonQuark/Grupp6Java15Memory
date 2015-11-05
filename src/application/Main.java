@@ -79,7 +79,7 @@ public class Main extends Application {
 				else if (start.tg.getSelectedToggle().equals(start.largeBoard))
 					boardSize = 2;
 
-				GameBoard gameBoard = new GameBoard(players, boardSize,start.frontSelection);
+				GameBoard gameBoard = new GameBoard(players, boardSize, start.frontSelection);
 				gameBoard.getBackToStartMenu().setOnMousePressed(ae -> {
 					start.centerBox.getChildren().clear();
 					start.setBottom(null);
@@ -100,18 +100,19 @@ public class Main extends Application {
 						start.largeBoard, start.cardThemeLabel, start.picBox);
 				start.setBottom(start.playBox);
 				start.fieldOption.getChildren().clear();
-				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersBox);
+				start.playersHeadLine.setText("Participants");
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 				start.choosePlayers.setOnAction(event2 -> {
 					String[] temp = start.participantsList.getText().split("[\n]");
-					boolean found=false;
-					for(String p_list : temp){
-						if(p_list.equals(start.choosePlayers.getValue())){
-							found=true;
+					boolean found = false;
+					for (String p_list : temp) {
+						if (p_list.equals(start.choosePlayers.getValue())) {
+							found = true;
 						}
 					}
-					if(!found){
+					if (!found) {
 						start.fieldOption.getChildren().clear();
-						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersBox);
+						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 						start.participantsList
 								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 					}
@@ -120,24 +121,27 @@ public class Main extends Application {
 					start.jBox.setStyle("-fx-background-color: #FFFFFF;");
 					start.nBox.setStyle(null);
 					start.wBox.setStyle(null);
-					start.frontSelection=3;
+					start.frontSelection = 3;
 				});
 				start.nBox.setOnMouseClicked(event3 -> {
 					start.nBox.setStyle("-fx-background-color: #FFFFFF;");
 					start.jBox.setStyle(null);
 					start.wBox.setStyle(null);
-					start.frontSelection=2;
+					start.frontSelection = 2;
 				});
 				start.wBox.setOnMouseClicked(event3 -> {
 					start.wBox.setStyle("-fx-background-color: #FFFFFF;");
 					start.nBox.setStyle(null);
 					start.jBox.setStyle(null);
-					start.frontSelection=1;
+					start.frontSelection = 1;
 				});
 			});
 
 			start.createButton.setOnAction(event -> {
 				start.centerBox.getChildren().clear();
+				start.fieldOption.getChildren().clear();
+				start.playersHeadLine.setText("Participants");
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 				start.centerBox.getChildren().add(start.creatorTexfield);
 				start.setBottom(null);
 			});
@@ -155,18 +159,18 @@ public class Main extends Application {
 				}
 				start.creatorTexfield.setText((start.creatorTexfield.getText().replace(" ", "-")));
 				String[] temp = start.participantsList.getText().split("[\n]");
-				boolean found=false;
+				boolean found = false;
 				System.out.println();
-				for(String p_list : temp){
-					if(p_list.equals(start.creatorTexfield.getText())){
-						found=true;
+				for (String p_list : temp) {
+					if (p_list.equals(start.creatorTexfield.getText())) {
+						found = true;
 					}
 				}
-				if(!found){
-				start.participantsList
-						.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
-				start.creatorTexfield.clear();
-				start.centerBox.getChildren().clear();
+				if (!found) {
+					start.participantsList
+							.setText(start.participantsList.getText() + start.creatorTexfield.getText() + "\n");
+					start.creatorTexfield.clear();
+					start.centerBox.getChildren().clear();
 				}
 			});
 
@@ -180,6 +184,7 @@ public class Main extends Application {
 				start.centerBox.getChildren().addAll(start.solo, start.smallBoard, start.mediumBoard, start.largeBoard,
 						start.clearHighScore);
 				start.fieldOption.getChildren().clear();
+				start.playersHeadLine.setText("Highscore");
 				start.fieldOption.getChildren().addAll(start.playersHeadLine, highScoreList);
 				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 					@Override
@@ -188,25 +193,25 @@ public class Main extends Application {
 						highScoreEntries.clear();
 						highScoreList.setItems(highScoreEntries);
 						RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
-							if (start.solo.isSelected())
-								highScoreEntries.setAll(fm.loadHighScore("Least moves", check.getText()));
-							else
-								highScoreEntries.setAll(fm.loadHighScore("Highest point", check.getText()));
+						if (start.solo.isSelected())
+							highScoreEntries.setAll(fm.loadHighScore("Least moves", check.getText()));
+						else
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", check.getText()));
 						highScoreList.setItems(highScoreEntries);
 					}
 				});
-				
+
 				start.solo.setOnAction(event3 -> {
-										highScoreEntries.clear();
-										highScoreList.setItems(highScoreEntries);
-										if (start.smallBoard.isSelected())
-											highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
-										else if (start.mediumBoard.isSelected())
-											highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
-										else if (start.largeBoard.isSelected())
-											highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
-										highScoreList.setItems(highScoreEntries);
-					 				});
+					highScoreEntries.clear();
+					highScoreList.setItems(highScoreEntries);
+					if (start.smallBoard.isSelected())
+						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
+					else if (start.mediumBoard.isSelected())
+						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
+					else if (start.largeBoard.isSelected())
+						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
+					highScoreList.setItems(highScoreEntries);
+				});
 
 				start.clearHighScore.setOnAction(event3 -> {
 					Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -228,9 +233,8 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
 
 	public static void main(String[] args) {
 		launch(args);

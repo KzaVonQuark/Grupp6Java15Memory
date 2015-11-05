@@ -34,7 +34,7 @@ public class StartMenu extends BorderPane {
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
-	HBox playersBox, labelBox, picBox, playBox;
+	HBox labelBox, picBox, playBox;
 	RadioButton smallBoard, mediumBoard, largeBoard;
 	CheckBox solo, wonGames;
 	ToggleGroup tg, pictg;
@@ -84,7 +84,7 @@ public class StartMenu extends BorderPane {
 		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
 		participantsList.setWrappingWidth(175);
 		participantsList.setTextAlignment(TextAlignment.CENTER);
-		playersHeadLine = new Label("Participants");
+		playersHeadLine = new Label();
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
 		playersHeadLine.setTextAlignment(TextAlignment.CENTER);
@@ -157,20 +157,15 @@ public class StartMenu extends BorderPane {
 		labelBox.setAlignment(Pos.CENTER);
 		labelBox.getChildren().add(headLine);
 
-		playersBox = new HBox(5);
-		playersBox.setAlignment(Pos.TOP_CENTER);
-		playersBox.setPrefWidth(175);
-		playersBox.getChildren().add(participantsList);
-
 		fieldOption = new VBox(5);
 		fieldOption.setAlignment(Pos.TOP_CENTER);
 		fieldOption.setPrefWidth(175);
-		fieldOption.getChildren().add(playersHeadLine);
+		fieldOption.getChildren().addAll(playersHeadLine, participantsList);
 
 		playBox = new HBox();
 		playBox.setAlignment(Pos.BASELINE_CENTER);
 		playBox.getChildren().add(playButton);
-		
+
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
 
