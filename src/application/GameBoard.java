@@ -173,7 +173,7 @@ public class GameBoard extends BorderPane {
 						// System.out.println(rules.gameOver(decks));
 						
 						if (rules.gameOver(decks)) {
-							winner.setText("Winner is " + rules.winner(this.players).getName());
+							winner.setText("Winner is " + rules.winner(this.players));
 							/*
 							FlowPane winnerPane = new FlowPane();
 							grid.add(winnerPane, 0, 0);
@@ -188,6 +188,7 @@ public class GameBoard extends BorderPane {
 								
 							}
 							*/
+							
 							grid.add(winner, 0, 0);
 						}
 					}

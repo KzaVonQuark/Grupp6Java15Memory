@@ -1,5 +1,0 @@
-Linus 24 20 3
-Masih 12 32 1
-Owen 42 24 3
-Ian 33 33 9
-Tomas 27 28 2

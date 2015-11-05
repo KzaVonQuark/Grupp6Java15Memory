@@ -16,20 +16,17 @@ public class FileManager {
 	String pathName = "src/Files/";
 	Player player;
 	TreeMap<String, Player> playerMap;
+	String gameMode;
 
 	// Load methods
-	public void load() {
+	public void loadPlayer() {
 		playerMap = new TreeMap<String, Player>();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "Players.txt"))) {
 
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				String tempArray[] = temp.split("[ ]");
-				player = new Player(tempArray[0]);
-				player.setHighestPoint(Integer.parseInt(tempArray[1]));
-				player.setLeastMoves(Integer.parseInt(tempArray[2]));
-				player.setWonGames(Integer.parseInt(tempArray[3]));
+				player = new Player(temp);
 				playerMap.put(player.getName(), player);
 
 			}
@@ -48,11 +45,9 @@ public class FileManager {
 		names.add("Guest");
 
 		try (BufferedReader br = new BufferedReader(new FileReader(pathName + "Players.txt"))) {
-
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				String tempArray[] = temp.split("[ ]");
-				names.add(tempArray[0]);
+				names.add(temp);
 			}
 
 		} catch (FileNotFoundException e) {
@@ -117,8 +112,7 @@ public class FileManager {
 	public void save(Player player) {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
-			bw.append("\r\n" + player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves() + " "
-					+ player.getWonGames());
+			bw.append("\r\n" + player.getName());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -127,19 +121,28 @@ public class FileManager {
 	}
 
 	public void saveHighScore(List<Player> players) {
-		load();
+		loadPlayer();
 		for (Player player : players) {
 			this.playerMap.replace(this.playerMap.get(player).getName(), player);
 		}
-
-		for (Player player : playerMap.values()) {
-			save(player);
+		
+		try {
+			BufferedWriter bw;
+			if (gameMode.equals("Easy"))
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreSmall.txt"));
+			else if (gameMode.equals("Normal"))
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreMedium.txt"));
+			else if (gameMode.equals("Hard"))
+				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreLarge.txt"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
 	public void clearHighScore(String boardSize) {
 		try {
-			BufferedWriter bw = null;
+			BufferedWriter bw;
 			if (boardSize.equals("Easy"))
 				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreSmall.txt"));
 			else if (boardSize.equals("Normal"))

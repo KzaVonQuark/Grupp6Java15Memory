@@ -152,24 +152,28 @@ public class Rules {
 	}
 
 	// Winning player
-	public Player winner(List<Player> players) {
+	public String winner(List<Player> players) {
 		players.get(0).setWonGames(players.get(0).getWonGames() + 1);
-		return players.get(0);
+		checkHighScore(players);
+		return players.get(0).getName();
 	}
-	
-	//Update Highscore
+
+	// Update Highscore
 	public void checkHighScore(List<Player> players) {
 		FileManager fm = new FileManager();
-
+		
 		for (Player player : players) {
-			if (player.getPoints() > player.getHighestPoint())
-				player.setHighestPoint(player.getPoints());
-
-			if (player.getMoves() < player.getLeastMoves())
-				player.setLeastMoves(player.getMoves());
+			if (players.size() == 1) {
+				if (player.getMoves() < player.getLeastMoves())
+					player.setLeastMoves(player.getMoves());
+			}
+			else {
+				if (player.getPoints() > player.getHighestPoint())
+					player.setHighestPoint(player.getPoints());
+			}
 		}
 		fm.saveHighScore(players);
-		
+
 		for (Player player : players) {
 			player.setMoves(0);
 			player.setPoints(0);
