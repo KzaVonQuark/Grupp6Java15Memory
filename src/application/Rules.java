@@ -65,11 +65,8 @@ public class Rules {
 
 		if (this.compareCards(card1, card2)) {
 			pairSound.play();
-			System.out.println("Du hittade ett par!");
 		} else {
-
 			noPairSound.play();
-			System.out.println("Du hittade inget par!");
 		}
 
 		Timeline delay = new Timeline(); // Delay timern innan korten v�nds

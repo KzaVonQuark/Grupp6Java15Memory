@@ -104,7 +104,8 @@ public class Main extends Application {
 						start.largeBoard, start.cardThemeLabel, start.picBox);
 				start.setBottom(start.playBox);
 				start.fieldOption.getChildren().clear();
-				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersBox);
+				start.playersHeadLine.setText("Participants");
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 				start.choosePlayers.setOnAction(event2 -> {
 					String[] temp = start.participantsList.getText().split("[\n]");
 					boolean found = false;
@@ -115,7 +116,7 @@ public class Main extends Application {
 					}
 					if (!found) {
 						start.fieldOption.getChildren().clear();
-						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.playersBox);
+						start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 						start.participantsList
 								.setText(start.participantsList.getText() + start.choosePlayers.getValue() + "\n");
 					}
@@ -142,6 +143,9 @@ public class Main extends Application {
 
 			start.createButton.setOnAction(event -> {
 				start.centerBox.getChildren().clear();
+				start.fieldOption.getChildren().clear();
+				start.playersHeadLine.setText("Participants");
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.participantsList);
 				start.centerBox.getChildren().add(start.creatorTexfield);
 				start.setBottom(null);
 			});
@@ -184,6 +188,7 @@ public class Main extends Application {
 				start.centerBox.getChildren().addAll(start.solo, start.smallBoard, start.mediumBoard, start.largeBoard,
 						start.clearHighScore);
 				start.fieldOption.getChildren().clear();
+				start.playersHeadLine.setText("Highscore");
 				start.fieldOption.getChildren().addAll(start.playersHeadLine, highScoreList);
 				start.tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 					@Override

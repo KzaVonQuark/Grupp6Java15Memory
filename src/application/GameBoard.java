@@ -161,35 +161,35 @@ public class GameBoard extends BorderPane {
 					// same card
 					if (rules.getCardOne() == null) {
 						rules.setCardOne(cardIv);
-						System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
 						flipAnimation(rules.getCardOne());
 					} else if (rules.getCardTwo() == null) {
 						rules.setCardTwo(cardIv);
 						flipAnimation(rules.getCardTwo());
-						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						playerTurn(turn); // Checks and changes player
-						// System.out.println(decks.getDeckSize());
-						// System.out.println(rules.gameOver(decks));
-						
+
 						if (rules.gameOver(decks)) {
 							winner.setText("Winner is " + rules.winner(this.players));
-							/*
-							FlowPane winnerPane = new FlowPane();
-							grid.add(winnerPane, 0, 0);
-							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
-								
-								CardImageView imageView = new CardImageView(
-										this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(),
-										decks.dealCard(i));
-								imageView.setFitHeight(100);
-								imageView.setFitWidth(100);
-								winnerPane.getChildren().add(imageView);
-								
-							}
-							*/
-							
-							grid.add(winner, 0, 0);
+
+							 FlowPane winnerPane = new FlowPane();
+							 grid.add(winnerPane, 0, 0); for (int i = 0; i <
+							 this.players.get(0).getPlayerWinningHand().
+							 getDeck().size(); i++) {
+							 
+							 CardImageView imageView = new CardImageView(
+							 this.players.get(0).getPlayerWinningHand().
+							 getDeck().get(i).getFrontImage(),
+							 decks.dealCard(i)); imageView.setFitHeight(100);
+							 imageView.setFitWidth(100);
+							 winnerPane.getChildren().add(imageView);
+							 }
+							 
+							int colSpan = 4;
+							if (mode == 1)
+								colSpan = 6;
+							if (mode == 2)
+								colSpan = 8;
+							grid.add(winner, 0, 0, colSpan, 1);
 						}
 					}
 				}
@@ -212,8 +212,10 @@ public class GameBoard extends BorderPane {
 		if (this.q.size() == 1) {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
-			decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
-			decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+			if (gotPair == true) {
+				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
+			}
 		}
 
 		else {
