@@ -160,16 +160,12 @@ public class GameBoard extends BorderPane {
 					// same card
 					if (rules.getCardOne() == null) {
 						rules.setCardOne(cardIv);
-						System.out.println("Card 1 Selected! (" + rules.getCardOne().getCard().getValue() + ")");
 						flipAnimation(rules.getCardOne());
 					} else if (rules.getCardTwo() == null) {
 						rules.setCardTwo(cardIv);
 						flipAnimation(rules.getCardTwo());
-						System.out.println("Card 2 Selected! (" + rules.getCardTwo().getCard().getValue() + ")");
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						playerTurn(turn); // Checks and changes player
-						System.out.println(decks.getDeckSize());
-						System.out.println(rules.gameOver(decks));
 
 						if (rules.gameOver(decks)) {
 							winner.setText("Winner is " + rules.winner(this.players).getName());
