@@ -13,8 +13,8 @@ public class MainTest {
 
 	@Test
 	public void testCardFrontImage() {
-		Card a = new Card(10, "10", 2);
-		Card b = new Card(5, "5", 2);
+		Card a = new Card(10, "2", 10);
+		Card b = new Card(5, "2", 5);
 		assertEquals("Card back image must be Nackademin", a.getFrontImage(), b.getFrontImage());
 	}
 

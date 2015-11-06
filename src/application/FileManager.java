@@ -75,48 +75,22 @@ public class FileManager {
 	public List<Player> loadHighScore(String sortType, String boardSize) {
 		ArrayList<Player> highScore = new ArrayList<Player>();
 		highScore.clear();
-		try {
-			BufferedReader br = null;
+
 			if (boardSize.equals("Easy"))
-				br = new BufferedReader(new FileReader(pathName + "HighScoreEasy.txt"));
+				read(pathName + "HighScoreEasy.txt", highScore);
 			else if (boardSize.equals("Normal"))
-				br = new BufferedReader(new FileReader(pathName + "HighScoreNormal.txt"));
+				read(pathName + "HighScoreNormal.txt", highScore);
 			else if (boardSize.equals("Hard"))
-				br = new BufferedReader(new FileReader(pathName + "HighScoreHard.txt"));
-
-			String temp;
-			while ((temp = br.readLine()) != null) {
-				String tempSplit[] = temp.split("[ ]");
-				Player player = new Player(tempSplit[0]);
-				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
-				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
-				player.setWonGames(Integer.parseInt(tempSplit[3]));
-				highScore.add(player);
-
-				if (sortType.equals("Least moves"))
-					player.setSortType(1);
-				else if (sortType.equals("Won games"))
-					player.setSortType(2);
-				else
-					player.setSortType(3);
-			}
-			br.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+				read(pathName + "HighScoreHard.txt", highScore);
+			
+			changeSortType(sortType, highScore.get(0));
 
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
-		if (highScore.size() > 4)
-			return highScore.subList(0, 4);
-
-		return highScore;
-	}
+			
+		return highScore.subList(0, 4);
+}
 
 	// Save methods.
 
@@ -189,8 +163,38 @@ public class FileManager {
 
 	}
 	
-	private void read(String pathName, TreeMap<String, Player> highScore) {
+	private void read(String pathName, ArrayList<Player> highScore) {
 		
+		try (BufferedReader br = new BufferedReader(new FileReader(pathName))) {
+			
+			String temp;
+			while ((temp = br.readLine()) != null) {
+				String tempSplit[] = temp.split("[ ]");
+				Player player = new Player(tempSplit[0]);
+				player.setHighestPoint(Integer.parseInt(tempSplit[1]));
+				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
+				player.setWonGames(Integer.parseInt(tempSplit[3]));
+				highScore.add(player);
+			}
+			
+		} catch (FileNotFoundException | NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			}
+	
+	private void changeSortType(String sortType, Player player) {
+
+		if (sortType.equals("Least moves"))
+			player.setSortType(1);
+		else if (sortType.equals("Won games"))
+			player.setSortType(2);
+		else
+			player.setSortType(3);
 	}
 
 	public void writer(String pathName, TreeMap<String, Player> highScoreMap) {
