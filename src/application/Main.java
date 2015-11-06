@@ -1,7 +1,5 @@
 package application;
 
-import static org.hamcrest.CoreMatchers.anything;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
