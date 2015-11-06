@@ -183,7 +183,7 @@ public class Main extends Application {
 			start.highScoreButton.setOnAction(event -> {
 				start.setBottom(null);
 				start.centerBox.getChildren().clear();
-				start.centerBox.getChildren().addAll(start.solo, start.smallBoard, start.mediumBoard, start.largeBoard,
+				start.centerBox.getChildren().addAll(start.cbBox, start.smallBoard, start.mediumBoard, start.largeBoard,
 						start.clearHighScore);
 				start.fieldOption.getChildren().clear();
 				start.playersHeadLine.setText("Highscore");
@@ -204,17 +204,23 @@ public class Main extends Application {
 				});
 
 				start.solo.setOnAction(event3 -> {
+					if (start.solo.isSelected()) {
+						start.wonGames.setVisible(false);
+					} else {
+						start.wonGames.setVisible(true);
+					}
 					highScoreEntries.clear();
 					highScoreList.setItems(highScoreEntries);
-					if (start.smallBoard.isSelected() && start.solo.isSelected())
+					if (start.smallBoard.isSelected() && start.solo.isSelected()){
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
-					else if (start.mediumBoard.isSelected() && start.solo.isSelected())
+					}
+					else if (start.mediumBoard.isSelected() && start.solo.isSelected()){
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
-					else if (start.largeBoard.isSelected() && start.solo.isSelected())
+					}
+					else if (start.largeBoard.isSelected() && start.solo.isSelected()){
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
+					}
 					highScoreList.setItems(highScoreEntries);
-
-					highScoreEntries.clear();
 				});
 
 				start.clearHighScore.setOnAction(event3 -> {

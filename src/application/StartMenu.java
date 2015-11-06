@@ -34,7 +34,7 @@ public class StartMenu extends BorderPane {
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
-	HBox labelBox, picBox, playBox;
+	HBox labelBox, picBox, playBox, cbBox;
 	RadioButton smallBoard, mediumBoard, largeBoard;
 	CheckBox solo, wonGames;
 	ToggleGroup tg, pictg;
@@ -168,7 +168,10 @@ public class StartMenu extends BorderPane {
 
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
-
+		
+		cbBox = new HBox(10);
+		cbBox.getChildren().addAll(solo, wonGames);
+		
 		alignmentBox = new VBox(5);
 		alignmentBox.setPadding(new Insets(0, 10, 0, 10));
 		alignmentBox.setAlignment(Pos.TOP_CENTER);
