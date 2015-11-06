@@ -132,8 +132,8 @@ public class FileManager {
 
 			if (boardSize.equals("Easy")) {
 				clearScore.put("Zaher", new Player("Zaher", 1, 30, 0));
-				clearScore.put("Owen", new Player("Owen", 2, 20, 0));
-				clearScore.put("Tomas", new Player("Tomas", 3, 25, 0));
+				clearScore.put("Owen", new Player("Owen", 2, 25, 0));
+				clearScore.put("Tomas", new Player("Tomas", 3, 40, 0));
 				clearScore.put("Masih", new Player("Masih", 4, 35, 0));
 				writer(pathName+"HighScoreEasy.txt", clearScore);
 				
