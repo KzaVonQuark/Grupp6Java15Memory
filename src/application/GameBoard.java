@@ -34,6 +34,7 @@ public class GameBoard extends BorderPane {
 	private Label playerTurnInfo;
 	private Label backToStartMenu;
 	private MusicImage musicImage;
+	private int winnerDelaySeconds = 0;
 
 	public MusicImage getMusicImage() {
 		return musicImage;
@@ -177,11 +178,11 @@ public class GameBoard extends BorderPane {
 						playerTurn(turn); // Checks and changes player
 						System.out.println(players.get(0).getMoves()); // <----
 																		// remove
-
+						System.out.println(this.players.get(0).getPlayerWinningHand().getDeck().size());
 						if (rules.gameOver(decks)) {
 
 							if (players.size() != 1) {
-								if(players.get(0).getPoints() == players.get(1).getPoints()) {
+								if (players.get(0).getPoints() == players.get(1).getPoints()) {
 									winner.setText("It's a draw!");
 								} else {
 									winner.setText("Winner is " + rules.winner(players));
@@ -191,25 +192,38 @@ public class GameBoard extends BorderPane {
 							}
 							rules.checkHighScore(players, mode);
 							FlowPane winnerPane = new FlowPane();
-							grid.add(winnerPane, 0, 0);
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
 
 								CardImageView imageView = new CardImageView(
-										this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(),
-										decks.dealCard(i));
+										this.players.get(0).getPlayerWinningHand().getDeck().get(i).getBackImage(),
+										this.players.get(0).getPlayerWinningHand().getDeck().get(i));
 								imageView.setFitHeight(100);
 								imageView.setFitWidth(100);
 								winnerPane.getChildren().add(imageView);
 							}
 
-							int colSpan = 4;
-							if (mode == 1)
-								colSpan = 6;
-							if (mode == 2)
-								colSpan = 8;
-							grid.add(winner, 0, 0, colSpan, 1);
-
+							// grid.add(winner, 0, 0, colSpan, 1);
+							// grid.add(winnerPane, 0, 1);
 							rules.checkHighScore(players, mode);
+							Timeline winnerDelay = new Timeline();
+							winnerDelay.setCycleCount(Timeline.INDEFINITE);
+							KeyFrame winnerKey = new KeyFrame(Duration.seconds(1.0), e -> {
+								winnerDelaySeconds++;
+								int colSpan = 4;
+								if (mode == 1)
+									colSpan = 6;
+								if (mode == 2)
+									colSpan = 8;
+								if (winnerDelaySeconds > 1) {
+									grid.add(winner, 0, 0, colSpan, 1);
+									grid.add(winnerPane, 0, 1);
+									winnerDelaySeconds = 0;
+									winnerDelay.stop();
+								}
+							});
+							winnerDelay.getKeyFrames().add(winnerKey);
+							winnerDelay.play();
+							System.out.println("WE COME HERE");
 						}
 					}
 				}
@@ -233,6 +247,9 @@ public class GameBoard extends BorderPane {
 			this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 			this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
 			if (gotPair == true) {
+				System.out.println(rules.getCardOne().getCard());
+				this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
+				System.out.println(this.q.peek().getPlayerWinningHand().getDeckSize());
 				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
 				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
 			}
