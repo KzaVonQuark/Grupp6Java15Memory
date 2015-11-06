@@ -61,7 +61,7 @@ public class GameBoard extends BorderPane {
 		} else {
 			cardsInDeck = 6 * 8;
 		}
-		decks = new Deck(8, "frontimage" + frontSelection);
+		decks = new Deck(6, "frontimage" + frontSelection);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
@@ -170,7 +170,6 @@ public class GameBoard extends BorderPane {
 						System.out.println(players.get(0).getMoves()); //<---- remove
 
 						if (rules.gameOver(decks)) {
-							rules.checkHighScore(players, mode);
 							
 							if (players.size() != 1)
 								winner.setText("Winner is " + rules.winner(players));
@@ -197,6 +196,7 @@ public class GameBoard extends BorderPane {
 								colSpan = 8;
 							grid.add(winner, 0, 0, colSpan, 1);
 
+							rules.checkHighScore(players, mode);
 						}
 					}
 				}

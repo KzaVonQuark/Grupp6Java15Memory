@@ -9,10 +9,21 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		this.points = 0;
-		this.moves = 0;
+		this.moves = 500;
 		this.time = 0;
 		this.highestPoint = 0;
 		this.leastMoves = 0;
+		this.wonGames = 0;
+		this.playerWinningHand = new Deck();
+	}
+	
+	public Player(String name, int highestPoint, int leastMoves) {
+		this.name = name;
+		this.points = 0;
+		this.moves = 500;
+		this.time = 0;
+		this.highestPoint = highestPoint;
+		this.leastMoves = leastMoves;
 		this.wonGames = 0;
 		this.playerWinningHand = new Deck();
 	}
