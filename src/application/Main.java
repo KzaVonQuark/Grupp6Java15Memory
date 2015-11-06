@@ -88,6 +88,7 @@ public class Main extends Application {
 					start.choosePlayers = new ComboBox<String>(FXCollections.observableArrayList(fm.loadNames()));
 					start.choosePlayers.setPrefSize(150, 15);
 					start.choosePlayers.setPromptText("Choose Player");
+					gameBoard.getMusicImage().stopMusic();
 					root.fadeChange(start, Color.BLACK);
 				});
 				playSound.play();
