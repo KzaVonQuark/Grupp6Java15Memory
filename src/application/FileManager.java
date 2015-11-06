@@ -34,9 +34,7 @@ public class FileManager {
 
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				String[] tempArray = temp.split("[ ]");
-				player = new Player(tempArray[0]);
-				player.setWonGames(Integer.parseInt(tempArray[1]));
+				player = new Player(temp);
 				playerMap.put(player.getName(), player);
 
 			}
@@ -139,25 +137,25 @@ public class FileManager {
 		TreeMap<String, Player> clearScore = new TreeMap<String, Player>();
 
 			if (boardSize.equals("Easy")) {
-				clearScore.put("Zaher", new Player("Zaher", 2, 16));
-				clearScore.put("Owen", new Player("Owen", 4, 18));
-				clearScore.put("Tomas", new Player("Tomas", 6, 20));
-				clearScore.put("Masih", new Player("Masih", 8, 22));
+				clearScore.put("Zaher", new Player("Zaher", 2, 16, 5));
+				clearScore.put("Owen", new Player("Owen", 4, 18, 4));
+				clearScore.put("Tomas", new Player("Tomas", 6, 20, 3));
+				clearScore.put("Masih", new Player("Masih", 8, 22, 2));
 				writer(pathName+"HighScoreEasy.txt", clearScore);
 				
 			} else if (boardSize.equals("Normal")) {
-				clearScore.put("Zaher", new Player("Zaher", 11, 25));
-				clearScore.put("Owen", new Player("Owen", 10, 30));
-				clearScore.put("Tomas", new Player("Tomas", 9, 35));
-				clearScore.put("Masih", new Player("Masih", 8, 40));
+				clearScore.put("Zaher", new Player("Zaher", 11, 25, 2));
+				clearScore.put("Owen", new Player("Owen", 10, 30, 3));
+				clearScore.put("Tomas", new Player("Tomas", 9, 35, 4));
+				clearScore.put("Masih", new Player("Masih", 8, 40, 5));
 				writer(pathName+"HighScoreNormal.txt", clearScore);
 			}
 
 			else if (boardSize.equals("Hard")) {
-				clearScore.put("Zaher", new Player("Zaher", 12, 16));
-				clearScore.put("Owen", new Player("Owen", 14, 18));
-				clearScore.put("Tomas", new Player("Tomas", 16, 20));
-				clearScore.put("Masih", new Player("Masih", 18, 22));
+				clearScore.put("Zaher", new Player("Zaher", 12, 16, 2));
+				clearScore.put("Owen", new Player("Owen", 14, 18, 3));
+				clearScore.put("Tomas", new Player("Tomas", 16, 20, 5));
+				clearScore.put("Masih", new Player("Masih", 18, 22, 4));
 				writer(pathName+"HighScoreHard.txt", clearScore);
 			}
 
