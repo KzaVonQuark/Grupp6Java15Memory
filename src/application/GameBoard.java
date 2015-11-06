@@ -35,6 +35,7 @@ public class GameBoard extends BorderPane {
 	private Label backToStartMenu;
 	private MusicImage musicImage;
 	private int winnerDelaySeconds = 0;
+	private boolean draw = false;
 
 	public MusicImage getMusicImage() {
 		return musicImage;
@@ -180,10 +181,10 @@ public class GameBoard extends BorderPane {
 																		// remove
 						System.out.println(this.players.get(0).getPlayerWinningHand().getDeck().size());
 						if (rules.gameOver(decks)) {
-
 							if (players.size() != 1) {
 								if (players.get(0).getPoints() == players.get(1).getPoints()) {
 									winner.setText("It's a draw!");
+									draw = true;
 								} else {
 									winner.setText("Winner is " + rules.winner(players));
 								}
@@ -215,15 +216,17 @@ public class GameBoard extends BorderPane {
 								if (mode == 2)
 									colSpan = 8;
 								if (winnerDelaySeconds > 1) {
+
 									grid.add(winner, 0, 0, colSpan, 1);
-									grid.add(winnerPane, 0, 1);
+									if (!draw)
+										grid.add(winnerPane, 0, 1);
 									winnerDelaySeconds = 0;
 									winnerDelay.stop();
 								}
 							});
 							winnerDelay.getKeyFrames().add(winnerKey);
 							winnerDelay.play();
-							System.out.println("WE COME HERE");
+							// System.out.println("WE COME HERE");
 						}
 					}
 				}
