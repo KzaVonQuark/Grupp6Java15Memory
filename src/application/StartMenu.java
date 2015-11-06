@@ -1,5 +1,8 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -84,7 +87,7 @@ public class StartMenu extends BorderPane {
 		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
 		participantsList.setWrappingWidth(175);
 		participantsList.setTextAlignment(TextAlignment.CENTER);
-		creditsList = new Text("Tomas Majling \n Masih Bandari \n Owen Jose \n Linus Lundahl \n Zaher Mahmoudi");
+		creditsList = new Text(randomCreditNames());
 		creditsList.setFill(Color.ORANGE);
 		creditsList.setFont(Font.font(null, FontWeight.BOLD, 15));
 		creditsList.setWrappingWidth(175);
@@ -269,5 +272,25 @@ public class StartMenu extends BorderPane {
 		javaFront.setOnMouseExited(event -> {
 			javaFront.setEffect(null);
 		});
+	}
+
+	private String randomCreditNames() {
+
+		ArrayList<String> creditNames = new ArrayList<>();
+		String strCreditNames = "";
+		creditNames.add("Tomas Majling");
+		creditNames.add("Masih Bandari");
+		creditNames.add("Linus Lundahl");
+		creditNames.add("Owen Jose");
+		creditNames.add("Zaher Mahmoudi");
+		creditNames.add("Ian Pratt");
+
+		Collections.shuffle(creditNames);
+
+		for (String names : creditNames) {
+			strCreditNames += names + "\n";
+		}
+
+		return strCreditNames;
 	}
 }
