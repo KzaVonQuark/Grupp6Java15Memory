@@ -1,5 +1,7 @@
 package application;
 
+import static org.hamcrest.CoreMatchers.anything;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -202,23 +204,34 @@ public class Main extends Application {
 						highScoreList.setItems(highScoreEntries);
 					}
 				});
-
+				
+				highScoreEntries.setAll(fm.loadHighScore("Highest point", "Normal"));
+				highScoreList.setItems(highScoreEntries);
+				
 				start.solo.setOnAction(event3 -> {
+					highScoreEntries.clear();
 					if (start.solo.isSelected()) {
 						start.wonGames.setVisible(false);
+						if (start.smallBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
+						}
+						else if (start.mediumBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
+						}
+						else if (start.largeBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
+						}
 					} else {
 						start.wonGames.setVisible(true);
-					}
-					highScoreEntries.clear();
-					highScoreList.setItems(highScoreEntries);
-					if (start.smallBoard.isSelected() && start.solo.isSelected()){
-						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
-					}
-					else if (start.mediumBoard.isSelected() && start.solo.isSelected()){
-						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
-					}
-					else if (start.largeBoard.isSelected() && start.solo.isSelected()){
-						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
+						if (start.smallBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Easy"));
+						}
+						else if (start.mediumBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Normal"));
+						}
+						else if (start.largeBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Hard"));
+						}
 					}
 					highScoreList.setItems(highScoreEntries);
 				});
