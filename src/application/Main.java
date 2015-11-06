@@ -88,6 +88,7 @@ public class Main extends Application {
 					start.choosePlayers = new ComboBox<String>(FXCollections.observableArrayList(fm.loadNames()));
 					start.choosePlayers.setPrefSize(150, 15);
 					start.choosePlayers.setPromptText("Choose Player");
+					gameBoard.getMusicImage().stopMusic();
 					root.fadeChange(start, Color.BLACK);
 				});
 				playSound.play();
@@ -205,13 +206,15 @@ public class Main extends Application {
 				start.solo.setOnAction(event3 -> {
 					highScoreEntries.clear();
 					highScoreList.setItems(highScoreEntries);
-					if (start.smallBoard.isSelected())
+					if (start.smallBoard.isSelected() && start.solo.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
-					else if (start.mediumBoard.isSelected())
+					else if (start.mediumBoard.isSelected() && start.solo.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
-					else if (start.largeBoard.isSelected())
+					else if (start.largeBoard.isSelected() && start.solo.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
 					highScoreList.setItems(highScoreEntries);
+
+					highScoreEntries.clear();
 				});
 
 				start.clearHighScore.setOnAction(event3 -> {
@@ -228,6 +231,8 @@ public class Main extends Application {
 						else if (start.largeBoard.isSelected())
 							fm.clearHighScore("Hard");
 					}
+
+					highScoreEntries.clear();
 
 				});
 			});
