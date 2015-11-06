@@ -13,7 +13,7 @@ import java.util.TreeMap;
 
 public class FileManager {
 
-	String pathName = "src/Files/";
+	String pathName = "src/files/";
 	Player player;
 	TreeMap<String, Player> playerMap;
 	private String gameMode;

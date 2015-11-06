@@ -52,10 +52,8 @@ public class Main extends Application {
 
 			start.playButton.setOnAction(e -> {
 
-				// int i = 0;
 				String[] temp = start.participantsList.getText().split("[\n]");
 				List<Player> players = new ArrayList<Player>();
-				// Random rand = new Random();
 				for (int i = 0; i < temp.length; i++) {
 					if (fm.playerMap.containsKey(temp[i]))
 						players.add(fm.playerMap.get(temp[i]));
@@ -252,6 +250,15 @@ public class Main extends Application {
 
 				});
 			});
+
+			start.creditsButton.setOnAction(ae -> {
+				start.centerBox.getChildren().clear();
+				start.fieldOption.getChildren().clear();
+				start.playersHeadLine.setText("Made by");
+				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.creditsList);
+
+			});
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

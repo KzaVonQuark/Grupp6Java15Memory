@@ -27,9 +27,9 @@ import javafx.scene.text.TextAlignment;
 public class StartMenu extends BorderPane {
 	int frontSelection = 3;
 	TextField creatorTexfield;
-	Text participantsList;
+	Text participantsList, creditsList;
 	Label headLine, playersHeadLine, cardThemeLabel;
-	Button playButton, exitButton, newGameButton, createButton, highScoreButton, clearHighScore;
+	Button playButton, exitButton, newGameButton, createButton, highScoreButton, clearHighScore, creditsButton;
 
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
@@ -84,6 +84,11 @@ public class StartMenu extends BorderPane {
 		participantsList.setFont(Font.font(null, FontWeight.BOLD, 15));
 		participantsList.setWrappingWidth(175);
 		participantsList.setTextAlignment(TextAlignment.CENTER);
+		creditsList = new Text("Tomas Majling \n Masih Bandari \n Owen Jose \n Linus Lundahl \n Zaher Mahmoudi");
+		creditsList.setFill(Color.ORANGE);
+		creditsList.setFont(Font.font(null, FontWeight.BOLD, 15));
+		creditsList.setWrappingWidth(175);
+		creditsList.setTextAlignment(TextAlignment.CENTER);
 		playersHeadLine = new Label();
 		playersHeadLine.setTextFill(Color.ORANGE);
 		playersHeadLine.setFont(Font.font(null, FontWeight.BOLD, 20));
@@ -118,6 +123,10 @@ public class StartMenu extends BorderPane {
 		clearHighScore.setTextFill(playButton.getTextFill());
 		clearHighScore.setStyle(playButton.getStyle());
 		clearHighScore.setFont(exitButton.getFont());
+		creditsButton = new Button("Credits");
+		creditsButton.setTextFill(playButton.getTextFill());
+		creditsButton.setStyle(playButton.getStyle());
+		creditsButton.setFont(exitButton.getFont());
 
 		solo = new CheckBox("Solo game");
 		solo.setTextFill(Color.ORANGE);
@@ -175,7 +184,7 @@ public class StartMenu extends BorderPane {
 		alignmentBox = new VBox(5);
 		alignmentBox.setPadding(new Insets(0, 10, 0, 10));
 		alignmentBox.setAlignment(Pos.TOP_CENTER);
-		alignmentBox.getChildren().addAll(newGameButton, createButton, highScoreButton, exitButton);
+		alignmentBox.getChildren().addAll(newGameButton, createButton, highScoreButton, creditsButton, exitButton);
 
 		setTop(labelBox);
 		setLeft(alignmentBox);
@@ -213,6 +222,12 @@ public class StartMenu extends BorderPane {
 		});
 		exitButton.setOnMouseExited(event -> {
 			exitButton.setEffect(null);
+		});
+		creditsButton.setOnMouseEntered(event -> {
+			creditsButton.setEffect(dShadow);
+		});
+		creditsButton.setOnMouseExited(event -> {
+			creditsButton.setEffect(null);
 		});
 		smallBoard.setOnMouseEntered(event -> {
 			smallBoard.setEffect(dShadow);
