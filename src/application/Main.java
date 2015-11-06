@@ -206,11 +206,11 @@ public class Main extends Application {
 				start.solo.setOnAction(event3 -> {
 					highScoreEntries.clear();
 					highScoreList.setItems(highScoreEntries);
-					if (start.smallBoard.isSelected())
+					if (start.smallBoard.isSelected() && start.solo.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
-					else if (start.mediumBoard.isSelected())
+					else if (start.mediumBoard.isSelected() && start.solo.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
-					else if (start.largeBoard.isSelected())
+					else if (start.largeBoard.isSelected() && start.solo.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
 					highScoreList.setItems(highScoreEntries);
 

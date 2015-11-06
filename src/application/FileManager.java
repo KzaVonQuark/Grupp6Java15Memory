@@ -25,7 +25,7 @@ public class FileManager {
 	public void setGameMode(String gameMode) {
 		this.gameMode = gameMode;
 	}
-	
+
 	// Load methods
 	public void loadPlayer() {
 		playerMap = new TreeMap<String, Player>();
@@ -92,7 +92,7 @@ public class FileManager {
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				player.setWonGames(Integer.parseInt(tempSplit[3]));
 				highScore.add(player);
-				
+
 				if (sortType.equals("Least moves"))
 					player.setSortType(1);
 				else if (sortType.equals("Won games"))
@@ -112,9 +112,9 @@ public class FileManager {
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
-/*		if (highScore.size() > 4)
+		if (highScore.size() > 4)
 			return highScore.subList(0, 4);
-*/
+
 		return highScore;
 	}
 
@@ -132,14 +132,14 @@ public class FileManager {
 	}
 
 	public void saveHighScore(List<Player> players, String sortType, String gameMode) {
-		
+
 		TreeMap<String, Player> highScoreMap = new TreeMap<String, Player>();
-		
+
 		for (Player player : loadHighScore(sortType, gameMode)) {
 			highScoreMap.put(player.getName(), player);
 		}
-		
-		for (Player player2 : players) {	
+
+		for (Player player2 : players) {
 			if (highScoreMap.isEmpty())
 				highScoreMap.put(player2.getName(), player2);
 			else {
@@ -149,49 +149,62 @@ public class FileManager {
 					highScoreMap.put(player2.getName(), player2);
 			}
 		}
-		System.out.println(highScoreMap.get("Linus").getName() + highScoreMap.get("Linus").getLeastMoves());
-		try {
-			BufferedWriter bw = null;
-			if (gameMode.equals("Easy")) {
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
-				for (Player player : highScoreMap.values()) {
-					bw.write(player.getName() + " " + player.getHighestPoint()
-						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
-				}
+
+		if (gameMode.equals("Easy"))
+			writer(pathName += "HighScoreEasy.txt", highScoreMap);
+
+		else if (gameMode.equals("Normal"))
+			writer(pathName += "HighScoreNormal.txt", highScoreMap);
+
+		else if (gameMode.equals("Hard"))
+			writer(pathName += "HighScoreHard.txt", highScoreMap);
+	}
+
+	public void clearHighScore(String boardSize) {
+
+		TreeMap<String, Player> clearScore = new TreeMap<String, Player>();
+
+			if (boardSize.equals("Easy")) {
+				clearScore.put("Zaher", defaultPlayers("Zaher", 2, 16));
+				clearScore.put("Owen", defaultPlayers("Owen", 4, 18));
+				clearScore.put("Tomas", defaultPlayers("Tomas", 6, 20));
+				clearScore.put("Masih", defaultPlayers("Masih", 8, 22));
+				writer(pathName+"HighScoreEasy.txt", clearScore);
+				
+			} else if (boardSize.equals("Normal")) {
+				clearScore.put("Zaher", defaultPlayers("Zaher", 11, 25));
+				clearScore.put("Owen", defaultPlayers("Owen", 10, 30));
+				clearScore.put("Tomas", defaultPlayers("Tomas", 9, 35));
+				clearScore.put("Masih", defaultPlayers("Masih", 8, 40));
+				writer(pathName+"HighScoreNormal.txt", clearScore);
 			}
-			else if (gameMode.equals("Normal")){
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
-				for (Player player : highScoreMap.values()) {
-					bw.write(player.getName() + " " + player.getHighestPoint()
-						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
-				}
+
+			else if (boardSize.equals("Hard")) {
+				clearScore.put("Zaher", defaultPlayers("Zaher", 12, 16));
+				clearScore.put("Owen", defaultPlayers("Owen", 14, 18));
+				clearScore.put("Tomas", defaultPlayers("Tomas", 16, 20));
+				clearScore.put("Masih", defaultPlayers("Masih", 18, 22));
+				writer(pathName+"HighScoreHard.txt", clearScore);
 			}
-			else if (gameMode.equals("Hard")){
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
-				for (Player player : highScoreMap.values()) {
-					bw.write(player.getName() + " " + player.getHighestPoint()
-						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
-				}
+
+	}
+
+	public void writer(String pathName, TreeMap<String, Player> highScoreMap) {
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName))) {
+			for (Player player : highScoreMap.values()) {
+				bw.write(player.getName() + " " + player.getHighestPoint() + " " + player.getLeastMoves() + " "
+						+ player.getWonGames() + "\n");
 			}
-			bw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void clearHighScore(String boardSize) {
-		try {
-			BufferedWriter bw;
-			if (boardSize.equals("Easy"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
-			else if (boardSize.equals("Normal"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
-			else if (boardSize.equals("Hard"))
-				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Player defaultPlayers(String name, int points, int moves) {
+		Player player = new Player(name, points, moves);
+		return player;
 	}
+
 }

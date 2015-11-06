@@ -209,6 +209,7 @@ public class GameBoard extends BorderPane {
 								colSpan = 8;
 							grid.add(winner, 0, 0, colSpan, 1);
 
+							rules.checkHighScore(players, mode);
 						}
 					}
 				}

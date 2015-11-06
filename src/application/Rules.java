@@ -184,7 +184,6 @@ public class Rules {
 		fm.saveHighScore(players, "Highest Points", gameMode);
 		}
 
-
 		for (Player player : players) {
 			player.setMoves(0);
 			player.setPoints(0);
