@@ -212,6 +212,8 @@ public class Main extends Application {
 					else if (start.largeBoard.isSelected())
 						highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
 					highScoreList.setItems(highScoreEntries);
+
+					highScoreEntries.clear();
 				});
 
 				start.clearHighScore.setOnAction(event3 -> {
@@ -228,6 +230,8 @@ public class Main extends Application {
 						else if (start.largeBoard.isSelected())
 							fm.clearHighScore("Hard");
 					}
+
+					highScoreEntries.clear();
 
 				});
 			});
