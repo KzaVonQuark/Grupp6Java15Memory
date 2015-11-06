@@ -190,7 +190,7 @@ public class GameBoard extends BorderPane {
 							} else {
 								winner.setText("CONGRATULATIONS! " + players.get(0).getName());
 							}
-							rules.checkHighScore(players, mode);
+							
 							FlowPane winnerPane = new FlowPane();
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
 
@@ -202,8 +202,6 @@ public class GameBoard extends BorderPane {
 								winnerPane.getChildren().add(imageView);
 							}
 
-							// grid.add(winner, 0, 0, colSpan, 1);
-							// grid.add(winnerPane, 0, 1);
 							rules.checkHighScore(players, mode);
 							Timeline winnerDelay = new Timeline();
 							winnerDelay.setCycleCount(Timeline.INDEFINITE);

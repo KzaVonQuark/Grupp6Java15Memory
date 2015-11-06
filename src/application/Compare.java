@@ -16,27 +16,28 @@ public class Compare implements Comparator<Player> {
 				return 1;
 		}
 
-		if (sortType.equals("Highest point")) {
+		else if (sortType.equals("Highest point")) {
 			if (p1.getHighestPoint() >= p2.getHighestPoint())
 				return -1;
 			else
 				return 1;
 		}
 
-		if (sortType.equals("Least moves")) {
+		else if (sortType.equals("Least moves")) {
 			if (p1.getLeastMoves() <= p2.getLeastMoves())
 				return -1;
 			else
 				return 1;
 		}
 
-		if (sortType.equals("Won games")) {
+		else if (sortType.equals("Won games")) {
 			if (p1.getWonGames() >= p2.getWonGames())
 				return -1;
 			else
 				return 1;
 		}
-
+		
+		else
 		return 0;
 
 	}

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
@@ -152,6 +153,7 @@ public class Rules {
 	// Update Highscore
 	public void checkHighScore(List<Player> players, int mode) {
 		FileManager fm = new FileManager();
+		List<Player> updatedPlayers = new ArrayList<Player>();
 		String gameMode = "";
 		if (mode == 0)
 			gameMode = "Easy";
@@ -159,24 +161,34 @@ public class Rules {
 			gameMode = "Normal";
 		else
 			gameMode = "Hard";
-		
+
 		if (players.size() == 1) {
-		for (Player player : players) {
+
+			for (Player player : fm.setNewData((fm.loadHighScore("Least moves", gameMode)), players).values()) {
+				
 				if (player.getMoves() < player.getLeastMoves() || player.getLeastMoves() == 0)
 					player.setLeastMoves(player.getMoves());
 				else
 					player.setMoves(player.getLeastMoves());
+
+				updatedPlayers.add(player);
 			}
-		fm.saveHighScore(players, "Least Moves", gameMode);
+			fm.saveHighScore(updatedPlayers, gameMode);
 		}
+
 		else {
-			for (Player player : players) {
+			for (Player player : fm.setNewData((fm.loadHighScore("Highest points", gameMode)), players).values()) {
+				
 				if (player.getPoints() > player.getHighestPoint())
 					player.setHighestPoint(player.getPoints());
 				else
 					player.setPoints(player.getHighestPoint());
+				
+				if (player.getLeastMoves() == 0)
+					player.setLeastMoves(500);
+				updatedPlayers.add(player);
 			}
-		fm.saveHighScore(players, "Highest Points", gameMode);
+			fm.saveHighScore(updatedPlayers, gameMode);
 		}
 
 		for (Player player : players) {
