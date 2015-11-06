@@ -13,9 +13,7 @@ import javafx.util.Duration;
 public class Rules {
 
 	private int timePassed = 0;
-	private int timeToSeeCard = 2; // Man har 2 sekunder p� sig att se korten
-									// innan
-									// de f�rsvinner eller flippas tillbaka.
+	private int timeToSeeCard = 2;
 	private CardImageView cardOne = null;
 	private CardImageView cardTwo = null;
 
@@ -69,14 +67,13 @@ public class Rules {
 			noPairSound.play();
 		}
 
-		Timeline delay = new Timeline(); // Delay timern innan korten v�nds
-											// tillbaka eller tas bort
+		Timeline delay = new Timeline(); // Delaytimer when card should flip
+											// back
 		delay.setCycleCount(Timeline.INDEFINITE);
 		// ska separeras fr�n metod och flyttas till eventet
 		KeyFrame cardFlip = new KeyFrame(Duration.seconds(1.0), e -> {
 			if (this.timePassed + 1 >= this.timeToSeeCard) {
-				// +1 f�r n�n anledning b�rjar Timern p� -1 verkar det
-				// som.
+				// Seems delay starts on -1 so +1 on timePassed
 				if (this.compareCards(card1, card2)) {
 					card1.Remove();
 					card2.Remove();
@@ -99,10 +96,8 @@ public class Rules {
 		delay.play();
 
 		if (this.compareCards(card1, card2)) {
-			// System.out.println("Du hittade ett par!");
 			return true;
 		} else {
-			// System.out.println("Du hittade inget par!");
 			return false;
 		}
 	}

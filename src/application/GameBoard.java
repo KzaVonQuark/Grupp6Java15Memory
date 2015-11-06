@@ -227,7 +227,6 @@ public class GameBoard extends BorderPane {
 							});
 							winnerDelay.getKeyFrames().add(winnerKey);
 							winnerDelay.play();
-							// System.out.println("WE COME HERE");
 						}
 					}
 				}
