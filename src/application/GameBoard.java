@@ -54,7 +54,7 @@ public class GameBoard extends BorderPane {
 		this.q = new LinkedList<Player>();
 		this.players = new ArrayList<Player>();
 		this.players = players;
-		this.q.addAll(players);
+		this.q.addAll(this.players);
 
 		this.swishSound = new AudioClip(new File("src/sounds/Swish.wav").toURI().toString());
 
@@ -70,7 +70,7 @@ public class GameBoard extends BorderPane {
 		} else {
 			cardsInDeck = 6 * 8;
 		}
-		decks = new Deck(8, "frontimage" + frontSelection);
+		decks = new Deck(6, "frontimage" + frontSelection);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setAlignment(Pos.CENTER);
@@ -179,13 +179,17 @@ public class GameBoard extends BorderPane {
 																		// remove
 
 						if (rules.gameOver(decks)) {
-							rules.checkHighScore(players, mode);
 
-							if (players.size() != 1)
-								winner.setText("Winner is " + rules.winner(players));
-							else
+							if (players.size() != 1) {
+								if(players.get(0).getPoints() == players.get(1).getPoints()) {
+									winner.setText("It's a draw!");
+								} else {
+									winner.setText("Winner is " + rules.winner(players));
+								}
+							} else {
 								winner.setText("CONGRATULATIONS! " + players.get(0).getName());
-
+							}
+							rules.checkHighScore(players, mode);
 							FlowPane winnerPane = new FlowPane();
 							grid.add(winnerPane, 0, 0);
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
