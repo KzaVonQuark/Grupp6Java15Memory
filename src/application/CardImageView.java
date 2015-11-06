@@ -26,12 +26,10 @@ public class CardImageView extends ImageView {
 
 	public void Flip() {
 		if(!isFlipped()){
-			//Animering insert h�r
 			this.flipped = true;
 			this.setImage(new Image(card.getBackImage()));
 		}
 		else{
-			//Animering to Front insert h�r
 			this.flipped = false;
 			this.setImage(new Image(card.getFrontImage()));
 		}
