@@ -285,6 +285,7 @@ public class Main extends Application {
 			start.creditsButton.setOnAction(ae -> {
 				start.centerBox.getChildren().clear();
 				start.fieldOption.getChildren().clear();
+				start.setBottom(null);
 				start.playersHeadLine.setText("Made by");
 				start.fieldOption.getChildren().addAll(start.playersHeadLine, start.creditsList);
 
