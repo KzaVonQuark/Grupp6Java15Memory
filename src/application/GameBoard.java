@@ -57,8 +57,6 @@ public class GameBoard extends BorderPane {
 		this.players = new ArrayList<Player>();
 		this.players = players;
 		this.q.addAll(this.players);
-		if (this.q.size() == 1)
-			this.q.peek().setMoves(0);
 
 		this.swishSound = new AudioClip(new File("src/sounds/Swish.wav").toURI().toString());
 

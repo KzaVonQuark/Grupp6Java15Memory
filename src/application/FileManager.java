@@ -132,24 +132,24 @@ public class FileManager {
 
 			if (boardSize.equals("Easy")) {
 				clearScore.put("Zaher", new Player("Zaher", 1, 30, 0));
-				clearScore.put("Owen", new Player("Owen", 2, 35, 0));
+				clearScore.put("Owen", new Player("Owen", 2, 20, 0));
 				clearScore.put("Tomas", new Player("Tomas", 3, 25, 0));
-				clearScore.put("Masih", new Player("Masih", 4, 20, 0));
+				clearScore.put("Masih", new Player("Masih", 4, 35, 0));
 				writer(pathName+"HighScoreEasy.txt", clearScore);
 				
 			} else if (boardSize.equals("Normal")) {
-				clearScore.put("Zaher", new Player("Zaher", 2, 35, 0));
-				clearScore.put("Owen", new Player("Owen", 4, 40, 0));
-				clearScore.put("Tomas", new Player("Tomas", 6, 45, 0));
-				clearScore.put("Masih", new Player("Masih", 8, 50, 0));
+				clearScore.put("Zaher", new Player("Zaher", 2, 50, 0));
+				clearScore.put("Owen", new Player("Owen", 4, 60, 0));
+				clearScore.put("Tomas", new Player("Tomas", 6, 55, 0));
+				clearScore.put("Masih", new Player("Masih", 8, 45, 0));
 				writer(pathName+"HighScoreNormal.txt", clearScore);
 			}
 
 			else if (boardSize.equals("Hard")) {
-				clearScore.put("Zaher", new Player("Zaher", 6, 45, 0));
-				clearScore.put("Owen", new Player("Owen", 7, 50, 0));
-				clearScore.put("Tomas", new Player("Tomas", 8, 55, 0));
-				clearScore.put("Masih", new Player("Masih", 9, 60, 0));
+				clearScore.put("Zaher", new Player("Zaher", 6, 60, 0));
+				clearScore.put("Owen", new Player("Owen", 7, 65, 0));
+				clearScore.put("Tomas", new Player("Tomas", 8, 70, 0));
+				clearScore.put("Masih", new Player("Masih", 9, 80, 0));
 				writer(pathName+"HighScoreHard.txt", clearScore);
 			}
 
