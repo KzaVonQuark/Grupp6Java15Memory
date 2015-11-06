@@ -34,7 +34,7 @@ public class StartMenu extends BorderPane {
 	ComboBox<String> choosePlayers, scoreType;
 	ListView<Player> HighScoreList;
 	VBox alignmentBox, centerBox, fieldOption;
-	HBox labelBox, picBox, playBox;
+	HBox labelBox, picBox, playBox, cbBox;
 	RadioButton smallBoard, mediumBoard, largeBoard;
 	CheckBox solo, wonGames;
 	ToggleGroup tg, pictg;
@@ -98,7 +98,7 @@ public class StartMenu extends BorderPane {
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 		playButton.setFont(Font.font(null, FontWeight.BOLD, 100));
-		exitButton = new Button("Leave Game");
+		exitButton = new Button("Exit Game");
 		exitButton.setTextFill(playButton.getTextFill());
 		exitButton.setStyle(playButton.getStyle());
 		exitButton.setFont(Font.font(null, FontWeight.BOLD, 20));
@@ -168,7 +168,10 @@ public class StartMenu extends BorderPane {
 
 		centerBox = new VBox(10);
 		centerBox.setAlignment(Pos.TOP_LEFT);
-
+		
+		cbBox = new HBox(10);
+		cbBox.getChildren().addAll(solo, wonGames);
+		
 		alignmentBox = new VBox(5);
 		alignmentBox.setPadding(new Insets(0, 10, 0, 10));
 		alignmentBox.setAlignment(Pos.TOP_CENTER);

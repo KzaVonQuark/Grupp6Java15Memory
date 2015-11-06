@@ -42,12 +42,12 @@ public class Deck {
 	public void populateDeck(int deckSize, String frontImage) {
 		LinkedList<Integer> imageList = new LinkedList<Integer>();
 		for (int i = 0; i < 24; i++) {
-			imageList.add(i+1);
+			imageList.add(i + 1);
 		}
 		Collections.shuffle(imageList);
 		int selectedMotive;
 		for (int i = 0; i < (deckSize / 2); i++) {
-			selectedMotive=imageList.pop();
+			selectedMotive = imageList.pop();
 			deck.add(new Card(selectedMotive, frontImage, selectedMotive));
 			deck.add(new Card(selectedMotive, frontImage, selectedMotive));
 		}
@@ -57,20 +57,23 @@ public class Deck {
 	public Card dealCard(int cardInDeck) {
 		return deck.get(cardInDeck);
 	}
-	public void removeCardbyValue(int value){
-		for(int i=0;i<deck.size();i++){
-			if(deck.get(i).getValue()==value){deck.remove(i);
-			return;
+
+	public void removeCardbyValue(int value) {
+		for (int i = 0; i < deck.size(); i++) {
+			if (deck.get(i).getValue() == value) {
+				deck.remove(i);
+				return;
 			}
 		}
 	}
+
 	// Add card to players win hand
 	public void addCardToDeck(Card card) {
-		for (Card playerCard : deck) {
-			if (playerCard.getValue() == card.getValue()) {
-				deck.push(playerCard);
-			}
-		}
+		// for (Card playerCard : deck) {
+		// if (playerCard.getValue() == card.getValue()) {
+		deck.push(card);
+		// }
+		// }
 	}
 
 }
