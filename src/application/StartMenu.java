@@ -98,7 +98,7 @@ public class StartMenu extends BorderPane {
 		playButton.setTextFill(Color.ORANGE);
 		playButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 		playButton.setFont(Font.font(null, FontWeight.BOLD, 100));
-		exitButton = new Button("Leave Game");
+		exitButton = new Button("Exit Game");
 		exitButton.setTextFill(playButton.getTextFill());
 		exitButton.setStyle(playButton.getStyle());
 		exitButton.setFont(Font.font(null, FontWeight.BOLD, 20));
