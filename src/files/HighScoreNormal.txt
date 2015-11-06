@@ -1,3 +1,4 @@
+Guest 0 7 0
 Linus 0 0 0
 Owen 3 0 0
 Tomas 1 0 0
