@@ -217,7 +217,7 @@ public class GameBoard extends BorderPane {
 								if (mode == 2)
 									colSpan = 8;
 								if (winnerDelaySeconds > 1) {
-
+									grid.getChildren().clear();
 									grid.add(winner, 0, 0, colSpan, 1);
 									if (!draw)
 										grid.add(winnerPane, 0, 1);
@@ -227,7 +227,6 @@ public class GameBoard extends BorderPane {
 							});
 							winnerDelay.getKeyFrames().add(winnerKey);
 							winnerDelay.play();
-							// System.out.println("WE COME HERE");
 						}
 					}
 				}

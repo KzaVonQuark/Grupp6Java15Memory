@@ -69,11 +69,7 @@ public class Deck {
 
 	// Add card to players win hand
 	public void addCardToDeck(Card card) {
-		// for (Card playerCard : deck) {
-		// if (playerCard.getValue() == card.getValue()) {
 		deck.push(card);
-		// }
-		// }
 	}
 
 }

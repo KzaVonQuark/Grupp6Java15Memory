@@ -162,7 +162,6 @@ public class Main extends Application {
 				start.creatorTexfield.setText((start.creatorTexfield.getText().replace(" ", "-")));
 				String[] temp = start.participantsList.getText().split("[\n]");
 				boolean found = false;
-				System.out.println();
 				for (String p_list : temp) {
 					if (p_list.equals(start.creatorTexfield.getText())) {
 						found = true;
