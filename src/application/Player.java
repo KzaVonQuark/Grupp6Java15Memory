@@ -17,14 +17,14 @@ public class Player {
 		this.playerWinningHand = new Deck();
 	}
 	
-	public Player(String name, int highestPoint, int leastMoves) {
+	public Player(String name, int highestPoint, int leastMoves, int wonGames) {
 		this.name = name;
 		this.points = 0;
 		this.moves = 500;
 		this.time = 0;
 		this.highestPoint = highestPoint;
 		this.leastMoves = leastMoves;
-		this.wonGames = 0;
+		this.wonGames = wonGames;
 		this.playerWinningHand = new Deck();
 	}
 
@@ -114,7 +114,7 @@ public class Player {
 		if (sortType == 1)
 			return this.getName() + " Moves " + this.getLeastMoves();
 		else if (sortType == 2)
-			return this.getWonGames() + "Won games" + this.getWonGames();
+			return this.getName() + " Won games " + this.getWonGames();
 		else
 			return this.getName() + " Points " + this.getHighestPoint();
 	}

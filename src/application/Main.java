@@ -194,6 +194,8 @@ public class Main extends Application {
 						RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
 						if (start.solo.isSelected())
 							highScoreEntries.setAll(fm.loadHighScore("Least moves", check.getText()));
+						else if (start.wonGames.isSelected())
+							highScoreEntries.setAll(fm.loadHighScore("Won games", check.getText()));
 						else
 							highScoreEntries.setAll(fm.loadHighScore("Highest point", check.getText()));
 						highScoreList.setItems(highScoreEntries);
@@ -202,6 +204,35 @@ public class Main extends Application {
 				
 				highScoreEntries.setAll(fm.loadHighScore("Highest point", "Normal"));
 				highScoreList.setItems(highScoreEntries);
+				
+				start.wonGames.setOnAction(event2 -> {
+					highScoreEntries.clear();
+					if (start.wonGames.isSelected()) {
+						start.solo.setVisible(false);
+						if (start.smallBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Won games", "Easy"));
+						}
+						else if (start.mediumBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Won games", "Normal"));
+						}
+						else if (start.largeBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Won games", "Hard"));
+						}
+					} else {
+						start.solo.setVisible(true);
+						if (start.smallBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Easy"));
+						}
+						else if (start.mediumBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Normal"));
+						}
+						else if (start.largeBoard.isSelected()){
+							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Hard"));
+						}
+					}
+					highScoreList.setItems(highScoreEntries);
+				});
+
 				
 				start.solo.setOnAction(event3 -> {
 					highScoreEntries.clear();
@@ -231,7 +262,7 @@ public class Main extends Application {
 					highScoreList.setItems(highScoreEntries);
 				});
 
-				start.clearHighScore.setOnAction(event3 -> {
+				start.clearHighScore.setOnAction(event4 -> {
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Confirm clear");
 					String s = "Do you really want to clear Highscore!?";

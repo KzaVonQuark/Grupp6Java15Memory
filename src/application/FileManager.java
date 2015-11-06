@@ -34,9 +34,7 @@ public class FileManager {
 
 			String temp;
 			while ((temp = br.readLine()) != null) {
-				String[] tempArray = temp.split("[ ]");
-				player = new Player(tempArray[0]);
-				player.setWonGames(Integer.parseInt(tempArray[1]));
+				player = new Player(temp);
 				playerMap.put(player.getName(), player);
 
 			}
@@ -79,7 +77,7 @@ public class FileManager {
 			else if (boardSize.equals("Hard"))
 				read(pathName + "HighScoreHard.txt", highScore);
 			
-			changeSortType(sortType, highScore.get(0));
+			changeSortType(sortType, highScore);
 
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
@@ -133,25 +131,25 @@ public class FileManager {
 		TreeMap<String, Player> clearScore = new TreeMap<String, Player>();
 
 			if (boardSize.equals("Easy")) {
-				clearScore.put("Zaher", new Player("Zaher", 2, 16));
-				clearScore.put("Owen", new Player("Owen", 4, 18));
-				clearScore.put("Tomas", new Player("Tomas", 6, 20));
-				clearScore.put("Masih", new Player("Masih", 8, 22));
+				clearScore.put("Zaher", new Player("Zaher", 1, 30, 0));
+				clearScore.put("Owen", new Player("Owen", 2, 35, 0));
+				clearScore.put("Tomas", new Player("Tomas", 3, 25, 0));
+				clearScore.put("Masih", new Player("Masih", 4, 20, 0));
 				writer(pathName+"HighScoreEasy.txt", clearScore);
 				
 			} else if (boardSize.equals("Normal")) {
-				clearScore.put("Zaher", new Player("Zaher", 11, 25));
-				clearScore.put("Owen", new Player("Owen", 10, 30));
-				clearScore.put("Tomas", new Player("Tomas", 9, 35));
-				clearScore.put("Masih", new Player("Masih", 8, 40));
+				clearScore.put("Zaher", new Player("Zaher", 2, 35, 0));
+				clearScore.put("Owen", new Player("Owen", 4, 40, 0));
+				clearScore.put("Tomas", new Player("Tomas", 6, 45, 0));
+				clearScore.put("Masih", new Player("Masih", 8, 50, 0));
 				writer(pathName+"HighScoreNormal.txt", clearScore);
 			}
 
 			else if (boardSize.equals("Hard")) {
-				clearScore.put("Zaher", new Player("Zaher", 12, 16));
-				clearScore.put("Owen", new Player("Owen", 14, 18));
-				clearScore.put("Tomas", new Player("Tomas", 16, 20));
-				clearScore.put("Masih", new Player("Masih", 18, 22));
+				clearScore.put("Zaher", new Player("Zaher", 6, 45, 0));
+				clearScore.put("Owen", new Player("Owen", 7, 50, 0));
+				clearScore.put("Tomas", new Player("Tomas", 8, 55, 0));
+				clearScore.put("Masih", new Player("Masih", 9, 60, 0));
 				writer(pathName+"HighScoreHard.txt", clearScore);
 			}
 
@@ -179,14 +177,17 @@ public class FileManager {
 		
 			}
 	
-	private void changeSortType(String sortType, Player player) {
+	private void changeSortType(String sortType, ArrayList<Player> players) {
 
+		for (Player player : players) {
+			
 		if (sortType.equals("Least moves"))
 			player.setSortType(1);
 		else if (sortType.equals("Won games"))
 			player.setSortType(2);
 		else
 			player.setSortType(3);
+	}
 	}
 
 	public void writer(String pathName, TreeMap<String, Player> highScoreMap) {

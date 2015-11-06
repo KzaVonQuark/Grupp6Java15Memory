@@ -31,7 +31,7 @@ public class Compare implements Comparator<Player> {
 		}
 
 		if (sortType.equals("Won games")) {
-			if (p1.getWonGames() <= p2.getWonGames())
+			if (p1.getWonGames() >= p2.getWonGames())
 				return -1;
 			else
 				return 1;
