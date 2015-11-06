@@ -33,6 +33,15 @@ public class GameBoard extends BorderPane {
 	private Label leaderBoard;
 	private Label playerTurnInfo;
 	private Label backToStartMenu;
+	private MusicImage musicImage;
+
+	public MusicImage getMusicImage() {
+		return musicImage;
+	}
+
+	public void setMusicImage(MusicImage musicImage) {
+		this.musicImage = musicImage;
+	}
 
 	Rules rules = new Rules();
 
@@ -86,8 +95,7 @@ public class GameBoard extends BorderPane {
 		vBoxLB2.getChildren().addAll(lbHeader, seperatorLB, this.leaderBoard);
 		HBox hBoxFill = new HBox();
 		hBoxFill.setPrefHeight(200);
-		MusicImage musicImage = new MusicImage("images/Radio.png", "images/RadioX.png",
-				"src/sounds/BackgroundMusic.wav", false);
+		musicImage = new MusicImage("images/Radio.png", "images/RadioX.png", "src/sounds/BackgroundMusic.wav", false);
 		vBoxLB.getChildren().addAll(vBoxLB2, hBoxFill, musicImage);
 		this.setLeft(vBoxLB);
 
@@ -167,29 +175,29 @@ public class GameBoard extends BorderPane {
 						flipAnimation(rules.getCardTwo());
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						playerTurn(turn); // Checks and changes player
-						System.out.println(players.get(0).getMoves()); //<---- remove
+						System.out.println(players.get(0).getMoves()); // <----
+																		// remove
 
 						if (rules.gameOver(decks)) {
 							rules.checkHighScore(players, mode);
-							
+
 							if (players.size() != 1)
 								winner.setText("Winner is " + rules.winner(players));
 							else
 								winner.setText("CONGRATULATIONS! " + players.get(0).getName());
 
-							 FlowPane winnerPane = new FlowPane();
-							 grid.add(winnerPane, 0, 0); for (int i = 0; i <
-							 this.players.get(0).getPlayerWinningHand().
-							 getDeck().size(); i++) {
-							 
-							 CardImageView imageView = new CardImageView(
-							 this.players.get(0).getPlayerWinningHand().
-							 getDeck().get(i).getFrontImage(),
-							 decks.dealCard(i)); imageView.setFitHeight(100);
-							 imageView.setFitWidth(100);
-							 winnerPane.getChildren().add(imageView);
-							 }
-							 
+							FlowPane winnerPane = new FlowPane();
+							grid.add(winnerPane, 0, 0);
+							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
+
+								CardImageView imageView = new CardImageView(
+										this.players.get(0).getPlayerWinningHand().getDeck().get(i).getFrontImage(),
+										decks.dealCard(i));
+								imageView.setFitHeight(100);
+								imageView.setFitWidth(100);
+								winnerPane.getChildren().add(imageView);
+							}
+
 							int colSpan = 4;
 							if (mode == 1)
 								colSpan = 6;
@@ -228,7 +236,7 @@ public class GameBoard extends BorderPane {
 		else {
 			// Reads first element in queue.
 			if (gotPair == true) {
-				
+
 				this.q.peek().setPoints(this.q.peek().getPoints() + 1);
 				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 				this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
@@ -268,13 +276,11 @@ public class GameBoard extends BorderPane {
 		this.swishSound.play();
 		flipAnimation.play();
 	}
-/*
-	public void addPlayers(List<Player> players) {
-		for (Player player : players) {
-			this.q.add(player);
-		}
-	}
-*/
+
+	/*
+	 * public void addPlayers(List<Player> players) { for (Player player :
+	 * players) { this.q.add(player); } }
+	 */
 	public GridPane getGrid() {
 		return grid;
 	}
