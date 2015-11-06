@@ -16,7 +16,7 @@ public class FileManager {
 	String pathName = "src/Files/";
 	Player player;
 	TreeMap<String, Player> playerMap;
-	String gameMode;
+	private String gameMode;
 
 	public String getGameMode() {
 		return gameMode;
@@ -92,7 +92,7 @@ public class FileManager {
 				player.setLeastMoves(Integer.parseInt(tempSplit[2]));
 				player.setWonGames(Integer.parseInt(tempSplit[3]));
 				highScore.add(player);
-
+				
 				if (sortType.equals("Least moves"))
 					player.setSortType(1);
 				else if (sortType.equals("Won games"))
@@ -112,9 +112,9 @@ public class FileManager {
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
-		if (highScore.size() > 4)
+/*		if (highScore.size() > 4)
 			return highScore.subList(0, 4);
-		
+*/
 		return highScore;
 	}
 
@@ -131,44 +131,44 @@ public class FileManager {
 		}
 	}
 
-	public void saveHighScore(List<Player> players, String sortType) {
+	public void saveHighScore(List<Player> players, String sortType, String gameMode) {
 		
-		playerMap = new TreeMap<String, Player>();
+		TreeMap<String, Player> highScoreMap = new TreeMap<String, Player>();
 		
 		for (Player player : loadHighScore(sortType, gameMode)) {
-			this.playerMap.put(player.getName(), player);
+			highScoreMap.put(player.getName(), player);
 		}
 		
-		for (Player player : players) {
-			if (this.playerMap.isEmpty())
-				this.playerMap.put(player.getName(), player);
+		for (Player player2 : players) {	
+			if (highScoreMap.isEmpty())
+				highScoreMap.put(player2.getName(), player2);
 			else {
-				if (this.playerMap.containsKey(player.getName()))
-					this.playerMap.replace(this.playerMap.get(player).getName(), player);
+				if (highScoreMap.containsKey(player2.getName()))
+					highScoreMap.replace(player2.getName(), player2);
 				else
-					this.playerMap.put(player.getName(), player);
+					highScoreMap.put(player2.getName(), player2);
 			}
 		}
-		
+		System.out.println(highScoreMap.get("Linus").getName() + highScoreMap.get("Linus").getLeastMoves());
 		try {
 			BufferedWriter bw = null;
 			if (gameMode.equals("Easy")) {
 				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreEasy.txt"));
-				for (Player player : this.playerMap.values()) {
+				for (Player player : highScoreMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
 						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
 			else if (gameMode.equals("Normal")){
 				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreNormal.txt"));
-				for (Player player : this.playerMap.values()) {
+				for (Player player : highScoreMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
 						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}
 			}
 			else if (gameMode.equals("Hard")){
 				bw = new BufferedWriter(new FileWriter(pathName + "HighScoreHard.txt"));
-				for (Player player : this.playerMap.values()) {
+				for (Player player : highScoreMap.values()) {
 					bw.write(player.getName() + " " + player.getHighestPoint()
 						+ " " + player.getLeastMoves() + " " + player.getWonGames() + "\n");
 				}

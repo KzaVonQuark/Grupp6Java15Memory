@@ -74,13 +74,10 @@ public class Main extends Application {
 
 				Collections.shuffle(players);
 				int boardSize = 0;
-				fm.setGameMode("Easy");
 				if (start.tg.getSelectedToggle().equals(start.mediumBoard)) {
 					boardSize = 1;
-					fm.setGameMode("Normal");
 				} else if (start.tg.getSelectedToggle().equals(start.largeBoard)) {
 					boardSize = 2;
-					fm.setGameMode("Hard");
 				}
 
 				GameBoard gameBoard = new GameBoard(players, boardSize, start.frontSelection);

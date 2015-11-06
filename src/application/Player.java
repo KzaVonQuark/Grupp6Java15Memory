@@ -89,7 +89,7 @@ public class Player {
 		this.playerWinningHand = playerWinningHand;
 	}
 
-	public int isSortType() {
+	public int getSortType() {
 		return sortType;
 	}
 

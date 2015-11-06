@@ -155,22 +155,33 @@ public class Rules {
 	}
 
 	// Update Highscore
-	public void checkHighScore(List<Player> players) {
+	public void checkHighScore(List<Player> players, int mode) {
 		FileManager fm = new FileManager();
+		String gameMode = "";
+		if (mode == 0)
+			gameMode = "Easy";
+		else if (mode == 1)
+			gameMode = "Normal";
+		else
+			gameMode = "Hard";
 		
 		if (players.size() == 1) {
 		for (Player player : players) {
-				if (player.getMoves() < player.getLeastMoves() || player.getMoves() == player.getLeastMoves())
+				if (player.getMoves() < player.getLeastMoves() || player.getLeastMoves() == 0)
 					player.setLeastMoves(player.getMoves());
+				else
+					player.setMoves(player.getLeastMoves());
 			}
-		fm.saveHighScore(players, "Moves");
+		fm.saveHighScore(players, "Least Moves", gameMode);
 		}
 		else {
 			for (Player player : players) {
 				if (player.getPoints() > player.getHighestPoint())
 					player.setHighestPoint(player.getPoints());
+				else
+					player.setPoints(player.getHighestPoint());
 			}
-		fm.saveHighScore(players, "Points");
+		fm.saveHighScore(players, "Highest Points", gameMode);
 		}
 
 
