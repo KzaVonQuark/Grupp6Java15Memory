@@ -78,6 +78,9 @@ public class Main extends Application {
 					boardSize = 2;
 				}
 
+				if (players.size() == 1)
+					players.get(0).setMoves(0);
+
 				GameBoard gameBoard = new GameBoard(players, boardSize, start.frontSelection);
 				gameBoard.getBackToStartMenu().setOnMousePressed(ae -> {
 					start.centerBox.getChildren().clear();

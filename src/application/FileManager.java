@@ -90,7 +90,7 @@ public class FileManager {
 	public void save(Player player) {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(pathName + "Players.txt", true))) {
-			bw.append("\r\n" + player.getName() + " " + player.getWonGames());
+			bw.append("\r\n" + player.getName());
 
 		} catch (IOException e) {
 			e.printStackTrace();

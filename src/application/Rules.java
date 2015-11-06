@@ -180,7 +180,7 @@ public class Rules {
 		}
 
 		for (Player player : players) {
-			player.setMoves(0);
+			player.setMoves(500);
 			player.setPoints(0);
 		}
 
