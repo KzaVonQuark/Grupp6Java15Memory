@@ -149,6 +149,8 @@ public class GameBoard extends BorderPane {
 			CardImageView imageView = new CardImageView(decks.dealCard(i).getFrontImage(), decks.dealCard(i));
 			imageView.setFitHeight(100);
 			imageView.setFitWidth(100);
+			DropShadow iVDS = new DropShadow(5.0, 3.0, 3.0, Color.BLACK);
+			imageView.setEffect(iVDS);
 			grid.add(imageView, col, row);
 			col++;
 			// if(i >= 4){
@@ -215,7 +217,7 @@ public class GameBoard extends BorderPane {
 								if (mode == 2)
 									colSpan = 8;
 								if (winnerDelaySeconds > 1) {
-
+									grid.getChildren().clear();
 									grid.add(winner, 0, 0, colSpan, 1);
 									if (!draw)
 										grid.add(winnerPane, 0, 1);
