@@ -12,10 +12,10 @@ import application.Main;
 public class MainTest {
 
 	@Test
-	public void testCardBackImage() {
+	public void testCardFrontImage() {
 		Card a = new Card(10, "10", 2);
 		Card b = new Card(5, "5", 2);
-		assertEquals("Card back image must be Nackademin", a.getBackImage(), b.getBackImage());
+		assertEquals("Card back image must be Nackademin", a.getFrontImage(), b.getFrontImage());
 	}
 
 	@Test
