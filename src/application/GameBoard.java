@@ -54,7 +54,9 @@ public class GameBoard extends BorderPane {
 		this.q = new LinkedList<Player>();
 		this.players = new ArrayList<Player>();
 		this.players = players;
-		this.q.addAll(players);
+		this.q.addAll(this.players);
+		if (this.q.size() == 1)
+			this.q.peek().setMoves(0);
 
 		this.swishSound = new AudioClip(new File("src/sounds/Swish.wav").toURI().toString());
 
@@ -175,16 +177,19 @@ public class GameBoard extends BorderPane {
 						flipAnimation(rules.getCardTwo());
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						playerTurn(turn); // Checks and changes player
-						System.out.println(players.get(0).getMoves()); // <----
-																		// remove
 
 						if (rules.gameOver(decks)) {
 
-							if (players.size() != 1)
-								winner.setText("Winner is " + rules.winner(players));
-							else
+							if (players.size() != 1) {
+								if(players.get(0).getPoints() == players.get(1).getPoints()) {
+									winner.setText("It's a draw!");
+								} else {
+									winner.setText("Winner is " + rules.winner(players));
+								}
+							} else {
 								winner.setText("CONGRATULATIONS! " + players.get(0).getName());
-
+							}
+							rules.checkHighScore(players, mode);
 							FlowPane winnerPane = new FlowPane();
 							grid.add(winnerPane, 0, 0);
 							for (int i = 0; i < this.players.get(0).getPlayerWinningHand().getDeck().size(); i++) {
@@ -236,9 +241,7 @@ public class GameBoard extends BorderPane {
 		else {
 			// Reads first element in queue.
 			if (gotPair == true) {
-
 				this.q.peek().setPoints(this.q.peek().getPoints() + 1);
-				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 				this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
 				this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
 				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
@@ -247,7 +250,6 @@ public class GameBoard extends BorderPane {
 
 			// Reads, removes and put element last in queue
 			else {
-				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 				this.q.add(this.q.poll());
 				this.playerTurnInfo.setText(this.getQ().peek().getName());
 			}

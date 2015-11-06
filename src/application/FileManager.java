@@ -165,28 +165,32 @@ public class FileManager {
 		TreeMap<String, Player> clearScore = new TreeMap<String, Player>();
 
 			if (boardSize.equals("Easy")) {
-				clearScore.put("Zaher", defaultPlayers("Zaher", 2, 16));
-				clearScore.put("Owen", defaultPlayers("Owen", 4, 18));
-				clearScore.put("Tomas", defaultPlayers("Tomas", 6, 20));
-				clearScore.put("Masih", defaultPlayers("Masih", 8, 22));
+				clearScore.put("Zaher", new Player("Zaher", 2, 16));
+				clearScore.put("Owen", new Player("Owen", 4, 18));
+				clearScore.put("Tomas", new Player("Tomas", 6, 20));
+				clearScore.put("Masih", new Player("Masih", 8, 22));
 				writer(pathName+"HighScoreEasy.txt", clearScore);
 				
 			} else if (boardSize.equals("Normal")) {
-				clearScore.put("Zaher", defaultPlayers("Zaher", 11, 25));
-				clearScore.put("Owen", defaultPlayers("Owen", 10, 30));
-				clearScore.put("Tomas", defaultPlayers("Tomas", 9, 35));
-				clearScore.put("Masih", defaultPlayers("Masih", 8, 40));
+				clearScore.put("Zaher", new Player("Zaher", 11, 25));
+				clearScore.put("Owen", new Player("Owen", 10, 30));
+				clearScore.put("Tomas", new Player("Tomas", 9, 35));
+				clearScore.put("Masih", new Player("Masih", 8, 40));
 				writer(pathName+"HighScoreNormal.txt", clearScore);
 			}
 
 			else if (boardSize.equals("Hard")) {
-				clearScore.put("Zaher", defaultPlayers("Zaher", 12, 16));
-				clearScore.put("Owen", defaultPlayers("Owen", 14, 18));
-				clearScore.put("Tomas", defaultPlayers("Tomas", 16, 20));
-				clearScore.put("Masih", defaultPlayers("Masih", 18, 22));
+				clearScore.put("Zaher", new Player("Zaher", 12, 16));
+				clearScore.put("Owen", new Player("Owen", 14, 18));
+				clearScore.put("Tomas", new Player("Tomas", 16, 20));
+				clearScore.put("Masih", new Player("Masih", 18, 22));
 				writer(pathName+"HighScoreHard.txt", clearScore);
 			}
 
+	}
+	
+	private void read(String pathName, TreeMap<String, Player> highScore) {
+		
 	}
 
 	public void writer(String pathName, TreeMap<String, Player> highScoreMap) {
@@ -200,11 +204,6 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public Player defaultPlayers(String name, int points, int moves) {
-		Player player = new Player(name, points, moves);
-		return player;
 	}
 
 }
