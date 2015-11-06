@@ -55,6 +55,8 @@ public class GameBoard extends BorderPane {
 		this.players = new ArrayList<Player>();
 		this.players = players;
 		this.q.addAll(this.players);
+		if (this.q.size() == 1)
+			this.q.peek().setMoves(0);
 
 		this.swishSound = new AudioClip(new File("src/sounds/Swish.wav").toURI().toString());
 
@@ -175,8 +177,6 @@ public class GameBoard extends BorderPane {
 						flipAnimation(rules.getCardTwo());
 						boolean turn = rules.confirmPair(rules.getCardOne(), rules.getCardTwo());
 						playerTurn(turn); // Checks and changes player
-						System.out.println(players.get(0).getMoves()); // <----
-																		// remove
 
 						if (rules.gameOver(decks)) {
 
@@ -241,9 +241,7 @@ public class GameBoard extends BorderPane {
 		else {
 			// Reads first element in queue.
 			if (gotPair == true) {
-
 				this.q.peek().setPoints(this.q.peek().getPoints() + 1);
-				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 				this.leaderBoard.setText(rules.leaderBoard(this.getPlayers()));
 				this.q.peek().getPlayerWinningHand().addCardToDeck(rules.getCardOne().getCard());
 				decks.removeCardbyValue(rules.getCardOne().getCard().getValue());
@@ -252,7 +250,6 @@ public class GameBoard extends BorderPane {
 
 			// Reads, removes and put element last in queue
 			else {
-				this.q.peek().setMoves(this.q.peek().getMoves() + 1);
 				this.q.add(this.q.poll());
 				this.playerTurnInfo.setText(this.getQ().peek().getName());
 			}
