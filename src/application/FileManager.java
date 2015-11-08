@@ -127,6 +127,8 @@ public class FileManager {
 			else
 				gamer.setHighestPoint(highScore.get(gamer.getName()).getHighestPoint());
 			
+			gamer.setWonGames(highScore.get(gamer.getName()).getWonGames() + gamer.getWonGames());
+					
 			return gamer;
 		}
 
