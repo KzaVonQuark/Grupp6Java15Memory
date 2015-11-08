@@ -1,7 +1,8 @@
 package application;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,8 @@ import javafx.scene.text.TextAlignment;
 
 public class StartMenu extends BorderPane {
 	int frontSelection = 3;
+	private final String[] CREDITS = { "Tomas Majling", "Masih Bandari", "Linus Lundahl", "Owen Jose", "Zaher Mahmoudi",
+			"Ian Pratt" };
 	TextField creatorTexfield;
 	Text participantsList, creditsList;
 	Label headLine, playersHeadLine, cardThemeLabel;
@@ -275,23 +278,9 @@ public class StartMenu extends BorderPane {
 	}
 
 	private String randomCreditNames() {
-
-		ArrayList<String> creditNames = new ArrayList<>();
-		String strCreditNames = "";
-		creditNames.add("Tomas Majling");
-		creditNames.add("Masih Bandari");
-		creditNames.add("Linus Lundahl");
-		creditNames.add("Owen Jose");
-		creditNames.add("Zaher Mahmoudi");
-		creditNames.add("Ian Pratt");
-
-		Collections.shuffle(creditNames);
-
-		for (String names : creditNames) {
-			strCreditNames += names + "\n";
-		}
-
-		return strCreditNames;
+		List<String> creditList = Arrays.asList(CREDITS);
+		Collections.shuffle(creditList);
+		return String.join("\n", creditList);
 	}
 
 }
