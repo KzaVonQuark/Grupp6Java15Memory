@@ -195,13 +195,19 @@ public class Main extends Application {
 						highScoreEntries.clear();
 						highScoreList.setItems(highScoreEntries);
 						RadioButton check = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
-						if (start.solo.isSelected())
-							highScoreEntries.setAll(fm.loadHighScore("Least moves", check.getText()));
-						else if (start.wonGames.isSelected())
-							highScoreEntries.setAll(fm.loadHighScore("Won games", check.getText()));
-						else
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", check.getText()));
+						if (start.solo.isSelected()) {
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Least moves", check.getText())).subList(0, 4));
+						}
+						else if (start.wonGames.isSelected()) {
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Won games", check.getText())).subList(0, 4));
+						}
+						else {
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", check.getText())).subList(0, 4));
 						highScoreList.setItems(highScoreEntries);
+						}
 					}
 				});
 				
@@ -213,53 +219,64 @@ public class Main extends Application {
 					if (start.wonGames.isSelected()) {
 						start.solo.setVisible(false);
 						if (start.smallBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Won games", "Easy"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Won games", "Easy")).subList(0, 4));
 						}
 						else if (start.mediumBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Won games", "Normal"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Won games", "Normal")).subList(0, 4));
 						}
 						else if (start.largeBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Won games", "Hard"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Won games", "Hard")).subList(0, 4));
 						}
 					} else {
 						start.solo.setVisible(true);
 						if (start.smallBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Easy"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", "Easy")).subList(0, 4));
 						}
 						else if (start.mediumBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Normal"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", "Normal")).subList(0, 4));
 						}
 						else if (start.largeBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Hard"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", "Hard")).subList(0, 4));
 						}
 					}
 					highScoreList.setItems(highScoreEntries);
 				});
-
 				
 				start.solo.setOnAction(event3 -> {
 					highScoreEntries.clear();
 					if (start.solo.isSelected()) {
 						start.wonGames.setVisible(false);
 						if (start.smallBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Least moves", "Easy"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Least moves", "Easy")).subList(0, 4));
 						}
 						else if (start.mediumBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Least moves", "Normal"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Least moves", "Normal")).subList(0, 4));
 						}
 						else if (start.largeBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Least moves", "Hard"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Least moves", "Hard")).subList(0, 4));
 						}
 					} else {
 						start.wonGames.setVisible(true);
 						if (start.smallBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Easy"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", "Easy")).subList(0, 4));
 						}
 						else if (start.mediumBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Normal"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", "Normal")).subList(0, 4));
 						}
 						else if (start.largeBoard.isSelected()){
-							highScoreEntries.setAll(fm.loadHighScore("Highest point", "Hard"));
+							highScoreEntries.setAll(
+									(fm.loadHighScore("Highest point", "Hard")).subList(0, 4));
 						}
 					}
 					highScoreList.setItems(highScoreEntries);

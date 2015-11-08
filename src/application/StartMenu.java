@@ -293,4 +293,5 @@ public class StartMenu extends BorderPane {
 
 		return strCreditNames;
 	}
+
 }

@@ -70,21 +70,21 @@ public class FileManager {
 		ArrayList<Player> highScore = new ArrayList<Player>();
 		highScore.clear();
 
-			if (boardSize.equals("Easy"))
-				read(pathName + "HighScoreEasy.txt", highScore);
-			else if (boardSize.equals("Normal"))
-				read(pathName + "HighScoreNormal.txt", highScore);
-			else if (boardSize.equals("Hard"))
-				read(pathName + "HighScoreHard.txt", highScore);
-			
+		if (boardSize.equals("Easy"))
+			read(pathName + "HighScoreEasy.txt", highScore);
+		else if (boardSize.equals("Normal"))
+			read(pathName + "HighScoreNormal.txt", highScore);
+		else if (boardSize.equals("Hard"))
+			read(pathName + "HighScoreHard.txt", highScore);
+
 		changeSortType(sortType, highScore);
 
 		Compare comp = new Compare();
 		comp.setSortType(sortType);
 		Collections.sort(highScore, comp);
-			
-		return highScore.subList(0, 4);
-}
+
+		return highScore;
+	}
 
 	// Save methods.
 	public void save(Player player) {
@@ -96,22 +96,39 @@ public class FileManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public TreeMap<String, Player> setNewData(List<Player> players, List<Player> gamePlayers){
+
+	public TreeMap<String, Player> setNewData(List<Player> oldScore, List<Player> gamePlayers) {
 		TreeMap<String, Player> highScoreMap = new TreeMap<String, Player>();
 		
-		for (Player player : players) {
-		highScoreMap.put(player.getName(), player);
+		for (Player player : oldScore) {
+			highScoreMap.put(player.getName(), player);
 		}
-		
+
 		for (Player gamer : gamePlayers) {
-				if (highScoreMap.containsKey(gamer.getName()))
-					highScoreMap.replace(gamer.getName(), gamer);
-				else
-					highScoreMap.put(gamer.getName(), gamer);
+			if (highScoreMap.containsKey(gamer.getName()))
+				highScoreMap.replace(gamer.getName(), (compareHighScore(gamer, highScoreMap)));
+			else {
+				gamer.setHighestPoint(gamer.getPoints());
+				highScoreMap.put(gamer.getName(), gamer);
 			}
+		}
 		return highScoreMap;
 	}
+	
+	private Player compareHighScore(Player gamer, TreeMap<String,Player> highScore) {
+
+			if (gamer.getMoves() < highScore.get(gamer.getName()).getLeastMoves())
+				gamer.setLeastMoves(gamer.getMoves());
+			else
+				gamer.setLeastMoves(highScore.get(gamer.getName()).getLeastMoves());
+
+			if (gamer.getPoints() > highScore.get(gamer.getName()).getHighestPoint())
+				gamer.setHighestPoint(highScore.get(gamer.getName()).getPoints());
+			else
+				gamer.setHighestPoint(highScore.get(gamer.getName()).getHighestPoint());
+			
+			return gamer;
+		}
 
 	public void saveHighScore(List<Player> highScore, String gameMode) {
 
@@ -129,35 +146,35 @@ public class FileManager {
 
 		List<Player> clearScore = new ArrayList<Player>();
 
-			if (boardSize.equals("Easy")) {
-				clearScore.add(new Player("Zaher", 1, 30, 0));
-				clearScore.add(new Player("Owen", 2, 25, 0));
-				clearScore.add(new Player("Tomas", 3, 40, 0));
-				clearScore.add(new Player("Masih", 4, 35, 0));
-				writer(pathName+"HighScoreEasy.txt", clearScore);
-				
-			} else if (boardSize.equals("Normal")) {
-				clearScore.add(new Player("Zaher", 2, 50, 0));
-				clearScore.add(new Player("Owen", 4, 60, 0));
-				clearScore.add(new Player("Tomas", 6, 55, 0));
-				clearScore.add(new Player("Masih", 8, 45, 0));
-				writer(pathName+"HighScoreNormal.txt", clearScore);
-			}
+		if (boardSize.equals("Easy")) {
+			clearScore.add(new Player("Zaher", 1, 30, 0));
+			clearScore.add(new Player("Owen", 2, 25, 0));
+			clearScore.add(new Player("Tomas", 3, 40, 0));
+			clearScore.add(new Player("Masih", 4, 35, 0));
+			writer(pathName + "HighScoreEasy.txt", clearScore);
 
-			else if (boardSize.equals("Hard")) {
-				clearScore.add(new Player("Zaher", 6, 60, 0));
-				clearScore.add(new Player("Owen", 7, 65, 0));
-				clearScore.add(new Player("Tomas", 8, 70, 0));
-				clearScore.add(new Player("Masih", 9, 80, 0));
-				writer(pathName+"HighScoreHard.txt", clearScore);
-			}
+		} else if (boardSize.equals("Normal")) {
+			clearScore.add(new Player("Zaher", 2, 50, 0));
+			clearScore.add(new Player("Owen", 4, 60, 0));
+			clearScore.add(new Player("Tomas", 6, 55, 0));
+			clearScore.add(new Player("Masih", 8, 45, 0));
+			writer(pathName + "HighScoreNormal.txt", clearScore);
+		}
+
+		else if (boardSize.equals("Hard")) {
+			clearScore.add(new Player("Zaher", 6, 60, 0));
+			clearScore.add(new Player("Owen", 7, 65, 0));
+			clearScore.add(new Player("Tomas", 8, 70, 0));
+			clearScore.add(new Player("Masih", 9, 80, 0));
+			writer(pathName + "HighScoreHard.txt", clearScore);
+		}
 
 	}
-	
+
 	private void read(String pathName, ArrayList<Player> highScore) {
-		
+
 		try (BufferedReader br = new BufferedReader(new FileReader(pathName))) {
-			
+
 			String temp;
 			while ((temp = br.readLine()) != null) {
 				String tempSplit[] = temp.split("[ ]");
@@ -167,26 +184,26 @@ public class FileManager {
 				player.setWonGames(Integer.parseInt(tempSplit[3]));
 				highScore.add(player);
 			}
-			
+
 		} catch (FileNotFoundException | NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-			}
-	
+
+	}
+
 	private void changeSortType(String sortType, ArrayList<Player> players) {
 
 		for (Player player : players) {
-			
-		if (sortType.equals("Least moves"))
-			player.setSortType(1);
-		else if (sortType.equals("Won games"))
-			player.setSortType(2);
-		else
-			player.setSortType(3);
-	}
+
+			if (sortType.equals("Least moves"))
+				player.setSortType(1);
+			else if (sortType.equals("Won games"))
+				player.setSortType(2);
+			else
+				player.setSortType(3);
+		}
 	}
 
 	public void writer(String pathName, List<Player> players) {

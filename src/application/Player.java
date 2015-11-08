@@ -12,7 +12,7 @@ public class Player {
 		this.moves = 500;
 		this.time = 0;
 		this.highestPoint = 0;
-		this.leastMoves = 0;
+		this.leastMoves = 500;
 		this.wonGames = 0;
 		this.playerWinningHand = new Deck();
 	}
